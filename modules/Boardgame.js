@@ -3,6 +3,8 @@ import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
 
+const CELL_SPRITE_SIZE = 128
+
 // Utility functions
 const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) );
 const emptyLineCell     = () => ( new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true))
@@ -149,13 +151,13 @@ export default class BoardGame extends PIXI.Container {
     board.map((cells,row_index) => {
       cells.map((cell,cell_index) => {
 
-        cell.x = 64 * cell_index
-        cell.y = row_index * 64
+        cell.x = CELL_SPRITE_SIZE * cell_index
+        cell.y = row_index * CELL_SPRITE_SIZE
         cell.pivot.x = 0;
         cell.pivot.y = 0;
 
-        cell.width = 64;
-        cell.height = 64;
+        cell.width = CELL_SPRITE_SIZE;
+        cell.height = CELL_SPRITE_SIZE;
 
         cell.rotation = (cell.rotation * 90) * Math.PI / 180;
 

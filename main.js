@@ -1,7 +1,7 @@
 import Game from './modules/Game.js'
 
-let canvas_width = 800;
-let canvas_height = 600;
+let canvas_width = 1600;
+let canvas_height = 1200;
 
 class MyApplication extends PIXI.Application {
 
@@ -44,6 +44,7 @@ const myApplication = new MyApplication({
   height          : canvas_height,
   backgroundColor : 0x1099bb
 })
+myApplication.Resize();
 myApplication.Start();
 
 window.onresize = function (event) {
