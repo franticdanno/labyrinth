@@ -33,6 +33,8 @@ export default class BoardGameCell extends PIXI.Sprite {
     this.players    = [];
     this.links      = [...CELL_TYPE_LINKS[celltype]]; // Copy the link array for the cell
     this.cardID     = currentCardCount++;
+    this.row        = 0;
+    this.index      = 0
 
   }
 
@@ -59,6 +61,22 @@ export default class BoardGameCell extends PIXI.Sprite {
         return [og[1],og[2],og[3],og[0]]
         break;
     }
+  }
+
+  SetRow = (row) => {
+    this.row = row
+  }
+
+  GetRow = () => {
+    return this.row
+  }
+
+  SetIndex = (index) => {
+    this.index = index;
+  }
+
+  GetIndex = () => {
+    return this.index;
   }
 
   GetID= () => {

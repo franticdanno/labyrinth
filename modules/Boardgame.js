@@ -156,14 +156,15 @@ export default class BoardGame extends PIXI.Container {
     board.map((cells,row_index) => {
       cells.map((cell,cell_index) => {
 
+        // Record the row and index against the cell for quicker access
+        cell.SetRow(row_index);
+        cell.SetIndex(cell_index);
+
+        // Positions and sizes
         cell.x = 620 + (CELL_SPRITE_SIZE * cell_index)
         cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
-        //cell.pivot.x = CELL_SPRITE_SIZE/2;
-        //cell.pivot.y = CELL_SPRITE_SIZE/2;
-
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
-
         cell.rotation = (cell.rotation * 90) * Math.PI / 180;
         cell.anchor.set(0.5,0.5)
 
@@ -177,6 +178,18 @@ export default class BoardGame extends PIXI.Container {
     this.addChild(this._board_container);
   }
 
+  GetBoardCellSpritesRow = (row) => {
+    return this.board[row];
+  }
+
+  GetBoardCellSpritesColumn = (index) => {
+    let returnCells = []
+    for(let row = 0; row < this.board.length;row++){
+      returnCells.push(this.board[row][index])
+    }
+    return returnCells;
+  }
+
   AddPlayersToBoard = (players) => {
     console.log("Adding players to board",players)
     players.forEach((item, i) => {
@@ -184,8 +197,10 @@ export default class BoardGame extends PIXI.Container {
       let playerSprite = new PIXI.Sprite.from(PLAYER_PIECES[item.house])
       let houseCell = this.FindCellBySymbol(item.house)
 
-      playerSprite.x = houseCell.x
-      playerSprite.y = houseCell.y
+      playerSprite.width *= 2;
+      playerSprite.height *= 2;
+      playerSprite.x = houseCell.x - playerSprite.width/2
+      playerSprite.y = houseCell.y - playerSprite.height/2
       playerSprite.house = item.house;
       //console.log("Cell found",houseCell,houseCell.x,houseCell.y);
 

@@ -39,9 +39,23 @@ export default class CellMoveState extends BaseState {
 
   ListenForCellInteraction = () => {
 
-    let board = this._entity.GetBoardgame().GetBoardCells();
+    let game = this._entity;
+    let boardgame = this._entity.GetBoardgame();
+    let board = boardgame.GetBoardCells();
+    let actionManager = this._actionManager;
 
     console.log("Setting up for Cell Interaction");
+
+    function cellClicked(cell){
+      actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
+      if(cell.GetRow() == 0 || cell.GetRow() == board.length - 1){
+        console.log("It's a column!")
+      } else {
+        console.log("It's a row!");
+      }
+
+      //console.log(boardgame.GetBoardCellSpritesRow(cell.GetRow()))
+    }
 
     board.forEach((cell_row, cell_row_index) => {
       return cell_row.forEach((cell, cell_index) => {
@@ -54,16 +68,20 @@ export default class CellMoveState extends BaseState {
 
         cell.on('pointerdown',(e,b)=>{
 
-          console.log("TILE CLICKED",cell_row_index,cell_index)
+          let cellClickedTarget = e.target;
+          //console.log(cellClicked.width,cellClicked.height);
+          cellClicked(cellClickedTarget);
+
+          //console.log("TILE CLICKED",cell_row_index,cell_index)
 
         })
 
         cell.on('pointerover',(e,b) => {
             let target = e.target;
             target.alpha = 0.5;
-            console.log("pointer over")
+            //console.log("pointer over")
             target.once('pointerout',(e,b) => {
-              console.log("pointer out")
+              //console.log("pointer out")
               target.alpha = 1.0;
             })
         })
