@@ -1,13 +1,13 @@
 import { Action } from './Action.js'
 import Vector2D from './../Vector2D.js'
 
+const MOVE_SPEED = 10;
+
 export class ActionFollowPath extends Action {
 
 
   constructor(entity,path){
     super();
-
-    console.log("HERE WE GO IN MOVING",entity,path)
 
     this._entity = entity;
     this._path = path;
@@ -16,14 +16,15 @@ export class ActionFollowPath extends Action {
 
   Update = (delta) => {
 
-    let distance = new Vector2D(this._currentNode.position.x - this._entity.position.x,
-        this._currentNode.position.y - this._entity.position.y)
+    let vectorToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y)
+    let normalizedToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y).normalize();
+    let movementVector = Vector2D.multiply(normalizedToTarget,MOVE_SPEED)
 
-    //console.log("Moving Player",distance.length(),this._entity.x,this._entity.y)
+    // If the distance from the current position to the target is less than the movement vector then we
+    // might as well just put the user into the position and move onto the next node
+    if (vectorToTarget.length() <= movementVector.length()){
 
-    if(distance.length() <= 1){
-
-      console.log("REACHED POSITION");
+      console.log("REACHED POSITION",vectorToTarget,movementVector);
       this._entity.position.x = this._currentNode.position.x;
       this._entity.position.y = this._currentNode.position.y;
 
@@ -34,12 +35,11 @@ export class ActionFollowPath extends Action {
         return;
       }
 
-    } else {
+    } else { // Otherwise, move the user towards the position
 
-      let move = distance.normalize();
-      this._entity.position.x += move.x;
-      this._entity.position.y += move.y;
-
+      //console.log("Moving",movementVector.x,movementVector.y)
+      this._entity.position.x += movementVector.x * delta;
+      this._entity.position.y += movementVector.y * delta;
     }
   }
 

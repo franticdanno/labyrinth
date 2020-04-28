@@ -40,15 +40,32 @@ export default class PlayerMoveState extends BaseState {
   ListenForCellInteraction = () => {
 
     let board = this._entity.GetBoardgame().GetBoardCells();
-    console.log("Going to listen",board);
+
+    console.log("Setting up for Cell Interaction");
+
     board.forEach((cell_row, i) => {
       return cell_row.forEach((cell, i) => {
-        //console.log("Checking",cell.symbol,symbol)
+
         cell.interactive = true;
         cell.buttonMode = true;
+
         cell.once('pointerdown',(e,b)=>{
-          this.RemoveListenersForCellInteraction();
-          this.MovePlayer(this._entity.GetCurrentPlayer(), e.target);
+
+          // Check to see if the player can reach the chosen square
+          let targetCell = e.target;
+          let player = this._entity.GetCurrentPlayer();
+          let playerCell = player.GetCurrentCell();
+
+          let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
+          if(path != null){
+
+            this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
+            this.MovePlayer(player, targetCell,path); // And move the player along the path
+
+          } else {
+            console.log("Unable to find path for player")
+          }
+
         })
       });
     });
@@ -56,7 +73,7 @@ export default class PlayerMoveState extends BaseState {
 
   RemoveListenersForCellInteraction = () => {
     let board = this._entity.GetBoardgame().GetBoardCells();
-    console.log("Going to listen",board);
+    console.log("Removing listeners",board);
     board.forEach((cell_row, i) => {
       return cell_row.forEach((cell, i) => {
         //console.log("Checking",cell.symbol,symbol)
@@ -67,13 +84,9 @@ export default class PlayerMoveState extends BaseState {
     });
   }
 
-  MovePlayer = (player,targetCell) => {
-    console.log("Moving player",player,targetCell);
-    let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-    if(path != null){
+  MovePlayer = (player,targetCell,path) => {
       console.log("Here is the path:",path)
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
-    }
   }
 
   GetStateName(){

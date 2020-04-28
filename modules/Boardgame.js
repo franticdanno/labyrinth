@@ -3,7 +3,7 @@ import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
 
-const CELL_SPRITE_SIZE = 224;
+const CELL_SPRITE_SIZE = 114;
 
 // Utility functions
 const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) );
@@ -32,7 +32,12 @@ export default class BoardGame extends PIXI.Container {
     this._game            = game;
     this.board            = null;
     this._playerSprites   = []
-    this._board_container = new PIXI.Container();;
+    this._board_container = new PIXI.Container();
+    this._boardBackground = new PIXI.Sprite.from("/assets/board_background.png")
+    this._board_container.addChild(this._boardBackground);
+    //this._boardBackground.anchor.set(0.5,0.5);
+    //this._board_container.pivot.x = this._boardBackground.width/2
+    //this._board_container.pivot.y = this._boardBackground.height/2
   }
 
   Setup  = () => {
@@ -151,23 +156,24 @@ export default class BoardGame extends PIXI.Container {
     board.map((cells,row_index) => {
       cells.map((cell,cell_index) => {
 
-        cell.x = CELL_SPRITE_SIZE * cell_index
-        cell.y = row_index * CELL_SPRITE_SIZE
-        cell.pivot.x = 0;
-        cell.pivot.y = 0;
+        cell.x = 620 + (CELL_SPRITE_SIZE * cell_index)
+        cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
+        //cell.pivot.x = CELL_SPRITE_SIZE/2;
+        //cell.pivot.y = CELL_SPRITE_SIZE/2;
 
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
 
         cell.rotation = (cell.rotation * 90) * Math.PI / 180;
+        cell.anchor.set(0.5,0.5)
 
         this._board_container.addChild(cell);
 
       })
     })
 
-    this._board_container.x += 200;
-    this._board_container.y += 110;
+    this._board_container.x += 0;
+    this._board_container.y += 0;
     this.addChild(this._board_container);
   }
 
