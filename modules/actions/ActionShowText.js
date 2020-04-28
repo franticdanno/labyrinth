@@ -14,7 +14,7 @@ export class ActionShowText extends Action {
 
     const richText = new PIXI.Text(this._text, new PIXI.TextStyle({
       fontFamily: 'Arial',
-      fontSize: 36,
+      fontSize: 72,
       fontStyle: 'italic',
       fontWeight: 'bold',
       fill: ['#ffffff', '#00ff99'], // Gradient
@@ -22,14 +22,14 @@ export class ActionShowText extends Action {
       strokeThickness: 5,
       dropShadow: true,
       dropShadowColor: '#000000',
-      dropShadowBlur: 4,
+      dropShadowBlur: 10,
       dropShadowAngle: Math.PI / 6,
       dropShadowDistance: 6,
-      wordWrap: true,
+      wordWrap: false,
       wordWrapWidth: 440,
     }));
-    richText.position.x = 150 + Math.random() * 100;
-    richText.position.y = 250  + Math.random() * 50;
+    richText.position.x = this._container.width / 2;
+    richText.position.y = this._container.height / 2;
 
     return richText;
 

@@ -347,7 +347,7 @@ export default class BoardGame extends PIXI.Container {
 
     let pathstring = ""
     path.forEach((node, i) => {
-      node.alpha = (1.0 / path.length) * i
+      node.alpha = 0.4//(1.0 / path.length) * i
       pathstring = pathstring + " " + node.GetID();
     });
     console.log("Path: ",pathstring);

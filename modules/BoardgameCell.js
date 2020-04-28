@@ -6,6 +6,12 @@ const CELL_IMAGES = {
   [CELL_TYPE.LINE] : "cell_line.png",
 }
 
+const CELL_IMAGES_FANCY = {
+  [CELL_TYPE.CORNER] : "cell_corner_fancy.png",
+  [CELL_TYPE.JUNCTION] : "cell_junction_fancy.png",
+  [CELL_TYPE.LINE] : "cell_line_fancy.png",
+}
+
 const CELL_TYPE_LINKS = {
   [CELL_TYPE.CORNER] : [false,true,true,false],
   [CELL_TYPE.JUNCTION] : [false,true,true,true],
@@ -18,7 +24,7 @@ export default class BoardGameCell extends PIXI.Sprite {
 
   constructor(celltype,symbol,rotation,canMove){
 
-    super(PIXI.Texture.from(CELL_IMAGES[celltype]))
+    super(Math.random() > 0.9 ? PIXI.Texture.from(CELL_IMAGES_FANCY[celltype]) : PIXI.Texture.from(CELL_IMAGES[celltype]))
 
     this.celltype   = celltype;
     this.rotation   = rotation;
@@ -28,6 +34,10 @@ export default class BoardGameCell extends PIXI.Sprite {
     this.links      = [...CELL_TYPE_LINKS[celltype]]; // Copy the link array for the cell
     this.cardID     = currentCardCount++;
 
+  }
+
+  CanMove = () => {
+    return this.canMove;
   }
 
   GetLinks = () => {

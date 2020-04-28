@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
 	"sourceSize": {"w":224,"h":224}
 },
-"cell_junction.png":
+"cell_corner_fancy.png":
 {
 	"frame": {"x":224,"y":0,"w":224,"h":224},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
 	"sourceSize": {"w":224,"h":224}
 },
-"cell_line.png":
+"cell_junction.png":
 {
 	"frame": {"x":0,"y":224,"w":224,"h":224},
 	"rotated": false,
@@ -24,9 +24,33 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
 	"sourceSize": {"w":224,"h":224}
 },
+"cell_junction_fancy.png":
+{
+	"frame": {"x":224,"y":224,"w":224,"h":224},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
+	"sourceSize": {"w":224,"h":224}
+},
+"cell_line.png":
+{
+	"frame": {"x":0,"y":448,"w":224,"h":224},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
+	"sourceSize": {"w":224,"h":224}
+},
+"cell_line_fancy.png":
+{
+	"frame": {"x":224,"y":448,"w":224,"h":224},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
+	"sourceSize": {"w":224,"h":224}
+},
 "player_four.png":
 {
-	"frame": {"x":224,"y":224,"w":32,"h":32},
+	"frame": {"x":448,"y":448,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -34,7 +58,7 @@
 },
 "player_one.png":
 {
-	"frame": {"x":256,"y":224,"w":32,"h":32},
+	"frame": {"x":480,"y":448,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -42,7 +66,7 @@
 },
 "player_three.png":
 {
-	"frame": {"x":288,"y":224,"w":32,"h":32},
+	"frame": {"x":0,"y":672,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -50,7 +74,7 @@
 },
 "player_two.png":
 {
-	"frame": {"x":320,"y":224,"w":32,"h":32},
+	"frame": {"x":32,"y":672,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -61,8 +85,8 @@
 	"version": "1.0",
 	"image": "boardgame_spritesheet.png",
 	"format": "RGBA8888",
-	"size": {"w":512,"h":512},
+	"size": {"w":512,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8c19b34c5561da12963ac320ed215a72:8d810a1cb82ae742feb2e1b0cbee4821:2fc7c3386d16e09928cef85026c3ca48$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4d3e68c569f1f60a8825f6e098327e57:0d3e2279e02610630f768baf16d89c88:2fc7c3386d16e09928cef85026c3ca48$"
 }
 }

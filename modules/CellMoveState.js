@@ -8,7 +8,7 @@ import BoardGame from './Boardgame.js';
 import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 
-export default class PlayerMoveState extends BaseState {
+export default class CellMoveState extends BaseState {
 
   constructor(entity){
     super(entity);
@@ -17,7 +17,7 @@ export default class PlayerMoveState extends BaseState {
   Enter = () => {
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,this._entity.GetCurrentPlayer().GetHouse(),1))
+    this._actionManager.AddAction(new ActionShowText(this._entity,"Move:" + this._entity.GetCurrentPlayer().GetHouse(),1))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))
@@ -43,29 +43,29 @@ export default class PlayerMoveState extends BaseState {
 
     console.log("Setting up for Cell Interaction");
 
-    board.forEach((cell_row, i) => {
-      return cell_row.forEach((cell, i) => {
+    board.forEach((cell_row, cell_row_index) => {
+      return cell_row.forEach((cell, cell_index) => {
+
+        if(!cell.CanMove()) return // Don't add listeners that cannot be moved
+        if(cell_row_index > 0 && cell_row_index < board.length - 1 && cell_index > 0 && cell_index < cell_row.length - 1) return; // Don't add listeners to anything in the middle of the board
 
         cell.interactive = true;
         cell.buttonMode = true;
 
-        cell.once('pointerdown',(e,b)=>{
+        cell.on('pointerdown',(e,b)=>{
 
-          // Check to see if the player can reach the chosen square
-          let targetCell = e.target;
-          let player = this._entity.GetCurrentPlayer();
-          let playerCell = player.GetCurrentCell();
+          console.log("TILE CLICKED",cell_row_index,cell_index)
 
-          let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-          if(path != null){
+        })
 
-            this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
-            this.MovePlayer(player, targetCell,path); // And move the player along the path
-
-          } else {
-            console.log("Unable to find path for player")
-          }
-
+        cell.on('pointerover',(e,b) => {
+            let target = e.target;
+            target.alpha = 0.5;
+            console.log("pointer over")
+            target.once('pointerout',(e,b) => {
+              console.log("pointer out")
+              target.alpha = 1.0;
+            })
         })
       });
     });
@@ -84,10 +84,6 @@ export default class PlayerMoveState extends BaseState {
     });
   }
 
-  MovePlayer = (player,targetCell,path) => {
-      console.log("Here is the path:",path)
-      this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
-  }
 
   GetStateName(){
     return "Main Game State";
