@@ -2,6 +2,7 @@ import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
 import { ActionShowText } from './actions/ActionShowText.js'
 import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
+import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js';
 import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
@@ -69,8 +70,10 @@ export default class PlayerMoveState extends BaseState {
   MovePlayer = (player,targetCell) => {
     console.log("Moving player",player,targetCell);
     let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-    console.log("Here is the path:",path)
-
+    if(path != null){
+      console.log("Here is the path:",path)
+      this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
+    }
   }
 
   GetStateName(){

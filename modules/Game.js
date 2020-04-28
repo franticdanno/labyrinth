@@ -17,10 +17,10 @@ export default class Game extends PIXI.Container {
 
     // State manager set up
     this._stateManager = new StateManager();
-    this._stateManager.ChangeState(new BaseState(this))
   }
 
   Start = () => {
+    console.log("Starting Loading state!")
     this.ChangeState(new LoadingScreenState(this));
   }
 

@@ -154,8 +154,8 @@ export default class BoardGame extends PIXI.Container {
         cell.pivot.x = 0;
         cell.pivot.y = 0;
 
-        cell.scale.x = 2.0;
-        cell.scale.y = 2.0;
+        cell.width = 64;
+        cell.height = 64;
 
         cell.rotation = (cell.rotation * 90) * Math.PI / 180;
 
@@ -186,6 +186,10 @@ export default class BoardGame extends PIXI.Container {
       this._board_container.addChild(playerSprite)
     });
 
+  }
+
+  GetPlayerSprite(player){
+    return this._playerSprites[0];
   }
 
   FindPlayerByHouse = (house) => {
@@ -220,7 +224,7 @@ export default class BoardGame extends PIXI.Container {
 
   CheckConnection = (cellOne,cellTwo,direction) => {
 
-    console.log("Checking connection",cellOne,cellTwo,direction)
+    console.log("Checking connection",cellOne.GetID(),cellTwo.GetID(),direction)
 
     switch(direction){
       case DIRECTION.NORTH:
@@ -289,29 +293,27 @@ export default class BoardGame extends PIXI.Container {
     let frontier = []; // This is the list of cells we're going to be traversing
     frontier.push(cellOne); // So lets add the very first cell to it
 
-    let came_from = {};
+    let came_from = {}; //
     let current = null;
 
-    while (frontier.length > 0)
+    let alpha = 0.1
+    while (frontier.length > 0) // While there is something to check in the list
     {
       current = frontier.shift(); // Get the item from the front of the queue
-
-      current.alpha = 0.4;
 
       if(current == targetCell){ // If it matches the target then we're done!
         console.log("Found the target cell, time to generate path")
         break;
       }
 
+      // Lets find all of the neighbours so that we can add them to the list
+      // and check their neighbours and theirs and theirs etc
       let neighbours = this.GetNeighbouringCells(current);
-      console.log("Found neighbours",neighbours);
 
       neighbours.forEach((next, i) => { // Lets go through all of the neighbours
         if(!came_from[next.GetID()]){
           frontier.push(next);
           came_from[next.GetID()] = current;
-        } else {
-          console.log("NOT NULL")
         }
       });
 
@@ -322,12 +324,25 @@ export default class BoardGame extends PIXI.Container {
     // Time to construct the path now
     let path = []
     current = targetCell;
+    let loopcount = 0
     while (current != cellOne){
-      path.unshift(current);
-      current = came_from[current];
+      path.unshift(current); //
+
+      current = came_from[current.GetID()];
+      console.log(current,cellOne)
+
+      loopcount++
+      if(loopcount>= 10) break;
     }
     path.unshift(cellOne);
     path.reverse();
+
+    let pathstring = ""
+    path.forEach((node, i) => {
+      node.alpha = (1.0 / path.length) * i
+      pathstring = pathstring + " " + node.GetID();
+    });
+    console.log("Path: ",pathstring);
 
 
     return path;
