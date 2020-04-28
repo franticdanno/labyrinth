@@ -32,9 +32,11 @@ export default class BoardGame extends PIXI.Container {
     this._game            = game;
     this.board            = null;
     this._playerSprites   = []
+    this._possibleCells   = null;
     this._board_container = new PIXI.Container();
     this._boardBackground = new PIXI.Sprite.from("/assets/board_background.png")
     this._board_container.addChild(this._boardBackground);
+    this._spareCell       = null;
     //this._boardBackground.anchor.set(0.5,0.5);
     //this._board_container.pivot.x = this._boardBackground.width/2
     //this._board_container.pivot.y = this._boardBackground.height/2
@@ -48,7 +50,7 @@ export default class BoardGame extends PIXI.Container {
   PopulateBoardCells = () => {
 
     // Get together the list of possible cells that will be placed down on the board
-    const possibleCells = [
+    this._possibleCells = [
       new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.LUNA,getRandomRotation(),true),
       new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.SEVERUS,getRandomRotation(),true),
       new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true),
@@ -81,22 +83,21 @@ export default class BoardGame extends PIXI.Container {
       new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.LUNA_ODD,getRandomRotation(),true),
       emptyLineCell(),
       emptyCornerCell(),
-      emptyCornerCell(),
       emptyLineCell(),
       new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.GRINGOTT,getRandomRotation(),true)
     ]
 
-    const getCellFromPossibleCells = () => {
+    const getCellFromPossibleCells = (possibleCells) => {
       let index = Math.floor(Math.random() * possibleCells.length)
       let fromPile = possibleCells[index] // Obtain a card from the pile
       possibleCells.splice(index,1)
       return fromPile
     }
 
-    const getArrayOfPossibleCells = (num) => {
+    const getArrayOfPossibleCells = (possibleCells,num) => {
       let returnArray = []
       for(let i = 0; i < num; i++){
-        returnArray.push(getCellFromPossibleCells());
+        returnArray.push(getCellFromPossibleCells(possibleCells));
       }
       return returnArray;
     }
@@ -105,44 +106,44 @@ export default class BoardGame extends PIXI.Container {
       [
         // Row 1
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,0,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HARRY,0,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.WHO,0,false) ,
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.SLYTHERIN,1,false),
       ],
-      getArrayOfPossibleCells(7),
+      getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 3
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.LONGBOTTOM,3,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.SNAPE,3,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.SYBILL,0,false) ,
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.MCGONAGALL,1,false),
       ],
-      getArrayOfPossibleCells(7),
+      getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 5
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.VOLDEMOORT,3,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HAGRID,2,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.DOBBY,1,false) ,
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.DUMBLEDORE,1,false),
       ],
-      getArrayOfPossibleCells(7),
+      getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,3,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HERMIONE,2,false),
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.RUFUS,2,false) ,
-        getCellFromPossibleCells(),
+        getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.RAVENCLAW,2,false),
       ]
     ]
@@ -173,9 +174,26 @@ export default class BoardGame extends PIXI.Container {
       })
     })
 
-    this._board_container.x += 0;
-    this._board_container.y += 0;
+    this._spareCell = this._possibleCells.pop(); // Tracking the spare cell
+
+    console.log("Boardgame Built, remaining cells:", this._spareCell)
+
+    this.ShowSpareCell();
+
+    this._board_container.x = 0;
+    this._board_container.y = 0;
     this.addChild(this._board_container);
+  }
+
+  ShowSpareCell = () => {
+    let cell = this._spareCell;
+    cell.x = 200;
+    cell.y = 200;
+    cell.width = CELL_SPRITE_SIZE;
+    cell.height = CELL_SPRITE_SIZE;
+    cell.anchor.set(0.5,0.5)
+    cell.rotation = 0
+    this._board_container.addChild(cell);
   }
 
   GetBoardCellSpritesRow = (row) => {
@@ -231,14 +249,14 @@ export default class BoardGame extends PIXI.Container {
   FindCellBySymbol = (symbol) => {
     let board = this.board
     let cellFound = null;
-    board.forEach((cell_row, i) => {
-      return cell_row.forEach((cell, i) => {
-        //console.log("Checking",cell.symbol,symbol)
-        if(cell.symbol == symbol) cellFound = cell;
-      });
-    });
-    return cellFound
-    //console.log("Unable to find cell");
+    for(let row_index = 0; row_index < board.length; row_index++){
+      for(let cell_index = 0; cell_index < board[row_index].length; cell_index++){
+        if(board[row_index][cell_index].GetSymbol() == symbol){
+          return board[row_index][cell_index]
+        }
+      }
+    }
+    return null
   }
 
   GetBoardCells = () => {

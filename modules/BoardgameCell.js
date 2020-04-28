@@ -63,6 +63,10 @@ export default class BoardGameCell extends PIXI.Sprite {
     }
   }
 
+  GetSymbol = () => {
+    return this.symbol;
+  }
+
   SetRow = (row) => {
     this.row = row
   }

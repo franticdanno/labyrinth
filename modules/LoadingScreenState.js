@@ -10,7 +10,7 @@ export default class LoadingScreenState extends BaseState {
   Enter = () => {
     const loadingText = new PIXI.Text('Loading', new PIXI.TextStyle({
       fontFamily: 'Arial',
-      fontSize: 36,
+      fontSize: 100,
       fontStyle: 'italic',
       fontWeight: 'bold',
       fill: ['#ffffff', '#00ff99'], // gradient
@@ -24,7 +24,7 @@ export default class LoadingScreenState extends BaseState {
       wordWrap: true,
       wordWrapWidth: 440,
     }));
-    loadingText.x = 50;
+    loadingText.x = 700;
     loadingText.y = 250;
 
     // Show Loading text
