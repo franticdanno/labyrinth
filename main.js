@@ -1,5 +1,8 @@
 import Game from './modules/Game.js'
 
+let canvas_width = 800;
+let canvas_height = 600;
+
 class MyApplication extends PIXI.Application {
 
   _game = null;
@@ -9,24 +12,22 @@ class MyApplication extends PIXI.Application {
 
     document.body.appendChild(this.view)
 
-    /*function resize() {
-        var ratio = canvas_width / canvas_height;
-        var w;
-        var h;
-        if (window.innerWidth / window.innerHeight >= ratio) {
-            w = window.innerHeight * ratio;
-            h = window.innerHeight;
-        } else {
-            w = window.innerWidth;
-            h = window.innerWidth / ratio;
-        }
-        app.view.style.width = w + 'px';
-        app.view.style.height = h + 'px';
-    }
+  }
 
-    window.onresize = function (event) {
-        resize();
-    };*/
+  Resize = () => {
+    console.log("Resizing");
+    var ratio = canvas_width / canvas_height;
+    var w;
+    var h;
+    if (window.innerWidth / window.innerHeight >= ratio) {
+        w = window.innerHeight * ratio;
+        h = window.innerHeight;
+    } else {
+        w = window.innerWidth;
+        h = window.innerWidth / ratio;
+    }
+    this.view.style.width = w + 'px';
+    this.view.style.height = h + 'px';
   }
 
   Start = () => {
@@ -39,7 +40,13 @@ class MyApplication extends PIXI.Application {
 
 // Start the application
 const myApplication = new MyApplication({
-  width           : 800,
-  height          : 600,
+  width           : canvas_width,
+  height          : canvas_height,
   backgroundColor : 0x1099bb
-}).Start();
+})
+myApplication.Start();
+
+window.onresize = function (event) {
+    console.log(event);
+    myApplication.Resize();
+};
