@@ -1,7 +1,7 @@
 import Game from './modules/Game.js'
 
-let canvas_width = 1600;
-let canvas_height = 1200;
+const CANVAS_WIDTH = 1920;
+const CANVAS_HEIGHT = 1800;
 
 class MyApplication extends PIXI.Application {
 
@@ -16,7 +16,7 @@ class MyApplication extends PIXI.Application {
 
   Resize = () => {
     console.log("Resizing");
-    var ratio = canvas_width / canvas_height;
+    var ratio = CANVAS_WIDTH / CANVAS_HEIGHT;
     var w;
     var h;
     if (window.innerWidth / window.innerHeight >= ratio) {
@@ -40,8 +40,8 @@ class MyApplication extends PIXI.Application {
 
 // Start the application
 const myApplication = new MyApplication({
-  width           : canvas_width,
-  height          : canvas_height,
+  width: CANVAS_WIDTH,
+  height: CANVAS_HEIGHT,
   backgroundColor : 0x1099bb
 })
 myApplication.Resize();

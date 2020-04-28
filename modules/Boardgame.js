@@ -3,7 +3,7 @@ import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
 
-const CELL_SPRITE_SIZE = 128
+const CELL_SPRITE_SIZE = 224;
 
 // Utility functions
 const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) );
