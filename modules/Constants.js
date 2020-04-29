@@ -1,3 +1,10 @@
+export const DIRECTION = {
+  NORTH : "north",
+  EAST : "east",
+  SOUTH : "south",
+  WEST : "west"
+}
+
 export const HOUSE = {
   GRYFFINDOR  : "gryffindor",
   RAVENCLAW   : "ravenclaw",

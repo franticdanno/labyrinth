@@ -3,9 +3,10 @@ import { ActionShowText } from './actions/ActionShowText.js'
 import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
+import { ActionMoveTiles } from './actions/ActionMoveTiles.js'
 import BaseState from './BaseState.js'
-import BoardGame from './Boardgame.js';
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import BoardGame from './Boardgame.js'
+import { HOUSE, CHARACTER, CELL_TYPE,DIRECTION } from './Constants.js'
 import Card from './Card.js';
 
 export default class CellMoveState extends BaseState {
@@ -47,11 +48,28 @@ export default class CellMoveState extends BaseState {
     console.log("Setting up for Cell Interaction");
 
     function cellClicked(cell){
-      actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
-      if(cell.GetRow() == 0 || cell.GetRow() == board.length - 1){
-        console.log("It's a column!")
+
+      let cellRow = boardgame.GetBoardgameCellRow(cell);
+      let cellIndex = boardgame.GetBoardgameCellIndex(cell)
+
+
+      //actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
+      if(cellRow == 0 || cellRow == board.length - 1){
+
+        let sprites = boardgame.GetBoardCellSpritesColumn(cellIndex)
+        console.log("It's a column!",sprites)
+        let direction = cellRow == 0 ? DIRECTION.NORTH : DIRECTION.SOUTH
+        //boardgame.ShiftCellColumn(cell.GetIndex(),direction)
+        actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+
       } else {
-        console.log("It's a row!");
+
+        let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
+        console.log("It's a row!",sprites);
+        let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
+        //boardgame.ShiftCellRow(cell.GetRow(),direction)
+        actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+
       }
 
       //console.log(boardgame.GetBoardCellSpritesRow(cell.GetRow()))

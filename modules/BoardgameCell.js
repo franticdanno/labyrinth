@@ -67,22 +67,6 @@ export default class BoardGameCell extends PIXI.Sprite {
     return this.symbol;
   }
 
-  SetRow = (row) => {
-    this.row = row
-  }
-
-  GetRow = () => {
-    return this.row
-  }
-
-  SetIndex = (index) => {
-    this.index = index;
-  }
-
-  GetIndex = () => {
-    return this.index;
-  }
-
   GetID= () => {
     return this.cardID;
   }

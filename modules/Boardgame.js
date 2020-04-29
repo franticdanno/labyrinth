@@ -157,10 +157,6 @@ export default class BoardGame extends PIXI.Container {
     board.map((cells,row_index) => {
       cells.map((cell,cell_index) => {
 
-        // Record the row and index against the cell for quicker access
-        cell.SetRow(row_index);
-        cell.SetIndex(cell_index);
-
         // Positions and sizes
         cell.x = 620 + (CELL_SPRITE_SIZE * cell_index)
         cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
@@ -206,6 +202,76 @@ export default class BoardGame extends PIXI.Container {
       returnCells.push(this.board[row][index])
     }
     return returnCells;
+  }
+
+  SetSpareCell = (cell) => {
+    this._spareCell = cell;
+  }
+
+/*  ShiftCellRow = (row,direction) => {
+
+    if (direction == DIRECTION.EAST){
+
+      // Add cell to the beginning and pop off the last cell
+      this.board[row].unshift(this._spareCell);
+      this.SetSpareCell(this.board[row].pop())
+
+    } else if (direction == DIRECTION.WEST){
+
+      // Add cell to the beginning and pop off the last cell
+      this.board[row].push(this._spareCell);
+      this.SetSpareCell(this.board[row].shift())
+    }
+  }
+
+
+
+  ShiftCellColumn = (column,direction) => {
+
+    let oldSpareCell = this._spareCell;
+
+    if(direction == DIRECTION.SOUTH){
+
+      // Pull the last cell off into the spare cell slot
+      this.SetSpareCell(this.board[this.board.length-1][column]);
+
+      // And startig from the bottom, move the cells up one place each
+      for(let i = this._board.length-1; i > 0 i--){
+        this.board[i][column] = this.board[i-1][column]
+      }
+
+      // Now set the new spot with the old spare
+      this.board[0][column] = oldSpareCell;
+
+    } else if (direction == DIRECTION.NORTH){
+
+      // Pull the first cell off into the spare cell slot
+      this.SetSpareCell(this.board[0][column]);
+
+      // And starting from the bottom, move the cells up one place each
+      for(let i = 0; i < this._board.length - 1  i++){
+        this.board[i][column] = this.board[i+1][column]
+      }
+
+      // Now set the new spot with the old spare
+      this.board[this._board.length - 1][column] = oldSpareCell;
+    }
+  }
+  */
+
+  GetBoardgameCellRow = (cell) => {
+    for(let row = 0; row < this.board.length; row++){
+      if(this.board[row].indexOf(cell) != -1) return row
+    }
+    return null
+  }
+
+  GetBoardgameCellIndex = (cell) => {
+    for(let row = 0; row < this.board.length; row++){
+      let index = this.board[row].indexOf(cell)
+      if(index != -1) return index
+    }
+    return null
   }
 
   AddPlayersToBoard = (players) => {
