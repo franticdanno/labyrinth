@@ -105,7 +105,7 @@ export default class BoardGame extends PIXI.Container {
     this.board = [
       [
         // Row 1
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,0,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,3,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HARRY,0,false),
         getCellFromPossibleCells(this._possibleCells),
@@ -138,7 +138,7 @@ export default class BoardGame extends PIXI.Container {
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,3,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,0,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HERMIONE,2,false),
         getCellFromPossibleCells(this._possibleCells),
@@ -309,9 +309,12 @@ export default class BoardGame extends PIXI.Container {
 
       let playerSprite = new PIXI.Sprite.from(PLAYER_PIECES[item.house])
       let houseCell = this.FindCellBySymbol(item.house)
+      console.log("House:", item.house, "is", houseCell.x, houseCell.y)
 
-      playerSprite.width *= 2;
-      playerSprite.height *= 2;
+      //playerSprite.width *= 1;
+      //playerSprite.height *= 2;
+      playerSprite.anchor.x = 0.5
+      playerSprite.anchor.y = 0.5;
       playerSprite.x = houseCell.x - playerSprite.width/2
       playerSprite.y = houseCell.y - playerSprite.height/2
       playerSprite.house = item.house;
@@ -365,6 +368,8 @@ export default class BoardGame extends PIXI.Container {
 
   CheckConnection = (cellOne,cellTwo,direction) => {
 
+    return true;
+
     console.log("Checking connection",cellOne.GetID(),cellTwo.GetID(),direction)
 
     switch(direction){
@@ -390,51 +395,58 @@ export default class BoardGame extends PIXI.Container {
     let board_rows = this.board;
     for(let row = 0; row < board_rows.length; row++ )
     {
-      console.log("Looking for the cell position in row",row)
+      //console.log("Looking for the cell position in row",row)
       let pos = board_rows[row].indexOf(cell);
       if(pos != -1){
 
-        console.log("Found cell position",pos)
+        //console.log("Found cell position",pos)
 
         let neighbours = []
 
         // Check North
         if(row != 0 && this.CheckConnection(cell,board_rows[row-1][pos],DIRECTION.NORTH)){
           neighbours.push(board_rows[row - 1][pos]);
-          console.log("NEIGHBOUR FOUND: NORTH")
+          //console.log("NEIGHBOUR FOUND: NORTH")
         }
 
         // Check East
         if(pos < board_rows[row].length - 1 && this.CheckConnection(cell,board_rows[row][pos+1],DIRECTION.EAST)){
           neighbours.push(board_rows[row][pos+1]);
-          console.log("NEIGHBOUR FOUND: EAST")
+          //console.log("NEIGHBOUR FOUND: EAST")
         }
 
         // Check West
         if(pos != 0 && this.CheckConnection(cell,board_rows[row][pos-1],DIRECTION.WEST)){
           neighbours.push(board_rows[row][pos-1]);
-          console.log("NEIGHBOUR FOUND: WEST")
+          //console.log("NEIGHBOUR FOUND: WEST")
         }
 
         // Check South
         if(row != board_rows.length - 1 && this.CheckConnection(cell,board_rows[row+1][pos],DIRECTION.SOUTH)){
           neighbours.push(board_rows[row + 1][pos]);
-          console.log("NEIGHBOUR FOUND: SOUTH")
+          //console.log("NEIGHBOUR FOUND: SOUTH")
         }
 
-        console.log("Identified neighbours",neighbours)
+        //console.log("Identified neighbours",neighbours)
         return neighbours;
       }
     }
   }
 
   GetPathFrom = (cellOne,targetCell) => {
-    console.log("Getting path from",cellOne.GetID(),"to",targetCell.GetID());
+      console.log("Getting path from",
+      this.GetBoardgameCellRow(cellOne),
+      this.GetBoardgameCellIndex(cellOne),
+      "to",this.GetBoardgameCellRow(targetCell),
+      this.GetBoardgameCellIndex(targetCell))
+
+    cellOne.scale = 1.2;
+    targetCell.scale = 1.2;
 
     let frontier = []; // This is the list of cells we're going to be traversing
     frontier.push(cellOne); // So lets add the very first cell to it
 
-    let came_from = {}; //
+    let came_from = {}; // This is going to track where each cell came from
     let current = null;
 
     let alpha = 0.1
@@ -453,6 +465,7 @@ export default class BoardGame extends PIXI.Container {
 
       neighbours.forEach((next, i) => { // Lets go through all of the neighbours
         if(!came_from[next.GetID()]){
+          next.alpha = 0.2
           frontier.push(next);
           came_from[next.GetID()] = current;
         }
@@ -469,21 +482,20 @@ export default class BoardGame extends PIXI.Container {
     while (current != cellOne){
       path.unshift(current); //
 
-      if (current == null) return []
+      //if (current == null) return []
 
       current = came_from[current.GetID()];
-      console.log(current,cellOne)
+      //console.log(current,cellOne)
     }
     path.unshift(cellOne);
-    path.reverse();
+    //path.reverse();
 
-    let pathstring = ""
-    path.forEach((node, i) => {
-      node.alpha = 0.4//(1.0 / path.length) * i
-      pathstring = pathstring + " " + node.GetID();
+    console.log("----- PATH ------")
+    path.forEach((cell, i) => {
+      console.log("row:",this.GetBoardgameCellRow(cell),"column:",this.GetBoardgameCellIndex(cell));
     });
-    console.log("Path: ",pathstring);
 
+    console.log("----- END ------")
 
     return path;
   }

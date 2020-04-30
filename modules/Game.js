@@ -79,6 +79,7 @@ export default class Game extends PIXI.Container {
 
     // Set up the players
     for (let i = 0; i < numOfPlayers; i++){
+
       let player = new Player(null,i,(()=>{
           switch(i){
             case 0: return HOUSE.GRYFFINDOR;
@@ -89,11 +90,13 @@ export default class Game extends PIXI.Container {
       })(i), (()=>{
           switch(i){
             case 0: return this.GetBoardgame().GetBoardCells()[0][0];
-            case 1: return this.GetBoardgame().GetBoardCells()[0][0];
-            case 2: return this.GetBoardgame().GetBoardCells()[0][0];
-            default: return this.GetBoardgame().GetBoardCells()[0][0];
+            case 1: return this.GetBoardgame().GetBoardCells()[0][6];
+            case 2: return this.GetBoardgame().GetBoardCells()[6][0];
+            default: return this.GetBoardgame().GetBoardCells()[6][6];
           }
       })(i))
+
+
 
       this._players.push(player);
     }

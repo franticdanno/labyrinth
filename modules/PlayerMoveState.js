@@ -103,6 +103,7 @@ export default class PlayerMoveState extends BaseState {
   MovePlayer = (player,targetCell,path) => {
       let game = this._entity
       console.log("Here is the path:",path)
+      player.SetCurrentCell(targetCell);
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
         .AddAction(new ActionCustom(()=>{
           game.NextPlayer();

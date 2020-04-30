@@ -12,14 +12,15 @@ export class ActionFollowPath extends Action {
     this._entity = entity;
     this._path = path;
     this._currentNode = this._path.shift();
+
+    // No point doing the action if there is no path, so lets just finish is straight away
+    if(path.length == 0){
+      console.log("No path found!");
+      this._isFinished = true;
+    }
   }
 
   Update = (delta) => {
-
-    if(this._path.length == 0){
-      this._isFinished = true;
-      return;
-    }
 
     let vectorToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y)
     let normalizedToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y).normalize();
@@ -36,6 +37,10 @@ export class ActionFollowPath extends Action {
       if(this._path.length > 0){
         this._currentNode = this._path.shift();
       } else {
+
+        //this._entity.position.x = this._currentNode.position.x
+        //this._entity.position.y = this._currentNode.position.y
+
         this._isFinished = true;
         return;
       }
