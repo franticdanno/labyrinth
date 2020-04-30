@@ -76,7 +76,7 @@ export default class PlayerMoveState extends BaseState {
     let board = this._entity.GetBoardgame().GetBoardCells();
     console.log("Removing listeners",board);
     board.forEach((cell_row, i) => {
-      return cell_row.forEach((cell, i) => {
+      cell_row.forEach((cell, i) => {
         //console.log("Checking",cell.symbol,symbol)
         cell.interactive = false;
         cell.buttonMode = false;
