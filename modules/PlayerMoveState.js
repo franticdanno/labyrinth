@@ -7,6 +7,7 @@ import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js';
 import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
+import CellMoveState from './CellMoveState.js';
 
 export default class PlayerMoveState extends BaseState {
 
@@ -17,7 +18,7 @@ export default class PlayerMoveState extends BaseState {
   Enter = () => {
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,this._entity.GetCurrentPlayer().GetHouse(),1))
+    this._actionManager.AddAction(new ActionShowText(this._entity,"Move your piece!",1))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))
@@ -79,14 +80,20 @@ export default class PlayerMoveState extends BaseState {
         //console.log("Checking",cell.symbol,symbol)
         cell.interactive = false;
         cell.buttonMode = false;
+        cell.alpha = 1.0;
         cell.removeListener('pointerdown')
       });
     });
   }
 
   MovePlayer = (player,targetCell,path) => {
+      let game = this._entity
       console.log("Here is the path:",path)
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
+        .AddAction(new ActionCustom(()=>{
+          game.NextPlayer();
+          game.ChangeState(new CellMoveState(this._entity));
+        }));
   }
 
   GetStateName(){

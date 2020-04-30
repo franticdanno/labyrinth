@@ -16,6 +16,11 @@ export class ActionFollowPath extends Action {
 
   Update = (delta) => {
 
+    if(this._path.length == 0){
+      this._isFinished = true;
+      return;
+    }
+
     let vectorToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y)
     let normalizedToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y).normalize();
     let movementVector = Vector2D.multiply(normalizedToTarget,MOVE_SPEED)

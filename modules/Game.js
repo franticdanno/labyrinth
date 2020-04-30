@@ -36,6 +36,10 @@ export default class Game extends PIXI.Container {
     return this._settings.playerCount;
   }
 
+  NextPlayer = () =>{
+    this._currentPlayer = (this._currentPlayer + 1) % this._players.length;
+  }
+
   SetUpAndShuffleCards = () => {
 
     // First, create the cards

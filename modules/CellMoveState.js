@@ -4,6 +4,7 @@ import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import { ActionMoveTiles } from './actions/ActionMoveTiles.js'
+import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
 import { HOUSE, CHARACTER, CELL_TYPE,DIRECTION } from './Constants.js'
@@ -18,7 +19,7 @@ export default class CellMoveState extends BaseState {
   Enter = () => {
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,"Move:" + this._entity.GetCurrentPlayer().GetHouse(),1))
+    this._actionManager.AddAction(new ActionShowText(this._entity,"Move a cell:" + this._entity.GetCurrentPlayer().GetHouse(),1))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))
@@ -44,31 +45,46 @@ export default class CellMoveState extends BaseState {
     let boardgame = this._entity.GetBoardgame();
     let board = boardgame.GetBoardCells();
     let actionManager = this._actionManager;
+    let state = this
 
     console.log("Setting up for Cell Interaction");
 
     function cellClicked(cell){
 
+      state.RemoveListenersForCellInteraction() // Disable cell clicking now that the user's chose their move
+
       let cellRow = boardgame.GetBoardgameCellRow(cell);
       let cellIndex = boardgame.GetBoardgameCellIndex(cell)
-
 
       //actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
       if(cellRow == 0 || cellRow == board.length - 1){
 
         let sprites = boardgame.GetBoardCellSpritesColumn(cellIndex)
         console.log("It's a column!",sprites)
-        let direction = cellRow == 0 ? DIRECTION.NORTH : DIRECTION.SOUTH
-        //boardgame.ShiftCellColumn(cell.GetIndex(),direction)
+        let direction = cellRow == 0 ? DIRECTION.SOUTH : DIRECTION.NORTH
+
         actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+          .AddAction(new ActionCustom(()=>{
+            boardgame.ShiftCellColumn(cellIndex,direction)
+            boardgame.ResetBoardgameSpritePositions()
+          }))
+          .AddAction(new ActionCustom(()=>{
+            game.ChangeState(new PlayerMoveState(game))
+          }))
 
       } else {
 
         let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
         console.log("It's a row!",sprites);
         let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
-        //boardgame.ShiftCellRow(cell.GetRow(),direction)
         actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+          .AddAction(new ActionCustom(()=>{
+            boardgame.ShiftCellRow(cellRow,direction)
+            boardgame.ResetBoardgameSpritePositions()
+          }))
+          .AddAction(new ActionCustom(()=>{
+            game.ChangeState(new PlayerMoveState(game))
+          }))
 
       }
 
@@ -115,6 +131,7 @@ export default class CellMoveState extends BaseState {
         //console.log("Checking",cell.symbol,symbol)
         cell.interactive = false;
         cell.buttonMode = false;
+        cell.alpha = 1.0;
         cell.removeListener('pointerdown')
       });
     });

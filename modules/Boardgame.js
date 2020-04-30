@@ -149,6 +149,25 @@ export default class BoardGame extends PIXI.Container {
     ]
   }
 
+  ResetBoardgameSpritePositions = () => {
+    let board = this.board
+    board.map((cells,row_index) => {
+      cells.map((cell,cell_index) => {
+
+        // Positions and sizes
+        cell.x = 620 + (CELL_SPRITE_SIZE * cell_index)
+        cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
+        cell.width = CELL_SPRITE_SIZE;
+        cell.height = CELL_SPRITE_SIZE;
+        //cell.rotation = (cell.rotation * 90) * Math.PI / 180;
+        cell.anchor.set(0.5,0.5)
+
+      })
+    })
+
+    this.ResetSpareCell();
+  }
+
   BuildBoardgame = () => {
 
     let board = this.board
@@ -181,7 +200,7 @@ export default class BoardGame extends PIXI.Container {
     this.addChild(this._board_container);
   }
 
-  ShowSpareCell = () => {
+  ResetSpareCell = () => {
     let cell = this._spareCell;
     cell.x = 200;
     cell.y = 200;
@@ -189,7 +208,11 @@ export default class BoardGame extends PIXI.Container {
     cell.height = CELL_SPRITE_SIZE;
     cell.anchor.set(0.5,0.5)
     cell.rotation = 0
-    this._board_container.addChild(cell);
+  }
+
+  ShowSpareCell = () => {
+    this.ResetSpareCell();
+    this._board_container.addChild(this._spareCell);
   }
 
   GetBoardCellSpritesRow = (row) => {
@@ -208,15 +231,19 @@ export default class BoardGame extends PIXI.Container {
     this._spareCell = cell;
   }
 
-/*  ShiftCellRow = (row,direction) => {
+  ShiftCellRow = (row,direction) => {
 
     if (direction == DIRECTION.EAST){
+
+      console.log("Shifting cells EAST");
 
       // Add cell to the beginning and pop off the last cell
       this.board[row].unshift(this._spareCell);
       this.SetSpareCell(this.board[row].pop())
 
     } else if (direction == DIRECTION.WEST){
+
+      console.log("Shifting cells WEST");
 
       // Add cell to the beginning and pop off the last cell
       this.board[row].push(this._spareCell);
@@ -232,11 +259,13 @@ export default class BoardGame extends PIXI.Container {
 
     if(direction == DIRECTION.SOUTH){
 
+      console.log("Shifting cells SOUTH");
+
       // Pull the last cell off into the spare cell slot
       this.SetSpareCell(this.board[this.board.length-1][column]);
 
       // And startig from the bottom, move the cells up one place each
-      for(let i = this._board.length-1; i > 0 i--){
+      for(let i = this.board.length-1; i > 0; i--){
         this.board[i][column] = this.board[i-1][column]
       }
 
@@ -245,19 +274,19 @@ export default class BoardGame extends PIXI.Container {
 
     } else if (direction == DIRECTION.NORTH){
 
+      console.log("Shifting cells NORTH");
       // Pull the first cell off into the spare cell slot
       this.SetSpareCell(this.board[0][column]);
 
       // And starting from the bottom, move the cells up one place each
-      for(let i = 0; i < this._board.length - 1  i++){
+      for(let i = 0; i < this.board.length - 1 ; i++){
         this.board[i][column] = this.board[i+1][column]
       }
 
       // Now set the new spot with the old spare
-      this.board[this._board.length - 1][column] = oldSpareCell;
+      this.board[this.board.length - 1][column] = oldSpareCell;
     }
   }
-  */
 
   GetBoardgameCellRow = (cell) => {
     for(let row = 0; row < this.board.length; row++){
@@ -435,11 +464,10 @@ export default class BoardGame extends PIXI.Container {
     while (current != cellOne){
       path.unshift(current); //
 
+      if (current == null) return []
+
       current = came_from[current.GetID()];
       console.log(current,cellOne)
-
-      loopcount++
-      if(loopcount>= 10) break;
     }
     path.unshift(cellOne);
     path.reverse();

@@ -27,13 +27,13 @@ export class ActionMoveTiles extends Action {
       switch(this._direction)
       {
         case DIRECTION.NORTH:
-          cell.y += distance
+          cell.y -= distance
           break;
         case DIRECTION.EAST:
           cell.x += distance
           break;
         case DIRECTION.SOUTH:
-          cell.y -= distance
+          cell.y += distance
           break;
         case DIRECTION.WEST:
           cell.x -= distance
