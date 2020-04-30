@@ -21,4 +21,8 @@ export default class Player {
   GetCurrentCell = () => {
     return this.currentCell;
   }
+
+  GetPlayerNumber = () => {
+    return this.playerNumber;
+  }
 }
