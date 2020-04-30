@@ -5,7 +5,7 @@ export class ActionMoveTiles extends Action {
 
   constructor(cellSprites,direction){
     super();
-    this._speed = 114 / 10;
+    this._speed = 114 / 30;
     this._cellSprites = cellSprites;
     this._direction = direction;
     this._totalDistanceMoved = 0;

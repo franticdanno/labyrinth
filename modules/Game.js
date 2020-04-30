@@ -38,6 +38,7 @@ export default class Game extends PIXI.Container {
 
   NextPlayer = () =>{
     this._currentPlayer = (this._currentPlayer + 1) % this._players.length;
+    console.log("Player turn:",this._currentPlayer);
   }
 
   SetUpAndShuffleCards = () => {
@@ -126,6 +127,10 @@ export default class Game extends PIXI.Container {
 
   GetCurrentPlayer = () => {
     return this._players[this._currentPlayer];
+  }
+
+  GetCurrentPlayerIndex = () => {
+    return this._currentPlayer;
   }
 
   SetUpBoardgame = () => {

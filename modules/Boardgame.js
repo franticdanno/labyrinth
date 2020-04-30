@@ -325,7 +325,7 @@ export default class BoardGame extends PIXI.Container {
   }
 
   GetPlayerSprite(player){
-    return this._playerSprites[0];
+    return this._playerSprites[this._game.GetCurrentPlayerIndex()];
   }
 
   FindPlayerByHouse = (house) => {
@@ -335,10 +335,15 @@ export default class BoardGame extends PIXI.Container {
   }
 
   HighlightCurrentPlayer = () => {
-    let house = this._game.GetCurrentPlayer().GetHouse()
-    console.log("Looking to highlight",house)
-    let playerSprite = this.FindPlayerByHouse(house)
-    console.log("Found player",playerSprite);
+    for(let i = 0; i < this._playerSprites.length; i++){
+      if(i == this._game.GetCurrentPlayerIndex()){
+        this._playerSprites[i].scale.x = 3.0;
+        this._playerSprites[i].scale.y = 3.0;
+      } else {
+        this._playerSprites[i].scale.x = 2.0;
+        this._playerSprites[i].scale.y = 2.0;
+      }
+    }
   }
 
   FindCellBySymbol = (symbol) => {
