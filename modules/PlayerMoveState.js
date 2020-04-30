@@ -17,6 +17,8 @@ export default class PlayerMoveState extends BaseState {
 
   Enter = () => {
 
+    let state = this;
+
     this._actionManager = new SequenceAction()
     this._actionManager.AddAction(new ActionShowText(this._entity,"Move your piece!",1))
       .AddAction(new ActionCustom((params)=>{
@@ -24,7 +26,7 @@ export default class PlayerMoveState extends BaseState {
       },{entity:this._entity}))
       .AddAction(new ActionCustom((params) => {
         params.entity.ListenForCellInteraction();
-      },{entity: this}))
+      },{entity: state}))
 
     console.log("Boardgame has been set up!",this)
   }
@@ -68,6 +70,16 @@ export default class PlayerMoveState extends BaseState {
           }
 
         })
+
+        cell.on('pointerover',(e,b) => {
+            let target = e.target;
+            target.alpha = 0.5;
+            //console.log("pointer over")
+            target.once('pointerout',(e,b) => {
+              //console.log("pointer out")
+              target.alpha = 1.0;
+            })
+        })
       });
     });
   }
@@ -82,6 +94,8 @@ export default class PlayerMoveState extends BaseState {
         cell.buttonMode = false;
         cell.alpha = 1.0;
         cell.removeListener('pointerdown')
+        cell.removeListener('pointerover')
+        console.log("Removing listeners")
       });
     });
   }

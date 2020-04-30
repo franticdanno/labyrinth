@@ -128,11 +128,12 @@ export default class CellMoveState extends BaseState {
     console.log("Removing listeners",board);
     board.forEach((cell_row, i) => {
       return cell_row.forEach((cell, i) => {
-        //console.log("Checking",cell.symbol,symbol)
+        console.log("Removing listener")
         cell.interactive = false;
         cell.buttonMode = false;
         cell.alpha = 1.0;
         cell.removeListener('pointerdown')
+        cell.removeListener('pointerover')
       });
     });
   }
