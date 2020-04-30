@@ -15,7 +15,7 @@ export class CompositeAction extends Action {
   }
 
   AddAction(action){
-    console.log("Adding action", action);
+    //console.log("Adding action", action);
     this._actions.push(action);
     return this;
   }
@@ -58,7 +58,7 @@ export class SequenceAction extends CompositeAction {
       this._actions[0].Update(delta);
 
       if(this._actions[0]._isFinished){
-        console.log("Finished?",this._actions[0]._isFinished);
+        //console.log("Finished?",this._actions[0]._isFinished);
         this._actions.shift()
       }
 

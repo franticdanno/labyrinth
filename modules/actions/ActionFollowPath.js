@@ -29,7 +29,7 @@ export class ActionFollowPath extends Action {
     // might as well just put the user into the position and move onto the next node
     if (vectorToTarget.length() <= movementVector.length()){
 
-      console.log("REACHED POSITION",vectorToTarget,movementVector);
+      //onsole.log("REACHED POSITION",vectorToTarget,movementVector);
       this._entity.position.x = this._currentNode.position.x;
       this._entity.position.y = this._currentNode.position.y;
 

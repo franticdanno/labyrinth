@@ -13,9 +13,9 @@ const emptyJunctionCell = () => ( new BoardGameCell(CELL_TYPE.JUNCTION,null,getR
 
 const PLAYER_PIECES = {
   [HOUSE.GRYFFINDOR] : "player_one.png",
-  [HOUSE.RAVENCLAW] : "player_two.png",
+  [HOUSE.SLYTHERIN] : "player_two.png",
   [HOUSE.HUFFLEPUFF] : "player_three.png",
-  [HOUSE.SLYTHERIN] : "player_four.png"
+  [HOUSE.RAVENCLAW] : "player_four.png",
 }
 
 const DIRECTION = {

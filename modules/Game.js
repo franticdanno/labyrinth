@@ -118,7 +118,7 @@ export default class Game extends PIXI.Container {
       currentPlayerIndex = (currentPlayerIndex + 1) % this.GetPlayerCount();
     }
 
-    console.log("Cards have been dealt out", possibleCards.length);
+    console.log("Cards have been dealt out. Cards remaining:", possibleCards.length);
   }
 
   SetCurrentPlayer = (playerNumber) => {
