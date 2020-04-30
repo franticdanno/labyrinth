@@ -2,55 +2,31 @@
 
 "cell_corner.png":
 {
-	"frame": {"x":0,"y":0,"w":224,"h":224},
+	"frame": {"x":0,"y":0,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
-},
-"cell_corner_fancy.png":
-{
-	"frame": {"x":224,"y":0,"w":224,"h":224},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
+	"sourceSize": {"w":114,"h":114}
 },
 "cell_junction.png":
 {
-	"frame": {"x":0,"y":224,"w":224,"h":224},
+	"frame": {"x":114,"y":0,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
-},
-"cell_junction_fancy.png":
-{
-	"frame": {"x":224,"y":224,"w":224,"h":224},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
+	"sourceSize": {"w":114,"h":114}
 },
 "cell_line.png":
 {
-	"frame": {"x":0,"y":448,"w":224,"h":224},
+	"frame": {"x":0,"y":114,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
-},
-"cell_line_fancy.png":
-{
-	"frame": {"x":224,"y":448,"w":224,"h":224},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":224,"h":224},
-	"sourceSize": {"w":224,"h":224}
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
+	"sourceSize": {"w":114,"h":114}
 },
 "player_four.png":
 {
-	"frame": {"x":448,"y":448,"w":32,"h":32},
+	"frame": {"x":114,"y":114,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -58,7 +34,7 @@
 },
 "player_one.png":
 {
-	"frame": {"x":480,"y":448,"w":32,"h":32},
+	"frame": {"x":146,"y":114,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -66,7 +42,7 @@
 },
 "player_three.png":
 {
-	"frame": {"x":0,"y":672,"w":32,"h":32},
+	"frame": {"x":178,"y":114,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -74,7 +50,7 @@
 },
 "player_two.png":
 {
-	"frame": {"x":32,"y":672,"w":32,"h":32},
+	"frame": {"x":210,"y":114,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -85,8 +61,8 @@
 	"version": "1.0",
 	"image": "boardgame_spritesheet.png",
 	"format": "RGBA8888",
-	"size": {"w":512,"h":1024},
+	"size": {"w":256,"h":256},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:4d3e68c569f1f60a8825f6e098327e57:0d3e2279e02610630f768baf16d89c88:2fc7c3386d16e09928cef85026c3ca48$"
+	"smartupdate": "$TexturePacker:SmartUpdate:2e8c4b6834e8b75881c53d4009f45eb0:5f3c229dc834373c0f67c44a006ae7b0:2fc7c3386d16e09928cef85026c3ca48$"
 }
 }

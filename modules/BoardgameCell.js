@@ -24,8 +24,8 @@ export default class BoardGameCell extends PIXI.Sprite {
 
   constructor(celltype,symbol,rotation,canMove){
 
-    super(Math.random() > 0.9 ? PIXI.Texture.from(CELL_IMAGES_FANCY[celltype]) : PIXI.Texture.from(CELL_IMAGES[celltype]))
-
+    //super(Math.random() > 0.9 ? PIXI.Texture.from(CELL_IMAGES_FANCY[celltype]) : PIXI.Texture.from(CELL_IMAGES[celltype]))
+    super(PIXI.Texture.from(CELL_IMAGES[celltype]))
     this.celltype   = celltype;
     this.rotation   = rotation;
     this.symbol     = symbol;
