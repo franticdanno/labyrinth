@@ -42,7 +42,8 @@ class MyApplication extends PIXI.Application {
 const myApplication = new MyApplication({
   width: CANVAS_WIDTH,
   height: CANVAS_HEIGHT,
-  backgroundColor : 0x1099bb
+  backgroundColor : 0x1099bb,
+  antialias : true
 })
 
 myApplication.Resize();

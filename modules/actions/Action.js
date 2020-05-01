@@ -55,11 +55,11 @@ export class SequenceAction extends CompositeAction {
 
     if(this._actions.length > 0){
 
-      this._actions[0].Update(delta);
-
       if(this._actions[0]._isFinished){
         //console.log("Finished?",this._actions[0]._isFinished);
         this._actions.shift()
+      } else {
+        this._actions[0].Update(delta);
       }
 
     }

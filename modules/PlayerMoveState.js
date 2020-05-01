@@ -28,6 +28,8 @@ export default class PlayerMoveState extends BaseState {
         params.entity.ListenForCellInteraction();
       },{entity: state}))
 
+      //this._entity.GetBoardgame().DrawConnectingNodes();
+
     console.log("Boardgame has been set up!",this)
   }
 
@@ -73,7 +75,7 @@ export default class PlayerMoveState extends BaseState {
 
         cell.on('pointerover',(e,b) => {
             let target = e.target;
-            target.alpha = 0.5;
+            target.alpha = 0.8;
             //console.log("pointer over")
             target.once('pointerout',(e,b) => {
               //console.log("pointer out")
@@ -102,7 +104,7 @@ export default class PlayerMoveState extends BaseState {
 
   MovePlayer = (player,targetCell,path) => {
       let game = this._entity
-      console.log("Here is the path:",path)
+      //console.log("Here is the path:",path)
       player.SetCurrentCell(targetCell);
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetPlayerSprite(),path))
         .AddAction(new ActionCustom(()=>{
