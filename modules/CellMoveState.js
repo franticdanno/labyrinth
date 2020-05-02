@@ -19,7 +19,7 @@ export default class CellMoveState extends BaseState {
   Enter = () => {
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,"Move a cell:" + this._entity.GetCurrentPlayer().GetHouse(),1))
+    this._actionManager.AddAction(new ActionShowText(this._entity,"Player " + (this._entity.GetCurrentPlayerIndex() + 1),1))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))

@@ -202,10 +202,10 @@ export default class BoardGame extends PIXI.Container {
 
   ResetSpareCell = () => {
     let cell = this._spareCell;
-    cell.x = 200;
-    cell.y = 200;
-    cell.width = CELL_SPRITE_SIZE;
-    cell.height = CELL_SPRITE_SIZE;
+    cell.x = 300;
+    cell.y = 500;
+    cell.width = CELL_SPRITE_SIZE * 1.2;
+    cell.height = CELL_SPRITE_SIZE * 1.2;
     //cell.anchor.set(0.5,0.5)
     cell.rotation = 0
   }

@@ -21,6 +21,7 @@ export default class MainGameSetupState extends BaseState {
     this._entity.SetUpPlayers();
     this._entity.SetUpAndShuffleCards();
     this._entity.DealCards();
+    this._entity.ShowPlayerCards();
 
     this._entity.SetCurrentPlayer(1);
 

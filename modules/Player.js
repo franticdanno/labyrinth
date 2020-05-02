@@ -14,6 +14,10 @@ export default class Player {
     this.cards.push(card);
   }
 
+  GetCards = () => {
+    return this.cards;
+  }
+
   GetHouse = () => {
     return this.house;
   }

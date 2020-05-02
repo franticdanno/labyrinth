@@ -34,6 +34,17 @@ export default class BoardGameCell extends PIXI.Container {
 
     // If there is a symbol, lets add it
     if(symbol != null && symbol.path != null) {
+
+      // Adding a background here to make it stand out more
+      let graphics = new PIXI.Graphics()
+      graphics.lineStyle(7, 0x98fc03, 1); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+      graphics.beginFill(0xdddddd, 1);
+      graphics.drawCircle(this._cellSpriteBackground.x, this._cellSpriteBackground.y, 30);
+      graphics.endFill();
+      graphics.alpha = 0.8;
+      this.addChild(graphics);
+
+      // And now we add the actual symbol onto the cell
       console.log('Creating cell with symbol',symbol.path)
       this._cellSpriteSymbol = new PIXI.Sprite.from(symbol.path)
       this._cellSpriteSymbol.anchor.set(0.5,0.5);

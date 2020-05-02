@@ -1,4 +1,4 @@
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import { HOUSE, CHARACTER, SYMBOLS, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import BoardGame from './Boardgame.js';
 import Player from './Player.js'
@@ -8,15 +8,20 @@ import LoadingScreenState from './LoadingScreenState.js'
 
 export default class Game extends PIXI.Container {
 
-  constructor(){
+  constructor(app){
     super();
 
     this._settings      = {};
     this._players       = [];
     this._currentPlayer = 0
+    this._app           = app;
 
     // State manager set up
     this._stateManager = new StateManager();
+  }
+
+  GetApp = () => {
+    return this._app;
   }
 
   Start = () => {
@@ -45,13 +50,9 @@ export default class Game extends PIXI.Container {
 
     // First, create the cards
     let cards = []
-    let i = 0
-    for( let k in CHARACTER)
+    for(let i = 0; i < SYMBOLS.length; i++)
     {
-      let newCard = new Card(null,k)
-      newCard.scale.x = 0.2;
-      newCard.scale.y = 0.2;
-      newCard.position.x = i * 50;
+      let newCard = new Card(SYMBOLS[i])
       cards.push(newCard)
       //this._entity.addChild(newCard);
       i++
@@ -122,6 +123,28 @@ export default class Game extends PIXI.Container {
     }
 
     console.log("Cards have been dealt out. Cards remaining:", possibleCards.length);
+  }
+
+
+  ShowPlayerCards = () => {
+
+    const playerCardPositions = [[200,200],[1720,200],[200,880],[1720,880]]
+
+    let players = this._players;
+
+    for(let playerIndex = 0; playerIndex < players.length; playerIndex++) {
+      let cards = players[playerIndex].GetCards();
+      for(let cardIndex = 0; cardIndex < cards.length; cardIndex++){
+        let card = cards[cardIndex]
+        card.x = playerCardPositions[playerIndex][0] + cardIndex * 15;
+        card.y = playerCardPositions[playerIndex][1]
+
+        // Set up whether or not it should be shown
+        cardIndex == cards.length - 1 ? card.ShowCard() : card.HideCard();
+
+        this.addChild(card);
+      }
+    }
   }
 
   SetCurrentPlayer = (playerNumber) => {
