@@ -25,7 +25,7 @@ export const SYMBOLS = [
   {name: "Hunter", path: "062-hunter.png"},
   {name: "Wizard", path: "063-wizard.png"},
   {name: "Witch", path: "065-witch.png"},
-  {name: "Devil", path: "065-witch.png"},
+  {name: "Devil", path: "013-devil.png"},
   {name: "Twins", path: "014-twins.png"},
   {name: "Dragon", path: "015-dragon.png"},
   {name: "Echidna", path: "017-echidna.png"},

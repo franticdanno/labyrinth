@@ -88,7 +88,7 @@ export default class PlayerMoveState extends BaseState {
 
   RemoveListenersForCellInteraction = () => {
     let board = this._entity.GetBoardgame().GetBoardCells();
-    console.log("Removing listeners",board);
+    //console.log("Removing listeners",board);
     board.forEach((cell_row, i) => {
       cell_row.forEach((cell, i) => {
         //console.log("Checking",cell.symbol,symbol)
@@ -97,7 +97,7 @@ export default class PlayerMoveState extends BaseState {
         cell.alpha = 1.0;
         cell.removeListener('pointerdown')
         cell.removeListener('pointerover')
-        console.log("Removing listeners")
+        //console.log("Removing listeners")
       });
     });
   }
@@ -105,8 +105,25 @@ export default class PlayerMoveState extends BaseState {
   MovePlayer = (player,targetCell,path) => {
       let game = this._entity
       //console.log("Here is the path:",path)
-      player.SetCurrentCell(targetCell);
+      player.SetCurrentCell(targetCell); // Set the player's current cell to ther target one
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetplayerContainer(),path))
+        .AddAction(new ActionCustom(()=> {
+
+          console.log("CHECKING CELL --------------")
+          let player = game.GetCurrentPlayer();
+          let playerCell = player.GetCurrentCell();
+          let cardRequired = player.GetCardTarget();
+
+          console.log("Player Cell", playerCell.GetSymbol(), "Card Required", cardRequired.GetSymbol())
+          if(playerCell.GetSymbol() == cardRequired.GetSymbol()){
+            console.log("Found a match")
+            playerCell.HideSymbol();
+            game.SetPlayerFoundCard(player,cardRequired);
+          } else {
+            console.log("No Match")
+          }
+
+        }))
         .AddAction(new ActionCustom(()=>{
           game.NextPlayer();
           game.ChangeState(new CellMoveState(this._entity));

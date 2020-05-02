@@ -54,8 +54,7 @@ export default class Game extends PIXI.Container {
     {
       let newCard = new Card(SYMBOLS[i])
       cards.push(newCard)
-      //this._entity.addChild(newCard);
-      i++
+      //this._entity.addChild(newCard)
     }
 
     // Now lets 'shuffle' them
@@ -70,7 +69,15 @@ export default class Game extends PIXI.Container {
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 
+    console.log("Shuffled all cards of length",cards.length)
+
     return cards;
+  }
+
+  SetPlayerFoundCard = (player,card) => {
+    player.ConsumeCardTarget();
+    this.removeChild(card);
+    player.GetCardTarget().ShowCard();
   }
 
   SetUpPlayers = () => {

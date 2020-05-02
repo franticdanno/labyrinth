@@ -24,6 +24,10 @@ export default class Card extends PIXI.Container {
     })
   }
 
+  GetSymbol = () => {
+    return this._symbol;
+  }
+
   ToggleShow = () => {
     if(this._isShowing){
       this.HideCard();

@@ -36,13 +36,13 @@ export default class BoardGameCell extends PIXI.Container {
     if(symbol != null && symbol.path != null) {
 
       // Adding a background here to make it stand out more
-      let graphics = new PIXI.Graphics()
-      graphics.lineStyle(7, 0x98fc03, 1); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
-      graphics.beginFill(0xdddddd, 1);
-      graphics.drawCircle(this._cellSpriteBackground.x, this._cellSpriteBackground.y, 30);
-      graphics.endFill();
-      graphics.alpha = 0.8;
-      this.addChild(graphics);
+      this._symbolBackground = new PIXI.Graphics()
+      this._symbolBackground.lineStyle(7, 0x98fc03, 1); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+      this._symbolBackground.beginFill(0xdddddd, 1);
+      this._symbolBackground.drawCircle(this._cellSpriteBackground.x, this._cellSpriteBackground.y, 30);
+      this._symbolBackground.endFill();
+      this._symbolBackground.alpha = 0.8;
+      this.addChild(this._symbolBackground);
 
       // And now we add the actual symbol onto the cell
       console.log('Creating cell with symbol',symbol.path)
@@ -74,7 +74,7 @@ export default class BoardGameCell extends PIXI.Container {
   GetLinks = () => {
     let og = CELL_TYPE_LINKS[this.celltype]
     let currentRotation = ((this.rotation * (180/Math.PI)) / 90) % 4;
-    console.log("Getting Links",this.rotation,og,currentRotation);
+    //console.log("Getting Links",this.rotation,og,currentRotation);
     switch (currentRotation){
       case 0:
         return [og[0],og[1],og[2],og[3]]
@@ -98,5 +98,10 @@ export default class BoardGameCell extends PIXI.Container {
 
   GetID= () => {
     return this.cardID;
+  }
+
+  HideSymbol = () => {
+    this._cellSpriteSymbol.visible = false;
+    this._symbolBackground.visible = false;
   }
 }

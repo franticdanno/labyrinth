@@ -24,8 +24,8 @@ export default class LoadingScreenState extends BaseState {
       wordWrap: true,
       wordWrapWidth: 440,
     }));
-    loadingText.x = 700;
-    loadingText.y = 250;
+    loadingText.x = 800;
+    loadingText.y = 450;
 
     // Show Loading text
     this._entity.addChild(loadingText);

@@ -13,7 +13,7 @@ export class ActionMoveTiles extends Action {
 
   Update = (delta) => {
 
-    console.log("moving sprites",this._direction)
+    //console.log("moving sprites",this._direction)
 
     let distance = this._speed * delta
     this._totalDistanceMoved += distance

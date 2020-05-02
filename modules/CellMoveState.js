@@ -60,7 +60,7 @@ export default class CellMoveState extends BaseState {
       if(cellRow == 0 || cellRow == board.length - 1){
 
         let sprites = boardgame.GetBoardCellSpritesColumn(cellIndex)
-        console.log("It's a column!",sprites)
+        //console.log("It's a column!",sprites)
         let direction = cellRow == 0 ? DIRECTION.SOUTH : DIRECTION.NORTH
 
         actionManager.AddAction(new ActionMoveTiles(sprites, direction))
@@ -75,7 +75,7 @@ export default class CellMoveState extends BaseState {
       } else {
 
         let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
-        console.log("It's a row!",sprites);
+        //console.log("It's a row!",sprites);
         let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
         actionManager.AddAction(new ActionMoveTiles(sprites, direction))
           .AddAction(new ActionCustom(()=>{
@@ -125,10 +125,10 @@ export default class CellMoveState extends BaseState {
 
   RemoveListenersForCellInteraction = () => {
     let board = this._entity.GetBoardgame().GetBoardCells();
-    console.log("Removing listeners",board);
+    //console.log("Removing listeners",board);
     board.forEach((cell_row, i) => {
       return cell_row.forEach((cell, i) => {
-        console.log("Removing listener")
+        //console.log("Removing listener")
         cell.interactive = false;
         cell.buttonMode = false;
         cell.alpha = 1.0;

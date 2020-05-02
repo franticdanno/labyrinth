@@ -275,8 +275,6 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>cell_corner.png</filename>
-            <filename>cell_junction.png</filename>
             <filename>cell_line.png</filename>
             <filename>player_four.png</filename>
             <filename>player_one.png</filename>
@@ -286,7 +284,6 @@
             <filename>icons/053-scarecrow.png</filename>
             <filename>icons/054-wizard.png</filename>
             <filename>icons/055-monster.png</filename>
-            <filename>boardgame_spritesheet.png</filename>
             <filename>icons/029-archer.png</filename>
             <filename>icons/056-time machine.png</filename>
             <filename>icons/057-tooth fairy.png</filename>

@@ -1,12 +1,12 @@
 {"frames": {
 
-"boardgame_spritesheet.png":
+"board_background.png":
 {
-	"frame": {"x":0,"y":0,"w":2048,"h":2048},
+	"frame": {"x":0,"y":0,"w":1921,"h":1081},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
-	"sourceSize": {"w":2048,"h":2048}
+	"spriteSourceSize": {"x":0,"y":0,"w":1921,"h":1081},
+	"sourceSize": {"w":1921,"h":1081}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -16,6 +16,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-1.json", "boardgame_spritesheet-2.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:f01a91a5ad7be0b80bad2c38b84d2e11:034ae4cf3d6236fdbb514c492766c14c:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b463b7ad112a6565746e4b25138c6b1a:822d86130f5ed395885bdafa2b91594e:f20ee964535c6611f30565802b09c4eb$"
 }
 }

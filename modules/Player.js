@@ -33,4 +33,12 @@ export default class Player {
   GetPlayerNumber = () => {
     return this.playerNumber;
   }
+
+  GetCardTarget = () => {
+    return this.cards[this.cards.length - 1]
+  }
+
+  ConsumeCardTarget = () => {
+    this.cards.pop(); // Remove the last card from the getArrayOfPossibleCells
+  }
 }
