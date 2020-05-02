@@ -18,6 +18,8 @@ export default class CellMoveState extends BaseState {
 
   Enter = () => {
 
+    let boardgame = this._entity.GetBoardgame()
+
     this._actionManager = new SequenceAction()
     this._actionManager.AddAction(new ActionShowText(this._entity,"Player " + (this._entity.GetCurrentPlayerIndex() + 1),1))
       .AddAction(new ActionCustom((params)=>{
@@ -25,6 +27,7 @@ export default class CellMoveState extends BaseState {
       },{entity:this._entity}))
       .AddAction(new ActionCustom((params) => {
         params.entity.ListenForCellInteraction();
+        boardgame.EnableSpareCellRotation();
       },{entity: this}))
 
     console.log("Boardgame has been set up!",this)

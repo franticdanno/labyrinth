@@ -200,6 +200,20 @@ export default class BoardGame extends PIXI.Container {
     this.addChild(this._board_container);
   }
 
+  DisableSpareCellRotation = () => {
+    this._spareCell.removeListener('pointerdown');
+  }
+
+  EnableSpareCellRotation = () => {
+    let cell = this._spareCell;
+
+    cell.interactive = true;
+    cell.buttonmode = true;
+    cell.on('pointerdown',()=>{
+      cell.rotation += Math.PI / 2 ;
+    })
+  }
+
   ResetSpareCell = () => {
     let cell = this._spareCell;
     cell.x = 300;
