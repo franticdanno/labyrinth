@@ -31,7 +31,7 @@ export default class BoardGame extends PIXI.Container {
     super();
     this._game            = game;
     this.board            = null;
-    this._playerSprites   = []
+    this._playerContainers   = []
     this._possibleCells   = null;
     this._board_container = new PIXI.Container();
     this._boardBackground = new PIXI.Sprite.from("/assets/board_background.png")
@@ -307,44 +307,45 @@ export default class BoardGame extends PIXI.Container {
     console.log("Adding players to board",players)
     players.forEach((item, i) => {
 
-      let playerSprite = new PIXI.Sprite.from(PLAYER_PIECES[item.house])
+      let playerContainer = new PIXI.Container();
+      playerContainer.addChild(PIXI.Sprite.from(PLAYER_PIECES[item.house]))
       let houseCell = this.FindCellBySymbol(item.house)
       console.log("House:", item.house, "is", houseCell.x, houseCell.y)
 
-      //playerSprite.width *= 1;
-      //playerSprite.height *= 2;
-      playerSprite.anchor.x = 0.5
-      playerSprite.anchor.y = 0.5;
-      playerSprite.x = houseCell.x - playerSprite.width/2
-      playerSprite.y = houseCell.y - playerSprite.height/2
-      playerSprite.house = item.house;
+      //playerContainer.width *= 1;
+      //playerContainer.height *= 2;
+      //playerContainer.anchor.x = 0.5
+      //playerContainer.anchor.y = 0.5;
+      playerContainer.x = houseCell.x - playerContainer.width/2
+      playerContainer.y = houseCell.y - playerContainer.height/2
+      playerContainer.house = item.house;
       //console.log("Cell found",houseCell,houseCell.x,houseCell.y);
 
-      this._playerSprites.push(playerSprite);
+      this._playerContainers.push(playerContainer);
 
-      this._board_container.addChild(playerSprite)
+      this._board_container.addChild(playerContainer)
     });
 
   }
 
-  GetPlayerSprite(player){
-    return this._playerSprites[this._game.GetCurrentPlayerIndex()];
+  GetplayerContainer(player){
+    return this._playerContainers[this._game.GetCurrentPlayerIndex()];
   }
 
   FindPlayerByHouse = (house) => {
-    for(let i = 0; i < this._playerSprites.length; i++){
-      if(this._playerSprites[i].house == house) return this._playerSprites[i];
+    for(let i = 0; i < this._playerContainers.length; i++){
+      if(this._playerContainers[i].house == house) return this._playerContainers[i];
     }
   }
 
   HighlightCurrentPlayer = () => {
-    for(let i = 0; i < this._playerSprites.length; i++){
+    for(let i = 0; i < this._playerContainers.length; i++){
       if(i == this._game.GetCurrentPlayerIndex()){
-        this._playerSprites[i].scale.x = 3.0;
-        this._playerSprites[i].scale.y = 3.0;
+        this._playerContainers[i].scale.x = 3.0;
+        this._playerContainers[i].scale.y = 3.0;
       } else {
-        this._playerSprites[i].scale.x = 2.0;
-        this._playerSprites[i].scale.y = 2.0;
+        this._playerContainers[i].scale.x = 2.0;
+        this._playerContainers[i].scale.y = 2.0;
       }
     }
   }
