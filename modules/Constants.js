@@ -12,7 +12,7 @@ export const HOUSE = {
   SLYTHERIN   : "slytherin",
 }
 
-export const CHARACTERS = [
+export const SYMBOLS = [
   {name: "Archer", path: "029-archer.png"},
   {name: "Santa", path: "052-santa claus.png"},
   {name: "Scarecrow", path: "053-scarecrow.png"},
@@ -25,7 +25,7 @@ export const CHARACTERS = [
   {name: "Hunter", path: "062-hunter.png"},
   {name: "Wizard", path: "063-wizard.png"},
   {name: "Witch", path: "065-witch.png"},
-  {name: "Devil", path: "013-devil.png"},
+  {name: "Devil", path: "065-witch.png"},
   {name: "Twins", path: "014-twins.png"},
   {name: "Dragon", path: "015-dragon.png"},
   {name: "Echidna", path: "017-echidna.png"},

@@ -1,4 +1,4 @@
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import { HOUSE, SYMBOLS, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
@@ -51,8 +51,8 @@ export default class BoardGame extends PIXI.Container {
 
     // Get together the list of possible cells that will be placed down on the board
     this._possibleCells = [
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.LUNA,getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.SEVERUS,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[0],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[1],getRandomRotation(),true),
       new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true),
       emptyLineCell(),
       emptyCornerCell(),
@@ -60,31 +60,31 @@ export default class BoardGame extends PIXI.Container {
       emptyLineCell(),
       emptyCornerCell(),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.LUPIN,getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.MOODY,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[2],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[3],getRandomRotation(),true),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.QUIRREL,getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.MALFOY,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[4],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[5],getRandomRotation(),true),
       emptyCornerCell(),
       emptyCornerCell(),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.RON,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[6],getRandomRotation(),true),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.MALFOY,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[7],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.DOLORES,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[8],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.GINNY,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[9],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,CHARACTER.LUNA_ODD,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[10],getRandomRotation(),true),
       emptyLineCell(),
       emptyCornerCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.GRINGOTT,getRandomRotation(),true)
+      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[11],getRandomRotation(),true)
     ]
 
     const getCellFromPossibleCells = (possibleCells) => {
@@ -107,42 +107,42 @@ export default class BoardGame extends PIXI.Container {
         // Row 1
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,3,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HARRY,0,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[12],0,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.WHO,0,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[13],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.SLYTHERIN,1,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 3
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.LONGBOTTOM,3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[14],3,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.SNAPE,3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[15],3,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.SYBILL,0,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[16],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.MCGONAGALL,1,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[17],1,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 5
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.VOLDEMOORT,3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[18],3,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HAGRID,2,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[19],2,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.DOBBY,1,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[20],1,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.DUMBLEDORE,1,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[21],1,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,0,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.HERMIONE,2,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],2,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,CHARACTER.RUFUS,2,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[23],2,false) ,
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.CORNER,HOUSE.RAVENCLAW,2,false),
       ]
@@ -160,7 +160,7 @@ export default class BoardGame extends PIXI.Container {
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
         //cell.rotation = (cell.rotation * 90) * Math.PI / 180;
-        cell.anchor.set(0.5,0.5)
+        //cell.anchor.set(0.5,0.5)
 
       })
     })
@@ -182,7 +182,7 @@ export default class BoardGame extends PIXI.Container {
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
         cell.rotation = (cell.rotation * 90) * Math.PI / 180;
-        cell.anchor.set(0.5,0.5)
+        //cell.anchor.set(0.5,0.5)
 
         this._board_container.addChild(cell);
 
@@ -206,7 +206,7 @@ export default class BoardGame extends PIXI.Container {
     cell.y = 200;
     cell.width = CELL_SPRITE_SIZE;
     cell.height = CELL_SPRITE_SIZE;
-    cell.anchor.set(0.5,0.5)
+    //cell.anchor.set(0.5,0.5)
     cell.rotation = 0
   }
 
@@ -308,16 +308,14 @@ export default class BoardGame extends PIXI.Container {
     players.forEach((item, i) => {
 
       let playerContainer = new PIXI.Container();
-      playerContainer.addChild(PIXI.Sprite.from(PLAYER_PIECES[item.house]))
+      let playerSprite = PIXI.Sprite.from(PLAYER_PIECES[item.house])
+      playerSprite.anchor.set(0.5,0.5)
+      playerContainer.addChild(playerSprite)
       let houseCell = this.FindCellBySymbol(item.house)
       console.log("House:", item.house, "is", houseCell.x, houseCell.y)
 
-      //playerContainer.width *= 1;
-      //playerContainer.height *= 2;
-      //playerContainer.anchor.x = 0.5
-      //playerContainer.anchor.y = 0.5;
-      playerContainer.x = houseCell.x - playerContainer.width/2
-      playerContainer.y = houseCell.y - playerContainer.height/2
+      playerContainer.x = houseCell.x
+      playerContainer.y = houseCell.y
       playerContainer.house = item.house;
       //console.log("Cell found",houseCell,houseCell.x,houseCell.y);
 

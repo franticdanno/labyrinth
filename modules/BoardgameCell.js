@@ -20,12 +20,30 @@ const CELL_TYPE_LINKS = {
 
 let currentCardCount = 0
 
-export default class BoardGameCell extends PIXI.Sprite {
+export default class BoardGameCell extends PIXI.Container {
 
   constructor(celltype,symbol,rotation,canMove){
 
     //super(Math.random() > 0.9 ? PIXI.Texture.from(CELL_IMAGES_FANCY[celltype]) : PIXI.Texture.from(CELL_IMAGES[celltype]))
-    super(PIXI.Texture.from(CELL_IMAGES[celltype]))
+    super()
+    this._cellSpriteBackground = new PIXI.Sprite.from(CELL_IMAGES[celltype])
+
+    // Adding the cell tile background
+    this._cellSpriteBackground.anchor.set(0.5,0.5)
+    this.addChild(this._cellSpriteBackground);
+
+    // If there is a symbol, lets add it
+    if(symbol != null && symbol.path != null) {
+      console.log('Creating cell with symbol',symbol.path)
+      this._cellSpriteSymbol = new PIXI.Sprite.from(symbol.path)
+      this._cellSpriteSymbol.anchor.set(0.5,0.5);
+      this._cellSpriteSymbol.alpha = 1
+      this._cellSpriteSymbol.width = 64;
+      this._cellSpriteSymbol.height = 64;
+      this.addChild(this._cellSpriteSymbol);
+
+    }
+
     this.celltype   = celltype;
     this.rotation   = rotation;
     this.symbol     = symbol;
