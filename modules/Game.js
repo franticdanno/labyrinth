@@ -143,7 +143,8 @@ export default class Game extends PIXI.Container {
       let cards = players[playerIndex].GetCards();
       for(let cardIndex = 0; cardIndex < cards.length; cardIndex++){
         let card = cards[cardIndex]
-        card.x = playerCardPositions[playerIndex][0] + cardIndex * 15;
+        let x = playerIndex % 2 == 0 ? playerCardPositions[playerIndex][0] + ((cardIndex / cards.length) * 120) : playerCardPositions[playerIndex][0] - ((cardIndex / cards.length) * 120)
+        card.x = x;
         card.y = playerCardPositions[playerIndex][1]
 
         // Set up whether or not it should be shown

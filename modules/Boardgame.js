@@ -105,7 +105,7 @@ export default class BoardGame extends PIXI.Container {
     this.board = [
       [
         // Row 1
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,3,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,0,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[12],0,false),
         getCellFromPossibleCells(this._possibleCells),
@@ -138,7 +138,7 @@ export default class BoardGame extends PIXI.Container {
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,0,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,3,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],2,false),
         getCellFromPossibleCells(this._possibleCells),
