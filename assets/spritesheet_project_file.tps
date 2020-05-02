@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>boardgame_spritesheet.png</filename>
+        <filename>boardgame_spritesheet-{n1}.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -132,11 +132,11 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>boardgame_spritesheet.json</filename>
+                <filename>boardgame_spritesheet-{n1}.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
-        <false/>
+        <true/>
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
@@ -181,6 +181,21 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">boardgame_spritesheet.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>512,512,1024,1024</rect>
+                <key>scale9Paddings</key>
+                <rect>512,512,1024,1024</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">cell_corner.png</key>
             <key type="filename">cell_junction.png</key>
             <key type="filename">cell_line.png</key>
@@ -202,6 +217,61 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">icons/013-devil.png</key>
+            <key type="filename">icons/014-twins.png</key>
+            <key type="filename">icons/015-dragon.png</key>
+            <key type="filename">icons/017-echidna.png</key>
+            <key type="filename">icons/019-ufo.png</key>
+            <key type="filename">icons/020-fairy.png</key>
+            <key type="filename">icons/021-broom.png</key>
+            <key type="filename">icons/022-statue.png</key>
+            <key type="filename">icons/023-genie lamp.png</key>
+            <key type="filename">icons/024-ghost.png</key>
+            <key type="filename">icons/026-giant.png</key>
+            <key type="filename">icons/028-goblin.png</key>
+            <key type="filename">icons/029-archer.png</key>
+            <key type="filename">icons/056-time machine.png</key>
+            <key type="filename">icons/057-tooth fairy.png</key>
+            <key type="filename">icons/059-unicorn.png</key>
+            <key type="filename">icons/060-vampire.png</key>
+            <key type="filename">icons/061-vampire.png</key>
+            <key type="filename">icons/062-hunter.png</key>
+            <key type="filename">icons/063-wizard.png</key>
+            <key type="filename">icons/065-witch.png</key>
+            <key type="filename">icons/066-wizard.png</key>
+            <key type="filename">icons/068-zombie.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9Paddings</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">icons/052-santa claus.png</key>
+            <key type="filename">icons/053-scarecrow.png</key>
+            <key type="filename">icons/054-wizard.png</key>
+            <key type="filename">icons/055-monster.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9Paddings</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -212,6 +282,34 @@
             <filename>player_one.png</filename>
             <filename>player_three.png</filename>
             <filename>player_two.png</filename>
+            <filename>icons/052-santa claus.png</filename>
+            <filename>icons/053-scarecrow.png</filename>
+            <filename>icons/054-wizard.png</filename>
+            <filename>icons/055-monster.png</filename>
+            <filename>boardgame_spritesheet.png</filename>
+            <filename>icons/029-archer.png</filename>
+            <filename>icons/056-time machine.png</filename>
+            <filename>icons/057-tooth fairy.png</filename>
+            <filename>icons/059-unicorn.png</filename>
+            <filename>icons/060-vampire.png</filename>
+            <filename>icons/061-vampire.png</filename>
+            <filename>icons/062-hunter.png</filename>
+            <filename>icons/063-wizard.png</filename>
+            <filename>icons/065-witch.png</filename>
+            <filename>icons/066-wizard.png</filename>
+            <filename>icons/068-zombie.png</filename>
+            <filename>icons/013-devil.png</filename>
+            <filename>icons/014-twins.png</filename>
+            <filename>icons/015-dragon.png</filename>
+            <filename>icons/017-echidna.png</filename>
+            <filename>icons/019-ufo.png</filename>
+            <filename>icons/020-fairy.png</filename>
+            <filename>icons/021-broom.png</filename>
+            <filename>icons/022-statue.png</filename>
+            <filename>icons/023-genie lamp.png</filename>
+            <filename>icons/024-ghost.png</filename>
+            <filename>icons/026-giant.png</filename>
+            <filename>icons/028-goblin.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

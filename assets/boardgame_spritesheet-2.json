@@ -104,6 +104,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-1.json", "boardgame_spritesheet-3.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:d1cd5391c63c2772636fd6d0418ca405:c5f5eacc76caca79ec58e4a8b521d7d2:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f01a91a5ad7be0b80bad2c38b84d2e11:034ae4cf3d6236fdbb514c492766c14c:f20ee964535c6611f30565802b09c4eb$"
 }
 }
