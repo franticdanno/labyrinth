@@ -1,8 +1,16 @@
 {"frames": {
 
+"board_background.png":
+{
+	"frame": {"x":0,"y":225,"w":1921,"h":1081},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1921,"h":1081},
+	"sourceSize": {"w":1921,"h":1081}
+},
 "cell_corner.png":
 {
-	"frame": {"x":0,"y":0,"w":114,"h":114},
+	"frame": {"x":128,"y":0,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
@@ -10,7 +18,7 @@
 },
 "cell_junction.png":
 {
-	"frame": {"x":114,"y":0,"w":114,"h":114},
+	"frame": {"x":242,"y":0,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
@@ -18,7 +26,7 @@
 },
 "cell_line.png":
 {
-	"frame": {"x":0,"y":114,"w":114,"h":114},
+	"frame": {"x":356,"y":0,"w":114,"h":114},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
@@ -26,7 +34,7 @@
 },
 "player_four.png":
 {
-	"frame": {"x":114,"y":114,"w":32,"h":32},
+	"frame": {"x":0,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -34,7 +42,7 @@
 },
 "player_one.png":
 {
-	"frame": {"x":146,"y":114,"w":32,"h":32},
+	"frame": {"x":32,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -42,7 +50,7 @@
 },
 "player_three.png":
 {
-	"frame": {"x":178,"y":114,"w":32,"h":32},
+	"frame": {"x":64,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -50,19 +58,27 @@
 },
 "player_two.png":
 {
-	"frame": {"x":210,"y":114,"w":32,"h":32},
+	"frame": {"x":96,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
+},
+"start_game_icon.png":
+{
+	"frame": {"x":470,"y":0,"w":225,"h":225},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":225},
+	"sourceSize": {"w":225,"h":225}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "boardgame_spritesheet.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":256},
+	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6dae9b403e4e39f7ea47c1ea0930851e:1e876aaf256f8b4c1a1cc527d289fc00:2fc7c3386d16e09928cef85026c3ca48$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7573f1f524908678444e08617941331d:b635f8ff1f6f09ddd139ad426ec25079:2fc7c3386d16e09928cef85026c3ca48$"
 }
 }

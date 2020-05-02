@@ -34,7 +34,7 @@ export default class LoadingScreenState extends BaseState {
     const loader = PIXI.Loader.shared;
     loader.add("assets/")
     loader.add("assets/boardgame_spritesheet.json")
-    loader.add("assets/board_background.png")
+    //loader.add("assets/board_background.png")
 
     //loader.onProgress.add((e)=>( console.log("progressing...",e)) )
     loader.onComplete.add((e)=>{
