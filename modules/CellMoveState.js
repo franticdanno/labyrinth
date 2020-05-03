@@ -3,7 +3,6 @@ import { ActionShowText } from './actions/ActionShowText.js'
 import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
-import { ActionMoveTiles } from './actions/ActionMoveTiles.js'
 import { Tween } from './libs/Tween.js'
 import { ActionGroupTween } from './actions/ActionGroupTween.js'
 import PlayerMoveState from './PlayerMoveState.js'
@@ -84,7 +83,7 @@ export default class CellMoveState extends BaseState {
         let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
         //console.log("It's a row!",sprites);
         let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
-        actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+        actionManager.AddAction(new ActionGroupTween(sprites,"x",Tween.easeOutQuad,direction == DIRECTION.EAST ? 114 : -114,70 ))
           .AddAction(new ActionCustom(()=>{
             boardgame.ShiftCellRow(cellRow,direction)
             boardgame.ResetBoardgameSpritePositions()

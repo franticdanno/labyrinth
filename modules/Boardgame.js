@@ -420,7 +420,7 @@ export default class BoardGame extends PIXI.Container {
         this._nodes.drawCircle(cellSprite.x, cellSprite.y, 10);
         let links = cellSprite.GetLinks()
 
-        this._nodes.beginFill(0x000000);
+        this._nodes.beginFill(0xCCCCCC);
 
         if(links[0] == true) this._nodes.drawCircle(cellSprite.x, cellSprite.y - 40, 5);
         if(links[1] == true) this._nodes.drawCircle(cellSprite.x + 40, cellSprite.y, 5);
