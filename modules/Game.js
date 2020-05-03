@@ -1,4 +1,5 @@
 import { HOUSE, CHARACTER, SYMBOLS, CELL_TYPE } from './Constants.js'
+import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
 import Card from './Card.js';
 import BoardGame from './Boardgame.js';
 import Player from './Player.js'
@@ -18,6 +19,7 @@ export default class Game extends PIXI.Container {
 
     // State manager set up
     this._stateManager = new StateManager();
+    this._actionManager = new SequenceAction();
   }
 
   GetApp = () => {

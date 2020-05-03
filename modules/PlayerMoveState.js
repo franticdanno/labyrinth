@@ -13,24 +13,34 @@ export default class PlayerMoveState extends BaseState {
 
   constructor(entity){
     super(entity);
+    this._actionManager = new SequenceAction();
   }
 
   Enter = () => {
 
     let state = this;
 
-    this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,"Move your piece!",1))
-      .AddAction(new ActionCustom((params)=>{
-        params.entity.GetBoardgame().HighlightCurrentPlayer();
-      },{entity:this._entity}))
-      .AddAction(new ActionCustom((params) => {
-        params.entity.ListenForCellInteraction();
-      },{entity: state}))
+    let playerCell = this._entity.GetCurrentPlayer().GetCurrentCell();
+    let neighbours = this._entity.GetBoardgame().GetNeighbouringCells(playerCell);
+    console.log("Player cell is:",playerCell, "with",neighbours.length, "neigbours");
 
-      this._entity.GetBoardgame().DrawConnectingNodes();
+    if(neighbours.length == 0){
 
-    console.log("Boardgame has been set up!",this)
+      this._actionManager.AddAction(new ActionShowText(this._entity,"No Moves Possible. Skipping...",1))
+        .AddAction(new ActionCustom(() => {
+          state.PlayerMoveFinished();
+        }))
+
+
+    } else {
+      this._actionManager.AddAction(new ActionShowText(this._entity,"Move your piece!",1))
+        .AddAction(new ActionCustom((params)=>{
+          params.entity.GetBoardgame().HighlightCurrentPlayer();
+        },{entity:this._entity}))
+        .AddAction(new ActionCustom((params) => {
+          params.entity.ListenForCellInteraction();
+        },{entity: state}))
+    }
   }
 
   Update = (delta) => {
