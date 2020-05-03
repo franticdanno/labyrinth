@@ -70,7 +70,7 @@ export default class PlayerMoveState extends BaseState {
         cell.interactive = true;
         cell.buttonMode = true;
 
-        cell.once('pointerdown',(e,b)=>{
+        cell.on('pointerdown',(e,b)=>{
 
           // Check to see if the player can reach the chosen square
           let targetCell = e.target;
@@ -141,9 +141,10 @@ export default class PlayerMoveState extends BaseState {
             console.log("No Match")
           }
 
+        }))
+        .AddAction(new ActionShowText(state._entity.GetBoardgame(),"Match Found!",70))
+        .AddAction(new ActionCustom(()=>{
           state.PlayerMoveFinished();
-          //this._isFinished = true;
-
         }))
   }
 

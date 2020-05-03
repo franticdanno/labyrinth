@@ -43,10 +43,10 @@ export default class PlayerSelectScreenState extends BaseState {
 
     const style = new PIXI.TextStyle({
         fontFamily: 'Arial',
-        fontSize: 36,
+        fontSize: 60,
         fontStyle: 'italic',
         fontWeight: 'bold',
-        fill: ['#ffffff', '#00ff99'], // gradient
+        fill: ['#ffffff'], // gradient
         stroke: '#4a1850',
         strokeThickness: 5,
         dropShadow: true,
@@ -55,11 +55,11 @@ export default class PlayerSelectScreenState extends BaseState {
         dropShadowAngle: Math.PI / 6,
         dropShadowDistance: 6,
         wordWrap: true,
-        wordWrapWidth: 440,
+        wordWrapWidth: 800,
     });
 
     const richText = new PIXI.Text('How many players?', style);
-    richText.x = 800;
+    richText.x = 680;
     richText.y = 380;
 
     this._entity.addChild(richText);
