@@ -35,7 +35,7 @@ export default class MainGameSetupState extends BaseState {
       .AddAction(new ActionShowText(this._entity,"Let's Go!",1))
       .AddAction(new ActionChangeState(this._entity,new CellMoveState(this._entity)))
 
-    console.log("Boardgame has been set up!",this)
+    //console.log("Boardgame has been set up!",this)
   }
 
   Update = (delta) => {

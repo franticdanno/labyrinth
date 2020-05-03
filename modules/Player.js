@@ -3,6 +3,7 @@ import Card from './Card.js'
 export default class Player {
 
   constructor(texture,playerNumber,house,currentCell){
+
     this.playerNumber = playerNumber;
     this.house        = house;
     this.currentCell  = currentCell;
@@ -41,4 +42,13 @@ export default class Player {
   ConsumeCardTarget = () => {
     this.cards.pop(); // Remove the last card from the getArrayOfPossibleCells
   }
+
+  GetContainerRef = () => {
+    return this._containerRef;
+  }
+
+  SetContainerRef = (container) => {
+    this._containerRef = container;
+  }
+
 }

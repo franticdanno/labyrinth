@@ -71,7 +71,7 @@ export default class Game extends PIXI.Container {
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 
-    console.log("Shuffled all cards of length",cards.length)
+    //console.log("Shuffled all cards of length",cards.length)
 
     return cards;
   }
@@ -112,11 +112,15 @@ export default class Game extends PIXI.Container {
     }
   }
 
+  GetPlayers = () => {
+    return this._players;
+  }
+
   DealCards = () => {
 
     let possibleCards = this.SetUpAndShuffleCards(); // Lets get all of the possible cards first
 
-    console.log("Number of cards:",possibleCards.length)
+    //console.log("Number of cards:",possibleCards.length)
 
     let currentPlayerIndex = 0;
     while(possibleCards.length > 0){
@@ -131,7 +135,7 @@ export default class Game extends PIXI.Container {
       currentPlayerIndex = (currentPlayerIndex + 1) % this.GetPlayerCount();
     }
 
-    console.log("Cards have been dealt out. Cards remaining:", possibleCards.length);
+    //console.log("Cards have been dealt out. Cards remaining:", possibleCards.length);
   }
 
 

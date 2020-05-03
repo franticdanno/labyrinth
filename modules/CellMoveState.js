@@ -5,6 +5,7 @@ import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import { Tween } from './libs/Tween.js'
 import { ActionGroupTween } from './actions/ActionGroupTween.js'
+import { ActionTween } from './actions/ActionTween.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
@@ -31,7 +32,7 @@ export default class CellMoveState extends BaseState {
         boardgame.EnableSpareCellRotation();
       },{entity: this}))
 
-    console.log("Boardgame has been set up!",this)
+    //console.log("Boardgame has been set up!",this)
   }
 
   Update = (delta) => {
@@ -64,7 +65,7 @@ export default class CellMoveState extends BaseState {
     let actionManager = this._actionManager;
     let state = this
 
-    console.log("Setting up for Cell Interaction");
+    //console.log("Setting up for Cell Interaction");
 
     function cellClicked(cell){
 
@@ -75,28 +76,54 @@ export default class CellMoveState extends BaseState {
       let cellRow = boardgame.GetBoardgameCellRow(cell);
       let cellIndex = boardgame.GetBoardgameCellIndex(cell)
 
+      let player = game.GetCurrentPlayer()
+      let playerContainer = game.GetBoardgame().GetplayerContainer();
+
       //actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
       if(cellRow == 0 || cellRow == board.length - 1){
 
-        let sprites = boardgame.GetBoardCellSpritesColumn(cellIndex)
-        //console.log("It's a column!",sprites)
+        let sprites   = boardgame.GetBoardCellSpritesColumn(cellIndex)
         let direction = cellRow == 0 ? DIRECTION.SOUTH : DIRECTION.NORTH
+        let change    = (direction == DIRECTION.SOUTH ? 114 : -114)
 
-        actionManager.AddAction(new ActionGroupTween(sprites,"y",Tween.easeOutQuad,direction == DIRECTION.SOUTH ? 114 : -114,70 ))
+        let playersWithinCells = boardgame.GetPlayerContainersWithinCells(sprites)
+        console.log("There are ",playersWithinCells.length,"players in those cells!",playersWithinCells)
+
+        // Lets set it up to move the player's piece if we need to
+        let actions = []
+        actions.unshift(new ActionGroupTween(sprites,"y",Tween.easeOutQuad,change,70 ))
+        if(playersWithinCells.length > 0){
+          actions.unshift(new ActionGroupTween(playersWithinCells,"y",Tween.easeOutQuad,change, 70))
+        }
+
+        actionManager
+          .AddAction(new ParallelAction(actions))
           .AddAction(new ActionCustom(()=>{
             boardgame.ShiftCellColumn(cellIndex,direction)
             boardgame.ResetBoardgameSpritePositions()
           }))
           .AddAction(new ActionCustom(()=>{
             game.ChangeState(new PlayerMoveState(game))
-          }))
+          }));
 
       } else {
 
         let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
-        //console.log("It's a row!",sprites);
         let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
-        actionManager.AddAction(new ActionGroupTween(sprites,"x",Tween.easeOutQuad,direction == DIRECTION.EAST ? 114 : -114,70 ))
+        let change  = (direction == DIRECTION.EAST ? 114 : -114)
+
+        let playersWithinCells = boardgame.GetPlayerContainersWithinCells(sprites)
+        console.log("There are ",playersWithinCells.length,"players in those cells!",playersWithinCells)
+
+        // Lets set it up to move the player's piece if we need to
+        let actions = []
+        actions.unshift(new ActionGroupTween(sprites,"x",Tween.easeOutQuad,change,70 ))
+        if(playersWithinCells.length > 0){
+          actions.unshift(new ActionGroupTween(playersWithinCells,"x",Tween.easeOutQuad,change, 70))
+        }
+
+        actionManager
+          .AddAction(new ParallelAction(actions))
           .AddAction(new ActionCustom(()=>{
             boardgame.ShiftCellRow(cellRow,direction)
             boardgame.ResetBoardgameSpritePositions()

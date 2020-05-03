@@ -33,7 +33,7 @@ export default class PlayerMoveState extends BaseState {
 
 
     } else {
-      this._actionManager.AddAction(new ActionShowText(this._entity,"Move your piece!",1))
+      this._actionManager.AddAction(new ActionShowText(this._entity,"Time to Move!",1))
         .AddAction(new ActionCustom((params)=>{
           params.entity.GetBoardgame().HighlightCurrentPlayer();
         },{entity:this._entity}))
@@ -56,7 +56,7 @@ export default class PlayerMoveState extends BaseState {
 
     let board = this._entity.GetBoardgame().GetBoardCells();
 
-    console.log("Setting up for Cell Interaction");
+    //console.log("Setting up for Cell Interaction");
 
     board.forEach((cell_row, i) => {
       return cell_row.forEach((cell, i) => {

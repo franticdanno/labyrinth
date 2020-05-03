@@ -24,8 +24,9 @@ export class CompositeAction extends Action {
 
 export class ParallelAction extends CompositeAction {
 
-  constructor(){
+  constructor(actions){
     super();
+    this._actions = actions;
   }
 
   Update = (delta) => {
@@ -36,12 +37,13 @@ export class ParallelAction extends CompositeAction {
     });
 
     // Remove any actions that are finished
-    this._actions = this._actions.filter((action)=>{
-        return action._isFinished == true;
+    this._actions = this._actions.filter((action,i,a)=>{
+        return action._isFinished == false;
     })
 
-    this._isFinished = (this._actions.length == 0); // Only finished if all actions are finished
-
+    if(this._actions.length == 0){
+      this._isFinished = true; // Only finished if all actions are finished
+    }
   }
 }
 

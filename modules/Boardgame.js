@@ -194,7 +194,7 @@ export default class BoardGame extends PIXI.Container {
 
     this._spareCell = this._possibleCells.pop(); // Tracking the spare cell
 
-    console.log("Boardgame Built, remaining cells:", this._spareCell)
+    //console.log("Boardgame Built, remaining cells:", this._spareCell)
 
     this.ShowSpareCell();
 
@@ -321,30 +321,49 @@ export default class BoardGame extends PIXI.Container {
   }
 
   AddPlayersToBoard = (players) => {
-    console.log("Adding players to board",players)
-    players.forEach((item, i) => {
+    //console.log("Adding players to board",players)
+    players.forEach((playerModel, i) => {
 
       let playerContainer = new PIXI.Container();
-      let playerSprite = PIXI.Sprite.from(PLAYER_PIECES[item.house])
+      let playerSprite = PIXI.Sprite.from(PLAYER_PIECES[playerModel.house])
       playerSprite.anchor.set(0.5,0.5)
       playerContainer.addChild(playerSprite)
-      let houseCell = this.FindCellBySymbol(item.house)
-      console.log("House:", item.house, "is", houseCell.x, houseCell.y)
+      let houseCell = this.FindCellBySymbol(playerModel.house)
+      //console.log("House:", item.house, "is", houseCell.x, houseCell.y)
 
       playerContainer.x = houseCell.x
       playerContainer.y = houseCell.y
-      playerContainer.house = item.house;
+      playerContainer.house = playerModel.house;
       //console.log("Cell found",houseCell,houseCell.x,houseCell.y);
 
       this._playerContainers.push(playerContainer);
 
       this._board_container.addChild(playerContainer)
+
+      playerModel.SetContainerRef(playerContainer);
     });
 
   }
 
+  GetPlayerContainersWithinCells = (cells) => {
+    let players = this._game.GetPlayers()
+    let returnPlayers = []
+    for(let cellIndex = 0; cellIndex < cells.length; cellIndex++){
+      for(let playerIndex = 0; playerIndex < players.length; playerIndex++ ){
+        if(players[playerIndex].GetCurrentCell() == cells[cellIndex]){
+          returnPlayers.push(players[playerIndex].GetContainerRef())
+        }
+      }
+    }
+    return returnPlayers;
+  }
+
   GetplayerContainer(player){
     return this._playerContainers[this._game.GetCurrentPlayerIndex()];
+  }
+
+  GetPlayerContainers = () =>{
+    return this._playerContainers
   }
 
   FindPlayerByHouse = (house) => {
@@ -386,7 +405,7 @@ export default class BoardGame extends PIXI.Container {
 
     //return true;
 
-    console.log("Checking connection",cellOne,cellTwo,direction)
+    //console.log("Checking connection",cellOne,cellTwo,direction)
 
     switch(direction){
       case DIRECTION.NORTH:

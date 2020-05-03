@@ -45,7 +45,7 @@ export default class BoardGameCell extends PIXI.Container {
       this.addChild(this._symbolBackground);
 
       // And now we add the actual symbol onto the cell
-      console.log('Creating cell with symbol',symbol.path)
+      //onsole.log('Creating cell with symbol',symbol.path)
       this._cellSpriteSymbol = new PIXI.Sprite.from(symbol.path)
       this._cellSpriteSymbol.anchor.set(0.5,0.5);
       this._cellSpriteSymbol.alpha = 1
