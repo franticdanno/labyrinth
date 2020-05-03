@@ -36,7 +36,20 @@ export default class CellMoveState extends BaseState {
 
   Update = (delta) => {
     //console.log("Main Game State");
+    if(this._entity.GetBoardgame()._keyboardManager.IsKeyDown('k')){
+      if(!this._entity.GetBoardgame().IsDrawingConnectingNodes()){
+        this._entity.GetBoardgame().DrawConnectingNodes();
+      }
+    }
+
+    if(this._entity.GetBoardgame()._keyboardManager.IsKeyDown('l')){
+      if(this._entity.GetBoardgame().IsDrawingConnectingNodes()){
+        this._entity.GetBoardgame().StopDrawConnectingNodes();
+      }
+    }
+
     if(this._actionManager != null) this._actionManager.Update(delta);
+
   }
 
   Exit = () => {

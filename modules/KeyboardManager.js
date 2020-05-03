@@ -1,28 +1,28 @@
-function KeyboardManager(){
+export default class  KeyboardManager {
 
-  // This will hold all of the keys and their state
-  this.keys = {}
-
-  this.isKeyDown = function(key){
-    return this.keys[key] ? this.keys[key].isDown : false;
+  constructor(){
+    this._keys = {}
   }
 
-  this.isKeyUp = function(key){
-    return this.keys[key] ? !this.keys[key].isDown : true;
+  // This will hold all of the keys and their stat
+  IsKeyDown = (key) => {
+    return this._keys[key] ? this._keys[key].isDown : false;
+  }
+
+  IsKeyUp = (key) => {
+    return this._keys[key] ? !this._keys[key].isDown : true;
   }
 
   // Listen out for key up / downs
-  this.setup = () => {
+  Setup = () => {
     window.addEventListener("keydown",(e)=>{
-      if(this.keys[e.key] == null) this.keys[e.key] = {};
-      this.keys[e.key].isDown = true;
+      if(this._keys[e.key] == null) this._keys[e.key] = {};
+      this._keys[e.key].isDown = true;
     },false);
 
     window.addEventListener("keyup",(e)=>{
-      this.keys[e.key].isDown = false;
+      this._keys[e.key].isDown = false;
     },false)
   }
 
 }
-
-export KeyboardManager;

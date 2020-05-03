@@ -74,7 +74,7 @@ export default class BoardGameCell extends PIXI.Container {
   GetLinks = () => {
     let og = CELL_TYPE_LINKS[this.celltype]
     let currentRotation = Math.floor(((this.rotation * (180/Math.PI)) / 90) % 4)
-    console.log("Current rotation is",currentRotation)
+    //console.log("Current rotation is",currentRotation)
     //console.log("Getting Links",this.rotation,og,currentRotation);
     switch (currentRotation){
       case 0:

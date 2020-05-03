@@ -2,6 +2,7 @@ import { HOUSE, SYMBOLS, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
+import KeyboardManager from './KeyboardManager.js'
 
 const CELL_SPRITE_SIZE = 114;
 
@@ -37,6 +38,8 @@ export default class BoardGame extends PIXI.Container {
     this._boardBackground = new PIXI.Sprite.from("/assets/board_background.png")
     this._board_container.addChild(this._boardBackground);
     this._spareCell       = null;
+    this._keyboardManager = new KeyboardManager();
+    this._keyboardManager.Setup();
     //this._boardBackground.anchor.set(0.5,0.5);
     //this._board_container.pivot.x = this._boardBackground.width/2
     //this._board_container.pivot.y = this._boardBackground.height/2
@@ -403,12 +406,21 @@ export default class BoardGame extends PIXI.Container {
     return false;
   }
 
-  DrawConnectingNodes = () => {
+  IsDrawingConnectingNodes = () => {
+    return this._nodes != null
+  }
 
+  StopDrawConnectingNodes = () => {
     if(this._nodes != null){
       this._nodes.destroy()
+      this._nodes = null;
       this._board_container.removeChild(this._nodes);
     }
+  }
+
+  DrawConnectingNodes = () => {
+
+    this.StopDrawConnectingNodes();
 
     this._nodes = new PIXI.Graphics();
     let board_rows = this.board

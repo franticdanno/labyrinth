@@ -22,28 +22,6 @@ export class CompositeAction extends Action {
 
 }
 
-/* export class ConditionalAction extends Action {
-  constructor(fCondition,params,Action1,Action2){
-      super();
-
-      this._fCondition = fCondition;
-      this._params = params;
-      this._action1 = Action1;
-      this._action2 = Action2;
-  }
-
-  Update = (delta) => {
-    if(fCondition(params)){
-      AddAction(this._action1);
-    } else {
-      AddAction(this._action2);
-    }
-
-    this._isFinished = true;
-  }
-
-} */
-
 export class ParallelAction extends CompositeAction {
 
   constructor(){

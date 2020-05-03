@@ -12,27 +12,38 @@ export class ActionShowText extends Action {
 
   getText = () => {
 
-    const richText = new PIXI.Text(this._text, new PIXI.TextStyle({
-      fontFamily: 'Arial',
-      fontSize: 72,
-      fontStyle: 'italic',
-      fontWeight: 'bold',
-      fill: ['#ffffff', '#00ff99'], // Gradient
-      stroke: '#4a1850',
-      strokeThickness: 5,
-      dropShadow: true,
-      dropShadowColor: '#000000',
-      dropShadowBlur: 10,
-      dropShadowAngle: Math.PI / 6,
-      dropShadowDistance: 6,
-      wordWrap: false,
-      wordWrapWidth: 440,
-    }));
-    richText.position.x = this._container.width / 2;
-    richText.position.y = this._container.height / 2;
+    const container = new PIXI.Container();
 
-    return richText;
+    const graphics = new PIXI.Graphics();
+    graphics.beginFill(0xDE3249);
+    graphics.drawRect(0, 1080 / 2 - 50,1920 , 130);
+    graphics.endFill();
+    container.addChild(graphics);
 
+    const style = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 74,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        fill: ['#DDDDDD'],
+        //fill: ['#ffffff', '#00ff99'], // gradient
+        stroke: '#4a1850',
+        strokeThickness: 8,
+        dropShadow: true,
+        dropShadowColor: '#000000',
+        dropShadowBlur: 4,
+        dropShadowAngle: Math.PI / 6,
+        dropShadowDistance: 6,
+        wordWrap: true,
+        wordWrapWidth: 1920,
+    });
+
+    let text = new PIXI.Text(this._text, style);
+    text.x = 1920 / 2 - text.width/2
+    text.y = 500
+
+    container.addChild(text);
+    return container;
   }
 
   Update = (delta) => {
