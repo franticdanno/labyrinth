@@ -1,5 +1,7 @@
 import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
 import { ActionShowText } from './actions/ActionShowText.js'
+import { ActionTween } from './actions/ActionTween.js'
+import {Tween} from './libs/Tween.js'
 import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionChangeState } from './actions/ActionChangeState.js'
 import BaseState from './BaseState.js'
@@ -15,6 +17,8 @@ export default class MainGameSetupState extends BaseState {
   }
 
   Enter = () => {
+    this._entity.alpha = 0;
+
     this._entity.SetUpBoardgame();
 
     // Set players up, deal out the cards etc
@@ -27,8 +31,9 @@ export default class MainGameSetupState extends BaseState {
 
     this._entity._boardgame.AddPlayersToBoard(this._entity._players)
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,"Lets get ready!",1))
-    .AddAction(new ActionChangeState(this._entity,new CellMoveState(this._entity)))
+    this._actionManager.AddAction(new ActionTween(this._entity,"alpha",Tween.linear,0,1,20))
+      .AddAction(new ActionShowText(this._entity,"Lets get ready!",1))
+      .AddAction(new ActionChangeState(this._entity,new CellMoveState(this._entity)))
 
     console.log("Boardgame has been set up!",this)
   }

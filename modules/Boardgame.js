@@ -383,7 +383,7 @@ export default class BoardGame extends PIXI.Container {
 
     //return true;
 
-    //console.log("Checking connection",cellOne.GetID(),cellTwo.GetID(),direction)
+    console.log("Checking connection",cellOne,cellTwo,direction)
 
     switch(direction){
       case DIRECTION.NORTH:
@@ -420,12 +420,12 @@ export default class BoardGame extends PIXI.Container {
         this._nodes.drawCircle(cellSprite.x, cellSprite.y, 10);
         let links = cellSprite.GetLinks()
 
-        this._nodes.beginFill(0xffffff);
+        this._nodes.beginFill(0x000000);
 
-        if(links[0] == true) this._nodes.drawCircle(cellSprite.x, cellSprite.y - 40, 10);
-        if(links[1] == true) this._nodes.drawCircle(cellSprite.x + 40, cellSprite.y, 10);
-        if(links[2] == true) this._nodes.drawCircle(cellSprite.x, cellSprite.y + 40, 10);
-        if(links[3] == true) this._nodes.drawCircle(cellSprite.x - 40, cellSprite.y, 10);
+        if(links[0] == true) this._nodes.drawCircle(cellSprite.x, cellSprite.y - 40, 5);
+        if(links[1] == true) this._nodes.drawCircle(cellSprite.x + 40, cellSprite.y, 5);
+        if(links[2] == true) this._nodes.drawCircle(cellSprite.x, cellSprite.y + 40, 5);
+        if(links[3] == true) this._nodes.drawCircle(cellSprite.x - 40, cellSprite.y, 5);
 
         this._nodes.lineTo(0,0);
 

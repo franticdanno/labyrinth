@@ -54,6 +54,8 @@ export default class CellMoveState extends BaseState {
 
     function cellClicked(cell){
 
+      boardgame.DisableSpareCellRotation()
+
       state.RemoveListenersForCellInteraction() // Disable cell clicking now that the user's chose their move
 
       let cellRow = boardgame.GetBoardgameCellRow(cell);

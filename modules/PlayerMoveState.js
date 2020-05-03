@@ -28,7 +28,7 @@ export default class PlayerMoveState extends BaseState {
         params.entity.ListenForCellInteraction();
       },{entity: state}))
 
-      //this._entity.GetBoardgame().DrawConnectingNodes();
+      this._entity.GetBoardgame().DrawConnectingNodes();
 
     console.log("Boardgame has been set up!",this)
   }
@@ -104,6 +104,7 @@ export default class PlayerMoveState extends BaseState {
 
   MovePlayer = (player,targetCell,path) => {
       let game = this._entity
+      let state = this;
       //console.log("Here is the path:",path)
       player.SetCurrentCell(targetCell); // Set the player's current cell to ther target one
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetplayerContainer(),path))
@@ -123,11 +124,15 @@ export default class PlayerMoveState extends BaseState {
             console.log("No Match")
           }
 
+          state.PlayerMoveFinished();
+          //this._isFinished = true;
+
         }))
-        .AddAction(new ActionCustom(()=>{
-          game.NextPlayer();
-          game.ChangeState(new CellMoveState(this._entity));
-        }));
+  }
+
+  PlayerMoveFinished = () => {
+    this._entity.NextPlayer();
+    this._entity.ChangeState(new CellMoveState(this._entity));
   }
 
   GetStateName(){
