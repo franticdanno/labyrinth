@@ -4,6 +4,8 @@ import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import { ActionMoveTiles } from './actions/ActionMoveTiles.js'
+import { Tween } from './libs/Tween.js'
+import { ActionGroupTween } from './actions/ActionGroupTween.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
@@ -68,7 +70,7 @@ export default class CellMoveState extends BaseState {
         //console.log("It's a column!",sprites)
         let direction = cellRow == 0 ? DIRECTION.SOUTH : DIRECTION.NORTH
 
-        actionManager.AddAction(new ActionMoveTiles(sprites, direction))
+        actionManager.AddAction(new ActionGroupTween(sprites,"y",Tween.easeOutQuad,direction == DIRECTION.SOUTH ? 114 : -114,70 ))
           .AddAction(new ActionCustom(()=>{
             boardgame.ShiftCellColumn(cellIndex,direction)
             boardgame.ResetBoardgameSpritePositions()

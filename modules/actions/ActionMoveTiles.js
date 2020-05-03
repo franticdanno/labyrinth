@@ -1,5 +1,6 @@
 import { Action } from './Action.js'
 import { DIRECTION } from '../Constants.js'
+import {Tween} from '../libs/Tween.js'
 
 export class ActionMoveTiles extends Action {
 

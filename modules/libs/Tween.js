@@ -1,6 +1,6 @@
 /* t: current time
 * b: start value
-* c: chance in value
+* c: change in value
 * d: duration
 */
 
