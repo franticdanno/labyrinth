@@ -8,10 +8,8 @@ export class ActionGroupTween extends Action {
 
     // Set up the starting values as this is relative
     this._start_values = []
-    this._end_values = []
     entities.forEach((entity, i) => {
       this._start_values[i] = entity[property]
-      this._end_values[i] = entity[property]
     });
 
     this._duration = duration;
@@ -22,11 +20,12 @@ export class ActionGroupTween extends Action {
   }
 
   Update = (delta) => {
-    this._current_time  = Math.min(this._current_time + this._duration, this._current_time + delta)
 
     this._entities.forEach((entity, i) => {
-      entity[this._property] = this._f(this._current_time,this._start_values[i],this._change_value, this._duration);
+      entity[this._property] = this._f(this._current_time,this._start_values[i], this._change_value, this._duration);
     });
+
+    this._current_time  = Math.min(this._current_time + this._duration, this._current_time + delta)
 
     if(this._current_time >= this._duration){
       this._isFinished = true;

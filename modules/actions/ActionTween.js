@@ -15,9 +15,10 @@ export class ActionTween extends Action {
   }
 
   Update = (delta) => {
-    this._current_time  = Math.min(this._current_time + this._duration, this._current_time + delta)
 
     this._entity[this._property] = this._f(this._current_time,this._start_value,this._change_value, this._duration);
+
+    this._current_time  = Math.min(this._current_time + this._duration, this._current_time + delta)
 
     if(this._entity[this._property] >= this._end_value){
       this._isFinished = true;
