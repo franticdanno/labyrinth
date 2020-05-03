@@ -122,6 +122,7 @@ export default class PlayerMoveState extends BaseState {
   MovePlayer = (player,targetCell,path) => {
       let game = this._entity
       let state = this;
+      let actionManager = this._actionManager;
       //console.log("Here is the path:",path)
       player.SetCurrentCell(targetCell); // Set the player's current cell to ther target one
       this._actionManager.AddAction(new ActionFollowPath(this._entity.GetBoardgame().GetplayerContainer(),path))
@@ -137,15 +138,19 @@ export default class PlayerMoveState extends BaseState {
             console.log("Found a match")
             playerCell.HideSymbol();
             game.SetPlayerFoundCard(player,cardRequired);
-          } else {
-            console.log("No Match")
+
+            actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),"Match Found!",70))
           }
 
+          actionManager.AddAction(new ActionCustom(()=>{
+            state.PlayerMoveFinished();
+          }))
+
         }))
-        .AddAction(new ActionShowText(state._entity.GetBoardgame(),"Match Found!",70))
-        .AddAction(new ActionCustom(()=>{
-          state.PlayerMoveFinished();
-        }))
+  }
+
+  MatchFound = () => {
+
   }
 
   PlayerMoveFinished = () => {
