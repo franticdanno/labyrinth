@@ -16,12 +16,14 @@ export default class  KeyboardManager {
   // Listen out for key up / downs
   Setup = () => {
     window.addEventListener("keydown",(e)=>{
-      if(this._keys[e.key] == null) this._keys[e.key] = {};
+      if(this._keys[e.key] == null && e.key != undefined) this._keys[e.key] = {};
       this._keys[e.key].isDown = true;
     },false);
 
     window.addEventListener("keyup",(e)=>{
-      this._keys[e.key].isDown = false;
+      if(e.key != undefined){
+        this._keys[e.key].isDown = false;
+      }
     },false)
   }
 

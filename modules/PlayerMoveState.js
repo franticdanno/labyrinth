@@ -54,6 +54,12 @@ export default class PlayerMoveState extends BaseState {
 
   ListenForCellInteraction = () => {
 
+    const failMessages = [
+      "No path found! Try again...",
+      "Hmmmm. I don't see a way...",
+      "Yeh, that's not gonna work...",
+    ]
+
     let board = this._entity.GetBoardgame().GetBoardCells();
 
     //console.log("Setting up for Cell Interaction");
@@ -72,13 +78,14 @@ export default class PlayerMoveState extends BaseState {
           let playerCell = player.GetCurrentCell();
 
           let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-          if(path != null){
+          if(path != null && path.length != 0){
 
             this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
             this.MovePlayer(player, targetCell,path); // And move the player along the path
 
           } else {
             console.log("Unable to find path for player")
+            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],70))
           }
 
         })
