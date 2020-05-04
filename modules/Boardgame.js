@@ -263,8 +263,9 @@ export default class BoardGame extends PIXI.Container {
   MovePlayersToCell = (players,cell) => {
     for(let player = 0; player < players.length; player++){
       players[player].SetCurrentCell(cell);
-      this._playerContainers[player].x = cell.x;
-      this._playerContainers[player].y = cell.y;
+      let container = players[player].GetContainerRef()
+      container.x = cell.x;
+      container.y = cell.y;
     }
 
   }
