@@ -7,7 +7,7 @@ import KeyboardManager from './KeyboardManager.js'
 const CELL_SPRITE_SIZE = 114;
 
 // Utility functions
-const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) );
+const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) * 90);
 const emptyLineCell     = () => ( new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true))
 const emptyCornerCell   = () => ( new BoardGameCell(CELL_TYPE.CORNER,null,getRandomRotation(),true))
 const emptyJunctionCell = () => ( new BoardGameCell(CELL_TYPE.JUNCTION,null,getRandomRotation(),true))
@@ -114,40 +114,40 @@ export default class BoardGame extends PIXI.Container {
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[13],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.SLYTHERIN,1,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.SLYTHERIN,90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 3
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[14],3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[14],270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[15],3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[15],270,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[16],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[17],1,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[17],90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 5
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[18],3,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[18],270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[19],2,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[19],180,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[20],1,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[20],90,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[21],1,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[21],90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,3,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],2,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],180,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[23],2,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[23],180,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.RAVENCLAW,2,false),
+        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.RAVENCLAW,180,false),
       ]
     ]
   }
@@ -184,7 +184,7 @@ export default class BoardGame extends PIXI.Container {
         cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
-        cell.SafeRotate(cell.rotation * 90)
+        //cell.SafeRotate(cell.rotation)
         //cell.rotation = (cell.rotation * 90) * Math.PI / 180;
         //cell.anchor.set(0.5,0.5)
 
@@ -225,7 +225,8 @@ export default class BoardGame extends PIXI.Container {
     cell.width = CELL_SPRITE_SIZE * 1.2;
     cell.height = CELL_SPRITE_SIZE * 1.2;
     //cell.anchor.set(0.5,0.5)
-    cell.SafeRotate(0);
+    //cell.rotation = 0;
+    //cell.SafeRotate(0);
   }
 
   IsPlayerAssignedToSpareCell = (player) => {

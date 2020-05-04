@@ -8,6 +8,7 @@ import BoardGame from './Boardgame.js';
 import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import CellMoveState from './CellMoveState.js';
+import GameOverState from './GameOverState.js'
 
 export default class PlayerMoveState extends BaseState {
 
@@ -134,18 +135,25 @@ export default class PlayerMoveState extends BaseState {
           let playerCell = player.GetCurrentCell();
           let cardRequired = player.GetCardTarget();
 
-          console.log("Player Cell", playerCell.GetSymbol(), "Card Required", cardRequired.GetSymbol())
-          if(playerCell.GetSymbol() == cardRequired.GetSymbol()){
+          //console.log("Player Cell", playerCell.GetSymbol(), "Card Required", cardRequired.GetSymbol())
+          if(cardRequired != null && cardRequired.GetSymbol() == playerCell.GetSymbol()){ // If the user needs a card and the cell they landed on is the same symbol...
             console.log("Found a match")
             playerCell.HideSymbol();
 
             game.SetPlayerFoundCard(player,cardRequired);
-            actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),"Match Found!",70))
+            actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
+              .AddAction(new ActionCustom(()=>{
+                state.PlayerMoveFinished();
+              }))
+          } else if(cardRequired == null && playerCell.GetSymbol() == player.GetHouse()){ // If the user needs no card and they have landed on the home cell...
+            actionManager.AddAction(new ActionCustom(()=>{
+                game.ChangeState(new GameOverState(this._entity));
+              }))
+          } else {
+            actionManager.AddAction(new ActionCustom(()=>{
+              state.PlayerMoveFinished();
+            }))
           }
-
-          actionManager.AddAction(new ActionCustom(()=>{
-            state.PlayerMoveFinished();
-          }))
 
         }))
   }

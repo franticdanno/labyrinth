@@ -79,7 +79,7 @@ export default class Game extends PIXI.Container {
   SetPlayerFoundCard = (player,card) => {
     player.ConsumeCardTarget();
     this.removeChild(card);
-    player.GetCardTarget().ShowCard();
+    if(player.GetCardTarget() != null) player.GetCardTarget().ShowCard();
   }
 
   SetUpPlayers = () => {
@@ -132,12 +132,20 @@ export default class Game extends PIXI.Container {
 
       this._players[currentPlayerIndex].DealCard(card);
 
+      let game = this
+      card.on("pointerdown", () => {
+
+        let symbolCell = this._boardgame.FindCellBySymbol(card.GetSymbol())
+        symbolCell.HideSymbol();
+
+        game.SetPlayerFoundCard(this._players[currentPlayerIndex],card)
+      })
+
       currentPlayerIndex = (currentPlayerIndex + 1) % this.GetPlayerCount();
     }
 
     //console.log("Cards have been dealt out. Cards remaining:", possibleCards.length);
   }
-
 
   ShowPlayerCards = () => {
 

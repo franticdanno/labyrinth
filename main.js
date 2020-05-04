@@ -15,7 +15,7 @@ class MyApplication extends PIXI.Application {
   }
 
   Resize = () => {
-    console.log("Resizing");
+    //console.log("Resizing");
     var ratio = CANVAS_WIDTH / CANVAS_HEIGHT;
     var w;
     var h;
@@ -50,6 +50,6 @@ myApplication.Resize();
 myApplication.Start();
 
 window.onresize = function (event) {
-    console.log(event);
+    //console.log(event);
     myApplication.Resize();
 };

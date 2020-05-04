@@ -15,6 +15,10 @@ export default class Player {
     this.cards.push(card);
   }
 
+  GetCardCountLeft = () =>{
+    return this.cards.length;
+  }
+
   GetCards = () => {
     return this.cards;
   }
@@ -36,7 +40,11 @@ export default class Player {
   }
 
   GetCardTarget = () => {
-    return this.cards[this.cards.length - 1]
+    if(this.GetCardCountLeft() == 0){
+       return null;
+    } else {
+       return this.cards[this.cards.length - 1];
+    }
   }
 
   ConsumeCardTarget = () => {

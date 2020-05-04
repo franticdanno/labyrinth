@@ -17,11 +17,6 @@ export default class Card extends PIXI.Container {
 
     this.interactive = true;
     this.buttonmode = true;
-
-    let card = this
-    this.on("pointerdown", () => {
-      card.ToggleShow();
-    })
   }
 
   GetSymbol = () => {

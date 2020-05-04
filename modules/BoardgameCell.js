@@ -57,7 +57,7 @@ export default class BoardGameCell extends PIXI.Container {
 
     this.celltype   = celltype;
 
-    this.SafeRotate(this.rotation);
+    this.SafeRotate(rotation);
 
     //this.rotation   = rotation;
     this.symbol     = symbol;
