@@ -59,83 +59,9 @@ export default class CellMoveState extends BaseState {
 
   ListenForCellInteraction = () => {
 
-    let game = this._entity;
     let boardgame = this._entity.GetBoardgame();
     let board = boardgame.GetBoardCells();
-    let actionManager = this._actionManager;
-    let state = this
-
-    //console.log("Setting up for Cell Interaction");
-
-    function cellClicked(cell){
-
-      boardgame.DisableSpareCellRotation()
-
-      state.RemoveListenersForCellInteraction() // Disable cell clicking now that the user's chose their move
-
-      let cellRow = boardgame.GetBoardgameCellRow(cell);
-      let cellIndex = boardgame.GetBoardgameCellIndex(cell)
-
-      let player = game.GetCurrentPlayer()
-      let playerContainer = game.GetBoardgame().GetplayerContainer();
-
-      //actionManager.AddAction(new ActionShowText(game,"Row: " + cell.GetRow() + " Index: " + cell.GetIndex(),1))
-      if(cellRow == 0 || cellRow == board.length - 1){
-
-        let sprites   = boardgame.GetBoardCellSpritesColumn(cellIndex)
-        let direction = cellRow == 0 ? DIRECTION.SOUTH : DIRECTION.NORTH
-        let change    = (direction == DIRECTION.SOUTH ? 114 : -114)
-
-        let playersWithinCells = boardgame.GetPlayerContainersWithinCells(sprites)
-        console.log("There are ",playersWithinCells.length,"players in those cells!",playersWithinCells)
-
-        // Lets set it up to move the player's piece if we need to
-        let actions = []
-        actions.unshift(new ActionGroupTween(sprites,"y",Tween.easeOutQuad,change,70 ))
-        if(playersWithinCells.length > 0){
-          actions.unshift(new ActionGroupTween(playersWithinCells,"y",Tween.easeOutQuad,change, 70))
-        }
-
-        actionManager
-          .AddAction(new ParallelAction(actions))
-          .AddAction(new ActionCustom(()=>{
-            boardgame.ShiftCellColumn(cellIndex,direction)
-            boardgame.ResetBoardgameSpritePositions()
-          }))
-          .AddAction(new ActionCustom(()=>{
-            game.ChangeState(new PlayerMoveState(game))
-          }));
-
-      } else {
-
-        let sprites = boardgame.GetBoardCellSpritesRow(cellRow)
-        let direction = cellIndex == 0 ? DIRECTION.EAST : DIRECTION.WEST
-        let change  = (direction == DIRECTION.EAST ? 114 : -114)
-
-        let playersWithinCells = boardgame.GetPlayerContainersWithinCells(sprites)
-        console.log("There are ",playersWithinCells.length,"players in those cells!",playersWithinCells)
-
-        // Lets set it up to move the player's piece if we need to
-        let actions = []
-        actions.unshift(new ActionGroupTween(sprites,"x",Tween.easeOutQuad,change,70 ))
-        if(playersWithinCells.length > 0){
-          actions.unshift(new ActionGroupTween(playersWithinCells,"x",Tween.easeOutQuad,change, 70))
-        }
-
-        actionManager
-          .AddAction(new ParallelAction(actions))
-          .AddAction(new ActionCustom(()=>{
-            boardgame.ShiftCellRow(cellRow,direction)
-            boardgame.ResetBoardgameSpritePositions()
-          }))
-          .AddAction(new ActionCustom(()=>{
-            game.ChangeState(new PlayerMoveState(game))
-          }))
-
-      }
-
-      //console.log(boardgame.GetBoardCellSpritesRow(cell.GetRow()))
-    }
+    let state = this;
 
     board.forEach((cell_row, cell_row_index) => {
       return cell_row.forEach((cell, cell_index) => {
@@ -146,15 +72,7 @@ export default class CellMoveState extends BaseState {
         cell.interactive = true;
         cell.buttonMode = true;
 
-        cell.on('pointerdown',(e,b)=>{
-
-          let cellClickedTarget = e.target;
-          //console.log(cellClicked.width,cellClicked.height);
-          cellClicked(cellClickedTarget);
-
-          //console.log("TILE CLICKED",cell_row_index,cell_index)
-
-        })
+        cell.on('pointerdown',(e,b)=>{ state.MoveCells(e.target); })
 
         cell.on('pointerover',(e,b) => {
             let target = e.target;
@@ -168,6 +86,69 @@ export default class CellMoveState extends BaseState {
       });
     });
   }
+
+
+  MoveCells = (cell) => {
+
+    function getMoveDirection(cellRow,cellIndex){
+        if(cellRow == 0) return DIRECTION.SOUTH;
+        if(cellRow == board.length - 1) return DIRECTION.NORTH;
+        if(cellIndex == 0) return DIRECTION.EAST;
+        return DIRECTION.WEST;
+    }
+
+    let game = this._entity;
+    let boardgame = this._entity.GetBoardgame();
+    let board = boardgame.GetBoardCells();
+    let actionManager = this._actionManager;
+    let state = this
+
+    boardgame.DisableSpareCellRotation() // No point being able to rotate the spare cell now...
+    state.RemoveListenersForCellInteraction() // Disable cell clicking now that the user's chose their move
+
+    let cellRow     = boardgame.GetBoardgameCellRow(cell); // Get the row of the cell
+    let cellIndex   = boardgame.GetBoardgameCellIndex(cell) // Get the column / index of the cell
+    let direction   = getMoveDirection(cellRow,cellIndex);
+
+    let previousSpareCell = boardgame.GetSpareCell()
+    let player = game.GetCurrentPlayer()
+    let playerContainer = game.GetBoardgame().GetplayerContainer();
+
+    let cellContainers = (direction == DIRECTION.SOUTH || direction == DIRECTION.NORTH) ? boardgame.GetBoardCellSpritesColumn(cellIndex) : boardgame.GetBoardCellSpritesRow(cellRow)
+    let change = (direction == DIRECTION.SOUTH || direction == DIRECTION.EAST ? 114 : -114)
+
+    let playersWithinCells = boardgame.GetPlayerContainersWithinCells(cellContainers);
+
+    // Lets set it up to move the player's piece if we need to
+    let actions = []
+    let coordinate = direction == DIRECTION.SOUTH || direction == DIRECTION.NORTH ? "y" : "x"
+    actions.unshift(new ActionGroupTween(cellContainers,coordinate,Tween.easeOutQuad,change,70 ))
+    if(playersWithinCells.length > 0){
+      actions.unshift(new ActionGroupTween(playersWithinCells,coordinate,Tween.easeOutQuad,change, 70))
+    }
+
+    actionManager
+      .AddAction(new ParallelAction(actions))
+      .AddAction(new ActionCustom(()=>{
+
+        (direction == DIRECTION.SOUTH || direction == DIRECTION.NORTH) ? boardgame.ShiftCellColumn(cellIndex,direction) : boardgame.ShiftCellRow(cellRow,direction);
+
+        boardgame.ResetBoardgameSpritePositions()
+
+        let overboardPlayers = boardgame.GetPlayersInSpareCell()
+
+        if(overboardPlayers!= null){
+          console.log("Players overboard!",overboardPlayers)
+          boardgame.MovePlayersToCell(overboardPlayers,previousSpareCell);
+        }
+
+      }))
+      .AddAction(new ActionCustom(()=>{
+        game.ChangeState(new PlayerMoveState(game))
+      }));
+  }
+
+
 
   RemoveListenersForCellInteraction = () => {
     let board = this._entity.GetBoardgame().GetBoardCells();

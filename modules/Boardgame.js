@@ -227,6 +227,14 @@ export default class BoardGame extends PIXI.Container {
     cell.rotation = 0
   }
 
+  IsPlayerAssignedToSpareCell = (player) => {
+    return player.GetCurrentCell() == this._spareCell ? true : false
+  }
+
+  IsPlayerAssignedToCell = (player,cell) => {
+    return player.GetCurrentCell() == cell;
+  }
+
   ShowSpareCell = () => {
     this.ResetSpareCell();
     this._board_container.addChild(this._spareCell);
@@ -246,6 +254,32 @@ export default class BoardGame extends PIXI.Container {
 
   SetSpareCell = (cell) => {
     this._spareCell = cell;
+  }
+
+  GetSpareCell = () => {
+    return this._spareCell;
+  }
+
+  MovePlayersToCell = (players,cell) => {
+    for(let player = 0; player < players.length; player++){
+      players[player].SetCurrentCell(cell);
+      this._playerContainers[player].x = cell.x;
+      this._playerContainers[player].y = cell.y;
+    }
+
+  }
+
+  GetPlayersInSpareCell = () => {
+    // Check if anyone went overboard
+    let players = this.GetPlayers()
+    let overboardPlayers = null
+    players.forEach((player, i) => {
+      if(this.IsPlayerAssignedToSpareCell(player)){
+        if(overboardPlayers == null) overboardPlayers = []
+        overboardPlayers.push(player);
+      }
+    });
+    return overboardPlayers;
   }
 
   ShiftCellRow = (row,direction) => {
@@ -356,6 +390,10 @@ export default class BoardGame extends PIXI.Container {
       }
     }
     return returnPlayers;
+  }
+
+  GetPlayers = () => {
+    return this._game.GetPlayers();
   }
 
   GetplayerContainer(player){
