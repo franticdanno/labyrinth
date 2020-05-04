@@ -225,7 +225,7 @@ export default class BoardGame extends PIXI.Container {
     cell.width = CELL_SPRITE_SIZE * 1.2;
     cell.height = CELL_SPRITE_SIZE * 1.2;
     //cell.anchor.set(0.5,0.5)
-    cell.rotation = 0
+    cell.SafeRotate(0);
   }
 
   IsPlayerAssignedToSpareCell = (player) => {
