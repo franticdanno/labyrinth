@@ -56,7 +56,10 @@ export default class BoardGameCell extends PIXI.Container {
     }
 
     this.celltype   = celltype;
-    this.rotation   = rotation;
+
+    this.SafeRotate(this.rotation);
+
+    //this.rotation   = rotation;
     this.symbol     = symbol;
     this.canMove    = canMove;
     this.players    = [];
@@ -65,6 +68,12 @@ export default class BoardGameCell extends PIXI.Container {
     this.row        = 0;
     this.index      = 0
 
+  }
+
+  SafeRotate = (rotate) => {
+    this.rotation += (rotate * (Math.PI/180)) % (2*Math.PI);
+    let diffRotate = (Math.PI*2) - this.rotation
+    if(this._cellSpriteSymbol!=null) this._cellSpriteSymbol.rotation = diffRotate;
   }
 
   CanMove = () => {

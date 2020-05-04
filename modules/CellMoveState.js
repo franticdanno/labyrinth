@@ -148,8 +148,6 @@ export default class CellMoveState extends BaseState {
       }));
   }
 
-
-
   RemoveListenersForCellInteraction = () => {
     let board = this._entity.GetBoardgame().GetBoardCells();
     //console.log("Removing listeners",board);

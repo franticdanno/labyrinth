@@ -184,7 +184,8 @@ export default class BoardGame extends PIXI.Container {
         cell.y = 200 + (row_index * CELL_SPRITE_SIZE)
         cell.width = CELL_SPRITE_SIZE;
         cell.height = CELL_SPRITE_SIZE;
-        cell.rotation = (cell.rotation * 90) * Math.PI / 180;
+        cell.SafeRotate(cell.rotation * 90)
+        //cell.rotation = (cell.rotation * 90) * Math.PI / 180;
         //cell.anchor.set(0.5,0.5)
 
         this._board_container.addChild(cell);
@@ -213,7 +214,7 @@ export default class BoardGame extends PIXI.Container {
     cell.interactive = true;
     cell.buttonmode = true;
     cell.on('pointerdown',()=>{
-      cell.rotation += Math.PI / 2 ;
+      cell.SafeRotate(90);
     })
   }
 
