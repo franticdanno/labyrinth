@@ -61,8 +61,8 @@ export default class Card extends PIXI.Container {
 
       // Now add the icon on top
       let frontSprite = PIXI.Sprite.from(this._symbol.path)
-      frontSprite.height = 128;
-      frontSprite.width = 128;
+      frontSprite.height = 100;
+      frontSprite.width = 100;
       frontSprite.anchor.set(0.5,0.5);
       this._frontContainer.addChild(frontSprite);
 

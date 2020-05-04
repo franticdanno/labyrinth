@@ -147,7 +147,7 @@ export default class PlayerMoveState extends BaseState {
               }))
           } else if(cardRequired == null && playerCell.GetSymbol() == player.GetHouse()){ // If the user needs no card and they have landed on the home cell...
             actionManager.AddAction(new ActionCustom(()=>{
-                game.ChangeState(new GameOverState(this._entity));
+                game.ChangeState(new GameOverState(this._entity,player));
               }))
           } else {
             actionManager.AddAction(new ActionCustom(()=>{
