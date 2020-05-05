@@ -15,9 +15,19 @@ export class CompositeAction extends Action {
   }
 
   AddAction(action){
-    //console.log("Adding action", action);
+    if(this._actions == null) this._actions = []
     this._actions.push(action);
     return this;
+  }
+
+  AddActions(actions){
+    for(let i=0; i < actions.length; i++){
+      this.AddAction(actions[i])
+    }
+  }
+
+  StopAllActions(){
+    this._actions = null;
   }
 
 }
@@ -26,7 +36,12 @@ export class ParallelAction extends CompositeAction {
 
   constructor(actions){
     super();
-    this._actions = actions;
+
+    let mainActions = this._actions
+    // Add all actions to the existing action list
+    if(actions!=null){
+      this.AddActions(actions);
+    }
   }
 
   Update = (delta) => {
@@ -49,8 +64,13 @@ export class ParallelAction extends CompositeAction {
 
 export class SequenceAction extends CompositeAction {
 
-  constructor(){
+  constructor(actions){
     super();
+
+    if(actions!=null){
+      AddActions(actions);
+    }
+
   }
 
   Update = (delta) => {

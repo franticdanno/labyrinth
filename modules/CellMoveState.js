@@ -5,7 +5,7 @@ import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import { Tween } from './libs/Tween.js'
 import { ActionGroupTween } from './actions/ActionGroupTween.js'
-import { ActionTween } from './actions/ActionTween.js'
+import { ActionTween, TWEEN_BEHAVIOUR } from './actions/ActionTween.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
@@ -16,11 +16,15 @@ export default class CellMoveState extends BaseState {
 
   constructor(entity){
     super(entity);
+
+    this._rotateSprite = null;
+
   }
 
   Enter = () => {
 
     let boardgame = this._entity.GetBoardgame()
+    let state = this
 
     this._actionManager = new SequenceAction()
     this._actionManager.AddAction(new ActionShowText(this._entity,"Player " + (this._entity.GetCurrentPlayerIndex() + 1),1))
@@ -28,6 +32,7 @@ export default class CellMoveState extends BaseState {
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))
       .AddAction(new ActionCustom((params) => {
+        state.ShowRotationIcon();
         params.entity.ListenForCellInteraction();
         boardgame.EnableSpareCellRotation();
       },{entity: this}))
@@ -50,11 +55,51 @@ export default class CellMoveState extends BaseState {
     }
 
     if(this._actionManager != null) this._actionManager.Update(delta);
+    if(this._rotateSprite != null && this._rotateSprite._actionManager !=null) this._rotateSprite._actionManager.Update(delta);
 
   }
 
   Exit = () => {
 
+  }
+
+  ShowRotationIcon = () => {
+    let boardgame = this._entity.GetBoardgame();
+    let spareCell = boardgame.GetSpareCell()
+
+    if(this._rotateSprite == null){
+      this._rotateSprite = new PIXI.Sprite.from('./assets/refresh.png')
+    }
+    this._rotateSprite.x = spareCell.x + spareCell.width/2;
+    this._rotateSprite.y = spareCell.y + spareCell.height/2;
+    this._rotateSprite.anchor.set(0.5,0.5);
+    this._rotateSprite.alpha = 0;
+
+    let rotSprite = this._rotateSprite;
+    rotSprite._actionManager = new ParallelAction();
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"alpha",Tween.linear,0,1,20))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"width",Tween.easeInQuad,300,80,20))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"height",Tween.easeInQuad,300,80,20))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"rotation",Tween.linear,0,2*Math.PI,300,TWEEN_BEHAVIOUR.REPEAT))
+
+    boardgame.addChild(this._rotateSprite);
+
+  }
+
+  HideRotationIcon = () => {
+
+    let boardgame = this._entity.GetBoardgame();
+    let rotSprite = this._rotateSprite;
+
+    rotSprite._actionManager.StopAllActions();
+
+    rotSprite._actionManager.AddAction(
+        new ParallelAction([
+          new ActionTween(rotSprite,"alpha",Tween.linear,1,0,20),
+          new ActionTween(rotSprite,"width",Tween.easeInQuad,80,300,20),
+          new ActionTween(rotSprite,"height",Tween.easeInQuad,80,300,20),
+        ])
+      )
   }
 
   ListenForCellInteraction = () => {
@@ -89,6 +134,8 @@ export default class CellMoveState extends BaseState {
 
 
   MoveCells = (cell) => {
+
+    this.HideRotationIcon()
 
     function getMoveDirection(cellRow,cellIndex){
         if(cellRow == 0) return DIRECTION.SOUTH;
