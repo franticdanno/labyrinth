@@ -96,8 +96,8 @@ export default class CellMoveState extends BaseState {
     rotSprite._actionManager.AddAction(
         new ParallelAction([
           new ActionTween(rotSprite,"alpha",Tween.linear,1,0,10),
-          new ActionTween(rotSprite,"width",Tween.easeInQuad,80,600,10),
-          new ActionTween(rotSprite,"height",Tween.easeInQuad,80,600,10),
+          new ActionTween(rotSprite,"width",Tween.easeInQuad,80,120,10),
+          new ActionTween(rotSprite,"height",Tween.easeInQuad,80,120,10),
         ])
       )
   }
