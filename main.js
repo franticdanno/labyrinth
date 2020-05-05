@@ -10,7 +10,7 @@ class MyApplication extends PIXI.Application {
   constructor(initObject){
     super(initObject);
 
-    document.body.appendChild(this.view)
+    document.getElementsByClassName("pixi_container")[0].appendChild(this.view)
 
   }
 

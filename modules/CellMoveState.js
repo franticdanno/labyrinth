@@ -80,7 +80,7 @@ export default class CellMoveState extends BaseState {
     rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"alpha",Tween.linear,0,1,20))
     rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"width",Tween.easeInQuad,300,80,20))
     rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"height",Tween.easeInQuad,300,80,20))
-    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"rotation",Tween.linear,0,2*Math.PI,300,TWEEN_BEHAVIOUR.REPEAT))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"rotation",Tween.easeInOutQuart,0,2*Math.PI,150,TWEEN_BEHAVIOUR.REPEAT))
 
     boardgame.addChild(this._rotateSprite);
 
