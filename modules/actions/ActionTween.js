@@ -41,7 +41,9 @@ export class ActionTween extends Action {
 
     this._current_time  = Math.min(this._start_time + this._duration, this._current_time + delta)
 
-    if((this._start_value < this._end_value && this._entity[this._property] >= this._end_value) || this._start_value > this._end_value && this._entity[this._property] <= this._end_value){
+    if(this._current_time >= this._start_time + this._duration){
+
+      this._entity[this._property] = this._end_value;
 
       switch(this._behaviour){
         case TWEEN_BEHAVIOUR.ONCE:
