@@ -55,7 +55,7 @@ export default class Card extends PIXI.Container {
       const graphics = new PIXI.Graphics();
       graphics.lineStyle(5, 0xFFFFFF, 1);
       graphics.beginFill(0xAA4F08);
-      graphics.drawRoundedRect(this.x - 64, this.y - 70, 128, 140);
+      graphics.drawRoundedRect(this.x - 64, this.y - 70, 128, 140,8);
       graphics.endFill();
       this._frontContainer.addChild(graphics)
 
@@ -76,9 +76,9 @@ export default class Card extends PIXI.Container {
 
       // Lets draw the card background
       const graphics = new PIXI.Graphics();
-      graphics.lineStyle(5, 0xFFFFFF, 1);
+      graphics.lineStyle(5, 0xBBBBBB, 1);
       graphics.beginFill(0x522b0c);
-      graphics.drawRoundedRect(this.x - 64, this.y - 70, 128, 140);
+      graphics.drawRoundedRect(this.x - 64, this.y - 70, 128, 140,8);
       graphics.endFill();
       this._backContainer.addChild(graphics)
 
