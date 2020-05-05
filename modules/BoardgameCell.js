@@ -39,7 +39,7 @@ export default class BoardGameCell extends PIXI.Container {
       this._symbolBackground = new PIXI.Graphics()
       this._symbolBackground.lineStyle(7, 0x98fc03, 1); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
       this._symbolBackground.beginFill(0xdddddd, 1);
-      this._symbolBackground.drawCircle(this._cellSpriteBackground.x, this._cellSpriteBackground.y, 30);
+      this._symbolBackground.drawCircle(this._cellSpriteBackground.x, this._cellSpriteBackground.y, 25);
       this._symbolBackground.endFill();
       this._symbolBackground.alpha = 0.8;
       this.addChild(this._symbolBackground);
@@ -49,8 +49,8 @@ export default class BoardGameCell extends PIXI.Container {
       this._cellSpriteSymbol = new PIXI.Sprite.from(symbol.path)
       this._cellSpriteSymbol.anchor.set(0.5,0.5);
       this._cellSpriteSymbol.alpha = 1
-      this._cellSpriteSymbol.width = 64;
-      this._cellSpriteSymbol.height = 64;
+      this._cellSpriteSymbol.width = 48;
+      this._cellSpriteSymbol.height = 48;
       this.addChild(this._cellSpriteSymbol);
 
     }
