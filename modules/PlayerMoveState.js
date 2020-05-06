@@ -150,12 +150,13 @@ export default class PlayerMoveState extends BaseState {
                 new ActionTween(cardRequired,"alpha",Tween.linear,1,0,10)
               ])
             )
-            .AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
-              .AddAction(new ActionCustom(()=>{
-                game.SetPlayerFoundCard(player,cardRequired);
-                state.PlayerMoveFinished();
-
-              }))
+            .AddAction(new ActionCustom(()=>{
+              game.SetPlayerFoundCard(player,cardRequired);
+              actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
+                .AddAction(new ActionCustom(()=>{
+                  state.PlayerMoveFinished();
+                }))
+            }))
           } else if(cardRequired == null && playerCell.GetSymbol() == player.GetHouse()){ // If the user needs no card and they have landed on the home cell...
             actionManager.AddAction(new ActionCustom(()=>{
                 game.ChangeState(new GameOverState(this._entity,player));

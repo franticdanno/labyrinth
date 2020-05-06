@@ -132,14 +132,14 @@ export default class Game extends PIXI.Container {
 
       this._players[currentPlayerIndex].DealCard(card);
 
-      /*let game = this
+      let game = this
       card.on("pointerdown", () => {
 
         let symbolCell = this._boardgame.FindCellBySymbol(card.GetSymbol())
         symbolCell.HideSymbol();
 
         game.SetPlayerFoundCard(this._players[currentPlayerIndex],card)
-      })*/
+      })
 
       currentPlayerIndex = (currentPlayerIndex + 1) % this.GetPlayerCount();
     }
