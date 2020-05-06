@@ -120,61 +120,13 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"cell_corner.png":
+"054-wizard.png":
 {
-	"frame": {"x":1536,"y":1536,"w":114,"h":114},
+	"frame": {"x":1536,"y":1536,"w":512,"h":512},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_junction.png":
-{
-	"frame": {"x":1650,"y":1536,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_line.png":
-{
-	"frame": {"x":1764,"y":1536,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"player_four.png":
-{
-	"frame": {"x":1878,"y":1536,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_one.png":
-{
-	"frame": {"x":1910,"y":1536,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_three.png":
-{
-	"frame": {"x":1942,"y":1536,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_two.png":
-{
-	"frame": {"x":1974,"y":1536,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -184,6 +136,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-2.json", "boardgame_spritesheet-3.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:cfa5289a38ea81eaf025baf4823c5134:2fa114ff0e69dee20943450277b227f4:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b8097d13014ccc1f8634e8cb9a5f367b:6f298d26575354c7efb3e2e249daf639:f20ee964535c6611f30565802b09c4eb$"
 }
 }

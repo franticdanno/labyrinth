@@ -7,7 +7,7 @@ import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js';
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import CellMoveState from './CellMoveState.js';
 import GameOverState from './GameOverState.js'

@@ -7,7 +7,7 @@ import { ActionChangeState } from './actions/ActionChangeState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js';
 import CellMoveState from './CellMoveState.js'
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 
 export default class MainGameSetupState extends BaseState {

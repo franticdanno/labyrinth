@@ -1,4 +1,4 @@
-import { HOUSE, CHARACTER, SYMBOLS, CELL_TYPE } from './Constants.js'
+import { PLAYERS, CHARACTER, SYMBOLS, CELL_TYPE } from './Constants.js'
 import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
 import Card from './Card.js';
 import BoardGame from './Boardgame.js';
@@ -92,10 +92,10 @@ export default class Game extends PIXI.Container {
 
       let player = new Player(null,i,(()=>{
           switch(i){
-            case 0: return HOUSE.GRYFFINDOR;
-            case 1: return HOUSE.SLYTHERIN;
-            case 2: return HOUSE.HUFFLEPUFF;
-            default: return HOUSE.RAVENCLAW;
+            case 0: return PLAYERS.PLAYER_ONE;
+            case 1: return PLAYERS.PLAYER_TWO;
+            case 2: return PLAYERS.PLAYER_THREE;
+            default: return PLAYERS.PLAYER_FOUR;
           }
       })(i), (()=>{
           switch(i){

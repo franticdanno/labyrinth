@@ -5,11 +5,11 @@ export const DIRECTION = {
   WEST : "west"
 }
 
-export const HOUSE = {
-  GRYFFINDOR  : "gryffindor",
-  RAVENCLAW   : "ravenclaw",
-  HUFFLEPUFF  : "hufflepuff",
-  SLYTHERIN   : "slytherin",
+export const PLAYERS = {
+  PLAYER_ONE  : "Player 1",
+  PLAYER_TWO   : "Player 2",
+  PLAYER_THREE  : "Player 3",
+  PLAYER_FOUR   : "Player 4",
 }
 
 export const SYMBOLS = [

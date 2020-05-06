@@ -1,4 +1,4 @@
-import { HOUSE, CHARACTER, CELL_TYPE } from './Constants.js'
+import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
 
 const CELL_IMAGES = {
   [CELL_TYPE.CORNER] : "cell_corner.png",
@@ -49,8 +49,8 @@ export default class BoardGameCell extends PIXI.Container {
       this._cellSpriteSymbol = new PIXI.Sprite.from(symbol.path)
       this._cellSpriteSymbol.anchor.set(0.5,0.5);
       this._cellSpriteSymbol.alpha = 1
-      this._cellSpriteSymbol.width = 48;
-      this._cellSpriteSymbol.height = 48;
+      this._cellSpriteSymbol.width = 58;
+      this._cellSpriteSymbol.height = 58;
       this.addChild(this._cellSpriteSymbol);
 
     }

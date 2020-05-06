@@ -1,4 +1,4 @@
-import { HOUSE, SYMBOLS, CELL_TYPE } from './Constants.js'
+import { PLAYERS, SYMBOLS, CELL_TYPE } from './Constants.js'
 import Card from './Card.js';
 import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
@@ -13,10 +13,10 @@ const emptyCornerCell   = () => ( new BoardGameCell(CELL_TYPE.CORNER,null,getRan
 const emptyJunctionCell = () => ( new BoardGameCell(CELL_TYPE.JUNCTION,null,getRandomRotation(),true))
 
 const PLAYER_PIECES = {
-  [HOUSE.GRYFFINDOR] : "player_one.png",
-  [HOUSE.SLYTHERIN] : "player_two.png",
-  [HOUSE.HUFFLEPUFF] : "player_three.png",
-  [HOUSE.RAVENCLAW] : "player_four.png",
+  [PLAYERS.PLAYER_ONE] : "player_one.png",
+  [PLAYERS.PLAYER_TWO] : "player_two.png",
+  [PLAYERS.PLAYER_THREE] : "player_three.png",
+  [PLAYERS.PLAYER_FOUR] : "player_four.png",
 }
 
 const DIRECTION = {
@@ -108,13 +108,13 @@ export default class BoardGame extends PIXI.Container {
     this.board = [
       [
         // Row 1
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.GRYFFINDOR,0,false),
+        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_ONE,0,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[12],0,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[13],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.SLYTHERIN,90,false),
+        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_TWO,90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
@@ -141,13 +141,13 @@ export default class BoardGame extends PIXI.Container {
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.HUFFLEPUFF,270,false),
+        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_THREE,270,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],180,false),
         getCellFromPossibleCells(this._possibleCells),
         new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[23],180,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,HOUSE.RAVENCLAW,180,false),
+        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_FOUR,180,false),
       ]
     ]
   }

@@ -9,7 +9,7 @@ import { ActionTween, TWEEN_BEHAVIOUR } from './actions/ActionTween.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
-import { HOUSE, CHARACTER, CELL_TYPE,DIRECTION } from './Constants.js'
+import { PLAYERS, CHARACTER, CELL_TYPE,DIRECTION } from './Constants.js'
 import Card from './Card.js';
 
 export default class CellMoveState extends BaseState {
