@@ -1,4 +1,6 @@
 import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
+import { ActionTween } from './actions/ActionTween.js'
+import { Tween } from './libs/Tween.js'
 import { ActionShowText } from './actions/ActionShowText.js'
 import { ActionSleep } from './actions/ActionSleep.js'
 import { ActionCustom } from './actions/ActionCustom.js'
@@ -137,13 +139,22 @@ export default class PlayerMoveState extends BaseState {
 
           //console.log("Player Cell", playerCell.GetSymbol(), "Card Required", cardRequired.GetSymbol())
           if(cardRequired != null && cardRequired.GetSymbol() == playerCell.GetSymbol()){ // If the user needs a card and the cell they landed on is the same symbol...
+
             console.log("Found a match")
             playerCell.HideSymbol();
 
-            game.SetPlayerFoundCard(player,cardRequired);
-            actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
+            actionManager.AddAction(
+              new ParallelAction([
+                new ActionTween(cardRequired,"width",Tween.linear,cardRequired.width * 2,800,10),
+                new ActionTween(cardRequired,"height",Tween.linear,cardRequired.height * 2,600,10),
+                new ActionTween(cardRequired,"alpha",Tween.linear,1,0,10)
+              ])
+            )
+            .AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
               .AddAction(new ActionCustom(()=>{
+                game.SetPlayerFoundCard(player,cardRequired);
                 state.PlayerMoveFinished();
+
               }))
           } else if(cardRequired == null && playerCell.GetSymbol() == player.GetHouse()){ // If the user needs no card and they have landed on the home cell...
             actionManager.AddAction(new ActionCustom(()=>{
