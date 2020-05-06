@@ -6,11 +6,17 @@ import KeyboardManager from './KeyboardManager.js'
 
 const CELL_SPRITE_SIZE = 114;
 
+const CELL_ASSETS = {
+  [CELL_TYPE.CORNER] : "cell_corner.png",
+  [CELL_TYPE.JUNCTION] : "cell_junction.png",
+  [CELL_TYPE.LINE] : "cell_line.png",
+}
+
 // Utility functions
 const getRandomRotation = () => ( Math.floor(((Math.random() * 4) + 1)) * 90);
-const emptyLineCell     = () => ( new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true))
-const emptyCornerCell   = () => ( new BoardGameCell(CELL_TYPE.CORNER,null,getRandomRotation(),true))
-const emptyJunctionCell = () => ( new BoardGameCell(CELL_TYPE.JUNCTION,null,getRandomRotation(),true))
+const emptyLineCell     = () => ( new BoardGameCell(CELL_TYPE.LINE,CELL_ASSETS[CELL_TYPE.LINE],null,getRandomRotation(),true))
+const emptyCornerCell   = () => ( new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],null,getRandomRotation(),true))
+const emptyJunctionCell = () => ( new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],getRandomRotation(),true))
 
 const PLAYER_PIECES = {
   [PLAYERS.PLAYER_ONE] : "player_one.png",
@@ -54,40 +60,40 @@ export default class BoardGame extends PIXI.Container {
 
     // Get together the list of possible cells that will be placed down on the board
     this._possibleCells = [
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[0],getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[1],getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.LINE,null,getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[0],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[1],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.LINE,CELL_ASSETS[CELL_TYPE.LINE],null,getRandomRotation(),true),
       emptyLineCell(),
       emptyCornerCell(),
       emptyLineCell(),
       emptyLineCell(),
       emptyCornerCell(),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[2],getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[3],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[2],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[3],getRandomRotation(),true),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[4],getRandomRotation(),true),
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[5],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[4],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[5],getRandomRotation(),true),
       emptyCornerCell(),
       emptyCornerCell(),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[6],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[6],getRandomRotation(),true),
       emptyCornerCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[7],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[7],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[8],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[8],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[9],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[9],getRandomRotation(),true),
       emptyLineCell(),
       emptyLineCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.CORNER,SYMBOLS[10],getRandomRotation(),true),
+      new BoardGameCell(CELL_TYPE.CORNER,CELL_ASSETS[CELL_TYPE.CORNER],SYMBOLS[10],getRandomRotation(),true),
       emptyLineCell(),
       emptyCornerCell(),
       emptyLineCell(),
-      new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[11],getRandomRotation(),true)
+      new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[11],getRandomRotation(),true)
     ]
 
     const getCellFromPossibleCells = (possibleCells) => {
@@ -108,46 +114,46 @@ export default class BoardGame extends PIXI.Container {
     this.board = [
       [
         // Row 1
-        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_ONE,0,false),
+        new BoardGameCell(CELL_TYPE.CORNER,"cell_corner_player_1.png",PLAYERS.PLAYER_ONE,0,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[12],0,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[12],0,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[13],0,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[13],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_TWO,90,false),
+        new BoardGameCell(CELL_TYPE.CORNER,"cell_corner_player_2.png",PLAYERS.PLAYER_TWO,90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 3
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[14],270,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[14],270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[15],270,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[15],270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[16],0,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[16],0,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[17],90,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[17],90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 5
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[18],270,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[18],270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[19],180,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[19],180,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[20],90,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[20],90,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[21],90,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[21],90,false),
       ],
       getArrayOfPossibleCells(this._possibleCells,7),
       [
         // Row 7
-        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_THREE,270,false),
+        new BoardGameCell(CELL_TYPE.CORNER,"cell_corner_player_3.png",PLAYERS.PLAYER_THREE,270,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[22],180,false),
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[22],180,false),
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.JUNCTION,SYMBOLS[23],180,false) ,
+        new BoardGameCell(CELL_TYPE.JUNCTION,CELL_ASSETS[CELL_TYPE.JUNCTION],SYMBOLS[23],180,false) ,
         getCellFromPossibleCells(this._possibleCells),
-        new BoardGameCell(CELL_TYPE.CORNER,PLAYERS.PLAYER_FOUR,180,false),
+        new BoardGameCell(CELL_TYPE.CORNER,"cell_corner_player_4.png",PLAYERS.PLAYER_FOUR,180,false),
       ]
     ]
   }

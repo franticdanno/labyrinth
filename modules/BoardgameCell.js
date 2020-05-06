@@ -1,16 +1,5 @@
 import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
 
-const CELL_IMAGES = {
-  [CELL_TYPE.CORNER] : "cell_corner.png",
-  [CELL_TYPE.JUNCTION] : "cell_junction.png",
-  [CELL_TYPE.LINE] : "cell_line.png",
-}
-
-const CELL_IMAGES_FANCY = {
-  [CELL_TYPE.CORNER] : "cell_corner_fancy.png",
-  [CELL_TYPE.JUNCTION] : "cell_junction_fancy.png",
-  [CELL_TYPE.LINE] : "cell_line_fancy.png",
-}
 
 const CELL_TYPE_LINKS = {
   [CELL_TYPE.CORNER] : [false,true,true,false],
@@ -22,11 +11,11 @@ let currentCardCount = 0
 
 export default class BoardGameCell extends PIXI.Container {
 
-  constructor(celltype,symbol,rotation,canMove){
+  constructor(celltype,cellassetpath,symbol,rotation,canMove){
 
     //super(Math.random() > 0.9 ? PIXI.Texture.from(CELL_IMAGES_FANCY[celltype]) : PIXI.Texture.from(CELL_IMAGES[celltype]))
     super()
-    this._cellSpriteBackground = new PIXI.Sprite.from(CELL_IMAGES[celltype])
+    this._cellSpriteBackground = new PIXI.Sprite.from(cellassetpath)
 
     // Adding the cell tile background
     this._cellSpriteBackground.anchor.set(0.5,0.5)
