@@ -569,6 +569,8 @@ export default class BoardGame extends PIXI.Container {
     //startCell.scale = 1.2;
     //targetCell.scale = 1.2;
 
+    if(startCell == targetCell) return [startCell]
+
     let frontier = []; // This is the list of cells we're going to be traversing
     frontier.push(startCell); // So lets add the very first cell to it
 
@@ -598,13 +600,10 @@ export default class BoardGame extends PIXI.Container {
       });
 
     }
-
-    console.log("SO we found the target. Construction time!")
-
     // Check if there is a path
     if(!came_from[targetCell.GetID()]){ // If there was no linking path to the final cell
       console.log("NO PATH FOUND");
-      return []
+      return null
     }
 
     // Time to construct the path now

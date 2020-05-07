@@ -64,11 +64,11 @@ export default class PlayerMoveState extends BaseState {
     ]
 
     let board = this._entity.GetBoardgame().GetBoardCells();
-
+    let state = this;
     //console.log("Setting up for Cell Interaction");
 
     board.forEach((cell_row, i) => {
-      return cell_row.forEach((cell, i) => {
+      cell_row.forEach((cell, i) => {
 
         cell.interactive = true;
         cell.buttonMode = true;
@@ -80,30 +80,42 @@ export default class PlayerMoveState extends BaseState {
           let player = this._entity.GetCurrentPlayer();
           let playerCell = player.GetCurrentCell();
 
-          let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-          if(path != null && path.length != 0){
+          if(targetCell == playerCell){ // If the chosen cell is the user's current cell...
 
             this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
-            this.MovePlayer(player, targetCell,path); // And move the player along the path
+
+            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),"Bold move, not moving..."), 70)
+            .AddAction(new ActionCustom(()=>{
+              state.PlayerMoveFinished();
+            }))
 
           } else {
-            console.log("Unable to find path for player")
-            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],70))
-          }
 
+            let path = this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
+
+            if(path == null){ // No path found
+              console.log("Unable to find path for player")
+              this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
+              this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],70))
+
+            } else if(path != null){
+
+              this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
+              this.MovePlayer(player, targetCell,path); // And move the player along the path
+            }
+          }
         })
 
+        // Adding / removing the
         cell.on('pointerover',(e,b) => {
             let target = e.target;
             target.alpha = 0.8;
-            //console.log("pointer over")
             target.once('pointerout',(e,b) => {
-              //console.log("pointer out")
               target.alpha = 1.0;
             })
         })
-      });
-    });
+      })
+    })
   }
 
   RemoveListenersForCellInteraction = () => {
