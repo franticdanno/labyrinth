@@ -569,8 +569,6 @@ export default class BoardGame extends PIXI.Container {
     //startCell.scale = 1.2;
     //targetCell.scale = 1.2;
 
-    if(startCell == targetCell) return [startCell]
-
     let frontier = []; // This is the list of cells we're going to be traversing
     frontier.push(startCell); // So lets add the very first cell to it
 

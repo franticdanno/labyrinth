@@ -68,7 +68,7 @@ export class SequenceAction extends CompositeAction {
     super();
 
     if(actions!=null){
-      AddActions(actions);
+      this.AddActions(actions);
     }
 
   }
