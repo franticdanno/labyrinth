@@ -169,9 +169,9 @@ export default class CellMoveState extends BaseState {
     // Lets set it up to move the player's piece if we need to
     let actions = []
     let coordinate = direction == DIRECTION.SOUTH || direction == DIRECTION.NORTH ? "y" : "x"
-    actions.unshift(new ActionGroupTween(cellContainers,coordinate,Tween.easeOutQuad,change,70 ))
+    actions.unshift(new ActionGroupTween(cellContainers,coordinate,Tween.easeInOutQuart,change,70 ))
     if(playersWithinCells.length > 0){
-      actions.unshift(new ActionGroupTween(playersWithinCells,coordinate,Tween.easeOutQuad,change, 70))
+      actions.unshift(new ActionGroupTween(playersWithinCells,coordinate,Tween.easeInOutQuart,change, 70))
     }
 
     actionManager
