@@ -70,8 +70,8 @@ export default class CellMoveState extends BaseState {
     if(this._rotateSprite == null){
       this._rotateSprite = new PIXI.Sprite.from('./assets/refresh.png')
     }
-    this._rotateSprite.x = spareCell.x + spareCell.width/2;
-    this._rotateSprite.y = spareCell.y + spareCell.height/2;
+    this._rotateSprite.x = spareCell.x;
+    this._rotateSprite.y = spareCell.y + spareCell.height/2 + 70;
     this._rotateSprite.anchor.set(0.5,0.5);
     this._rotateSprite.alpha = 0;
 

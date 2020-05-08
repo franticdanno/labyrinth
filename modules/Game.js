@@ -149,7 +149,7 @@ export default class Game extends PIXI.Container {
 
   ShowPlayerCards = () => {
 
-    const playerCardPositions = [[200,200],[1720,200],[200,880],[1720,880]]
+    const playerCardPositions = [[105,190],[1817,190],[105,875],[1817,875]]
 
     let players = this._players;
 
@@ -157,7 +157,7 @@ export default class Game extends PIXI.Container {
       let cards = players[playerIndex].GetCards();
       for(let cardIndex = 0; cardIndex < cards.length; cardIndex++){
         let card = cards[cardIndex]
-        let x = playerIndex % 2 == 0 ? playerCardPositions[playerIndex][0] + ((cardIndex / cards.length) * 120) : playerCardPositions[playerIndex][0] - ((cardIndex / cards.length) * 120)
+        let x = playerIndex % 2 == 0 ? playerCardPositions[playerIndex][0] + ((cardIndex / cards.length) * 180) : playerCardPositions[playerIndex][0] - ((cardIndex / cards.length) * 180)
         card.x = x;
         card.y = playerCardPositions[playerIndex][1]
 
