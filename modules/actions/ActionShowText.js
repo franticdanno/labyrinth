@@ -59,14 +59,20 @@ export class ActionShowText extends Action {
         break;
       case 1:
         this._text.alpha += this._totalTime / 2000 ;
-        //console.log(delta,this._text.alpha);
         if(this._text.alpha >= 2){
           this._state = 2;
+          this._totalTime = 0;
         }
         break;
       case 2:
+        if(this._totalTime >= 10){
+          this._state = 3;
+        }
+        break;
+      case 3:
         this._container.removeChild(this._text)
         this._isFinished = true;
+        break;
     }
 
   }
