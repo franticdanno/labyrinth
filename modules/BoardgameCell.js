@@ -65,6 +65,12 @@ export default class BoardGameCell extends PIXI.Container {
     if(this._cellSpriteSymbol!=null) this._cellSpriteSymbol.rotation = diffRotate;
   }
 
+  SetSafeRotate = (rotate) => {
+    this.rotation = (rotate * (Math.PI/180)) % (2*Math.PI);
+    let diffRotate = (Math.PI*2) - this.rotation
+    if(this._cellSpriteSymbol!=null) this._cellSpriteSymbol.rotation = diffRotate;
+  }
+
   CanMove = () => {
     return this.canMove;
   }

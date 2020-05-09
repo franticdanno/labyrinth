@@ -5,7 +5,9 @@ import { ActionCustom } from './actions/ActionCustom.js'
 import { ActionFollowPath } from './actions/ActionFollowPath.js'
 import { Tween } from './libs/Tween.js'
 import { ActionGroupTween } from './actions/ActionGroupTween.js'
-import { ActionTween, TWEEN_BEHAVIOUR } from './actions/ActionTween.js'
+import { ActionTween } from './actions/ActionTween.js'
+import { ActionTweenCustom } from './actions/ActionTweenCustom.js'
+import {TWEEN_BEHAVIOUR} from './libs/TweenConstants.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
@@ -33,11 +35,44 @@ export default class CellMoveState extends BaseState {
       },{entity:this._entity}))
       .AddAction(new ActionCustom((params) => {
         state.ShowRotationIcon();
+        state.EnableSpareCellRotationListener();
         params.entity.ListenForCellInteraction();
-        boardgame.EnableSpareCellRotation();
+        //boardgame.EnableSpareCellRotation();
       },{entity: this}))
 
     //console.log("Boardgame has been set up!",this)
+  }
+
+  EnableSpareCellRotationListener = () => {
+    let sparecell = this._entity.GetBoardgame().GetSpareCell();
+    let actionManager = this._actionManager;
+    let state = this
+
+    sparecell.interactive = true;
+    sparecell.buttonmode = true;
+
+    sparecell.once("pointerdown",()=>{
+
+        actionManager.AddActions([
+          new ActionCustom(()=>{
+            state.DisableSpareCellRotationListener();
+          }),
+          new ActionTweenCustom(sparecell,(entity,value)=>{
+            entity.SetSafeRotate(value)
+          },Tween.easeInOutQuad, sparecell.rotation * 180/Math.PI,sparecell.rotation * 180 /Math.PI + 90, 30),
+          new ActionCustom(()=>{
+            state.EnableSpareCellRotationListener();
+          }),
+        ])
+        /*.AddAction(new ActionCustom(()=>{
+          sparecell.SafeRotate(90);
+        }))*/
+    })
+  }
+
+  DisableSpareCellRotationListener = () => {
+    let sparecell = this._entity.GetBoardgame().GetSpareCell();
+    sparecell.removeListener('pointerdown');
   }
 
   Update = (delta) => {
@@ -150,8 +185,9 @@ export default class CellMoveState extends BaseState {
     let actionManager = this._actionManager;
     let state = this
 
-    boardgame.DisableSpareCellRotation() // No point being able to rotate the spare cell now...
-    state.RemoveListenersForCellInteraction() // Disable cell clicking now that the user's chose their move
+    //boardgame.DisableSpareCellRotation() // No point being able to rotate the spare cell now...
+    state.DisableSpareCellRotationListener();
+    state.RemoveListenersForCellInteraction(); // Disable cell clicking now that the user's chose their move
 
     let cellRow     = boardgame.GetBoardgameCellRow(cell); // Get the row of the cell
     let cellIndex   = boardgame.GetBoardgameCellIndex(cell) // Get the column / index of the cell

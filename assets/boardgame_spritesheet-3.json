@@ -2,111 +2,12 @@
 
 "board_background.png":
 {
-	"frame": {"x":0,"y":128,"w":1920,"h":1080},
+	"frame": {"x":0,"y":0,"w":1920,"h":1080},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1080},
 	"sourceSize": {"w":1920,"h":1080}
-},
-"cell_corner.png":
-{
-	"frame": {"x":128,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_corner_player_1.png":
-{
-	"frame": {"x":242,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_corner_player_2.png":
-{
-	"frame": {"x":356,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_corner_player_3.png":
-{
-	"frame": {"x":470,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_corner_player_4.png":
-{
-	"frame": {"x":584,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_junction.png":
-{
-	"frame": {"x":698,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"cell_line.png":
-{
-	"frame": {"x":812,"y":0,"w":114,"h":114},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":114},
-	"sourceSize": {"w":114,"h":114}
-},
-"player_four.png":
-{
-	"frame": {"x":0,"y":0,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_one.png":
-{
-	"frame": {"x":32,"y":0,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_three.png":
-{
-	"frame": {"x":64,"y":0,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"player_two.png":
-{
-	"frame": {"x":96,"y":0,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"refresh.png":
-{
-	"frame": {"x":926,"y":0,"w":128,"h":128},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
-	"sourceSize": {"w":128,"h":128}
 }},
-"animations": {
-	"cell_corner_player": ["cell_corner_player_1.png","cell_corner_player_2.png","cell_corner_player_3.png","cell_corner_player_4.png"]
-},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
@@ -115,6 +16,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-1.json", "boardgame_spritesheet-2.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:b3c8231f572185639d3e4fef299c6fcc:f7f35d7a018e743665af8772885393c6:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:583209c886029ab3f82516b466c0458f:4e92d24d735a3d11aed03c7af72bcfea:f20ee964535c6611f30565802b09c4eb$"
 }
 }

@@ -1,6 +1,6 @@
 {"frames": {
 
-"055-monster.png":
+"029-archer.png":
 {
 	"frame": {"x":0,"y":0,"w":512,"h":512},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"056-time machine.png":
+"052-santa claus.png":
 {
 	"frame": {"x":512,"y":0,"w":512,"h":512},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"057-tooth fairy.png":
+"053-scarecrow.png":
 {
 	"frame": {"x":1024,"y":0,"w":512,"h":512},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"059-unicorn.png":
+"054-wizard.png":
 {
 	"frame": {"x":1536,"y":0,"w":512,"h":512},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"060-vampire.png":
+"055-monster.png":
 {
 	"frame": {"x":0,"y":512,"w":512,"h":512},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"061-vampire.png":
+"056-time machine.png":
 {
 	"frame": {"x":512,"y":512,"w":512,"h":512},
 	"rotated": false,
@@ -48,7 +48,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"062-hunter.png":
+"057-tooth fairy.png":
 {
 	"frame": {"x":1024,"y":512,"w":512,"h":512},
 	"rotated": false,
@@ -56,7 +56,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"063-wizard.png":
+"059-unicorn.png":
 {
 	"frame": {"x":1536,"y":512,"w":512,"h":512},
 	"rotated": false,
@@ -64,7 +64,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"065-witch.png":
+"060-vampire.png":
 {
 	"frame": {"x":0,"y":1024,"w":512,"h":512},
 	"rotated": false,
@@ -72,7 +72,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"066-wizard.png":
+"061-vampire.png":
 {
 	"frame": {"x":512,"y":1024,"w":512,"h":512},
 	"rotated": false,
@@ -80,9 +80,41 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
 },
-"068-zombie.png":
+"062-hunter.png":
 {
 	"frame": {"x":1024,"y":1024,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+"063-wizard.png":
+{
+	"frame": {"x":1536,"y":1024,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+"065-witch.png":
+{
+	"frame": {"x":0,"y":1536,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+"066-wizard.png":
+{
+	"frame": {"x":512,"y":1536,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+"068-zombie.png":
+{
+	"frame": {"x":1024,"y":1536,"w":512,"h":512},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
@@ -96,6 +128,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-1.json", "boardgame_spritesheet-3.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:b3c8231f572185639d3e4fef299c6fcc:f7f35d7a018e743665af8772885393c6:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:583209c886029ab3f82516b466c0458f:4e92d24d735a3d11aed03c7af72bcfea:f20ee964535c6611f30565802b09c4eb$"
 }
 }

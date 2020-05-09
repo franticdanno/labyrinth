@@ -1,8 +1,9 @@
 import { Action } from './Action.js'
 import {TWEEN_BEHAVIOUR} from '../libs/TweenConstants.js'
 
-export class ActionTween extends Action {
-  constructor(entity, property,f, start_value, end_value, duration, behaviour){
+
+export class ActionTweenCustom extends Action {
+  constructor(entity, custom_function, f, start_value, end_value, duration, behaviour){
     super();
 
     this._entity = entity;
@@ -13,7 +14,7 @@ export class ActionTween extends Action {
     this._start_time = 0;
     this._current_time = 0;
     this._f = f;
-    this._property = property;
+    this._custom_function = custom_function;
     this._behaviour = behaviour || TWEEN_BEHAVIOUR.ONCE;
   }
 
@@ -32,13 +33,14 @@ export class ActionTween extends Action {
 
   Update = (delta) => {
 
-    this._entity[this._property] = this._f(this._current_time,this._start_value,this._change_value, this._duration);
+     // Run the custom function passing in the
+    this._custom_function(this._entity,this._f(this._current_time,this._start_value,this._change_value, this._duration))
 
     this._current_time  = Math.min(this._start_time + this._duration, this._current_time + delta)
 
     if(this._current_time >= this._start_time + this._duration){
 
-      this._entity[this._property] = this._end_value;
+      this._custom_function(this._entity,this._end_value)
 
       switch(this._behaviour){
         case TWEEN_BEHAVIOUR.ONCE:

@@ -210,23 +210,9 @@ export default class BoardGame extends PIXI.Container {
     this.addChild(this._board_container);
   }
 
-  DisableSpareCellRotation = () => {
-    this._spareCell.removeListener('pointerdown');
-  }
-
-  EnableSpareCellRotation = () => {
-    let cell = this._spareCell;
-
-    cell.interactive = true;
-    cell.buttonmode = true;
-    cell.on('pointerdown',()=>{
-      cell.SafeRotate(90);
-    })
-  }
-
   ResetSpareCell = () => {
     let cell = this._spareCell;
-    cell.x = 240;
+    cell.x = 237;
     cell.y = 520;
     cell.width = CELL_SPRITE_SIZE * 1.2;
     cell.height = CELL_SPRITE_SIZE * 1.2;
@@ -369,7 +355,9 @@ export default class BoardGame extends PIXI.Container {
 
       let playerContainer = new PIXI.Container();
       let playerSprite = PIXI.Sprite.from(PLAYER_PIECES[playerModel.house])
-      playerSprite.anchor.set(0.5,0.5)
+      playerSprite.width = 48
+      playerSprite.height = 48
+      playerSprite.anchor.set(0.5,0.5);
       playerContainer.addChild(playerSprite)
       let houseCell = this.FindCellBySymbol(playerModel.house)
       //console.log("House:", item.house, "is", houseCell.x, houseCell.y)
@@ -419,14 +407,18 @@ export default class BoardGame extends PIXI.Container {
     }
   }
 
+  GetCurrentPlayerContainer = () => {
+    return this._playerContainers[this._game.GetCurrentPlayerIndex];
+  }
+
   HighlightCurrentPlayer = () => {
     for(let i = 0; i < this._playerContainers.length; i++){
       if(i == this._game.GetCurrentPlayerIndex()){
-        this._playerContainers[i].scale.x = 3.0;
-        this._playerContainers[i].scale.y = 3.0;
+        this._playerContainers[i].scale.x = 1.8;
+        this._playerContainers[i].scale.y = 1.8;
       } else {
-        this._playerContainers[i].scale.x = 2.0;
-        this._playerContainers[i].scale.y = 2.0;
+        this._playerContainers[i].scale.x = 1.0;
+        this._playerContainers[i].scale.y = 1.0;
       }
     }
   }
