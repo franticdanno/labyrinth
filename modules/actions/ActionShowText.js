@@ -56,21 +56,23 @@ export class ActionShowText extends Action {
         this._text.alpha = 0;
         this._container.addChild(this._text);
         this._state = 1;
+        this._totalTime = 0;
         break;
       case 1:
-        this._text.alpha += this._totalTime / 2000 ;
-        if(this._text.alpha >= 2){
+        this._text.alpha = this._totalTime / 1000 ;
+        if(this._text.alpha >= 1){
           this._state = 2;
           this._totalTime = 0;
         }
         break;
       case 2:
-        if(this._totalTime >= 10){
+        if(this._totalTime >= 1000){
           this._state = 3;
         }
         break;
       case 3:
         this._container.removeChild(this._text)
+        this._text.destroy();
         this._isFinished = true;
         break;
     }

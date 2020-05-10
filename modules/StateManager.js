@@ -14,8 +14,9 @@ export default class StateManager {
   }
 
   Update = (delta) => {
+    //console.log("Ticker",delta,this._ticker.deltaTime,this._ticker.deltaMS,this._ticker.elapsedMS )
     //console.log("Update",this._currentState)
-    if(this._currentState != null) this._currentState.Update(delta)
+    if(this._currentState != null) this._currentState.Update(this._ticker.deltaMS)
   }
 
   ChangeState = (newState) => {

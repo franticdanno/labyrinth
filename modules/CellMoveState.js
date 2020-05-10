@@ -59,7 +59,7 @@ export default class CellMoveState extends BaseState {
           }),
           new ActionTweenCustom(sparecell,(entity,value)=>{
             entity.SetSafeRotate(value)
-          },Tween.easeInOutQuad, sparecell.rotation * 180/Math.PI,sparecell.rotation * 180 /Math.PI + 90, 30),
+          },Tween.easeInOutQuad, sparecell.rotation * 180/Math.PI,sparecell.rotation * 180 /Math.PI + 90, 500),
           new ActionCustom(()=>{
             state.EnableSpareCellRotationListener();
           }),
@@ -75,7 +75,13 @@ export default class CellMoveState extends BaseState {
     sparecell.removeListener('pointerdown');
   }
 
-  Update = (delta) => {
+  Update = (delta,b,c) => {
+
+    if(this._totalTime == null){ this._totalTime = 0;}
+    this._totalTime += delta
+
+    //console.log("Cell Move State",this._totalTime)
+
     //console.log("Main Game State");
     if(this._entity.GetBoardgame()._keyboardManager.IsKeyDown('k')){
       if(!this._entity.GetBoardgame().IsDrawingConnectingNodes()){
@@ -112,10 +118,10 @@ export default class CellMoveState extends BaseState {
 
     let rotSprite = this._rotateSprite;
     rotSprite._actionManager = new ParallelAction();
-    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"alpha",Tween.linear,0,1,20))
-    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"width",Tween.easeInQuad,300,80,20))
-    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"height",Tween.easeInQuad,300,80,20))
-    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"rotation",Tween.easeInOutQuart,0,2*Math.PI,150,TWEEN_BEHAVIOUR.REPEAT))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"alpha",Tween.linear,0,1,500))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"width",Tween.easeInQuad,300,80,500))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"height",Tween.easeInQuad,300,80,500))
+    rotSprite._actionManager.AddAction(new ActionTween(rotSprite,"rotation",Tween.easeInOutQuart,0,2*Math.PI,1500,TWEEN_BEHAVIOUR.REPEAT))
 
     boardgame.addChild(this._rotateSprite);
 
@@ -205,9 +211,9 @@ export default class CellMoveState extends BaseState {
     // Lets set it up to move the player's piece if we need to
     let actions = []
     let coordinate = direction == DIRECTION.SOUTH || direction == DIRECTION.NORTH ? "y" : "x"
-    actions.unshift(new ActionGroupTween(cellContainers,coordinate,Tween.easeInOutQuart,change,70 ))
+    actions.unshift(new ActionGroupTween(cellContainers,coordinate,Tween.easeInOutQuart,change,1000 ))
     if(playersWithinCells.length > 0){
-      actions.unshift(new ActionGroupTween(playersWithinCells,coordinate,Tween.easeInOutQuart,change, 70))
+      actions.unshift(new ActionGroupTween(playersWithinCells,coordinate,Tween.easeInOutQuart,change, 1000))
     }
 
     actionManager

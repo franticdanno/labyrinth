@@ -84,7 +84,7 @@ export default class PlayerMoveState extends BaseState {
 
             this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
 
-            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),"Bold move, not moving..."), 70)
+            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),"Bold move, not moving..."), 500)
             .AddAction(new ActionCustom(()=>{
               state.PlayerMoveFinished();
             }))
@@ -96,7 +96,7 @@ export default class PlayerMoveState extends BaseState {
             if(path == null){ // No path found
               console.log("Unable to find path for player")
               this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-              this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],70))
+              this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],500))
 
             } else if(path != null){
 
@@ -157,14 +157,14 @@ export default class PlayerMoveState extends BaseState {
 
             actionManager.AddAction(
               new ParallelAction([
-                new ActionTween(cardRequired,"width",Tween.linear,cardRequired.width * 2,800,10),
-                new ActionTween(cardRequired,"height",Tween.linear,cardRequired.height * 2,600,10),
-                new ActionTween(cardRequired,"alpha",Tween.linear,1,0,10)
+                new ActionTween(cardRequired,"width",Tween.linear,cardRequired.width * 2,800,100),
+                new ActionTween(cardRequired,"height",Tween.linear,cardRequired.height * 2,600,100),
+                new ActionTween(cardRequired,"alpha",Tween.linear,1,0,100)
               ])
             )
             .AddAction(new ActionCustom(()=>{
               game.SetPlayerFoundCard(player,cardRequired);
-              actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",70))
+              actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",500))
                 .AddAction(new ActionCustom(()=>{
                   state.PlayerMoveFinished();
                 }))

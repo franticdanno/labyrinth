@@ -1,7 +1,7 @@
 import { Action } from './Action.js'
 import Vector2D from './../Vector2D.js'
 
-const MOVE_SPEED = 10;
+const MOVE_SPEED = 0.5;
 
 export class ActionFollowPath extends Action {
 
@@ -24,13 +24,12 @@ export class ActionFollowPath extends Action {
 
     let vectorToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y)
     let normalizedToTarget = new Vector2D(this._currentNode.position.x - this._entity.position.x,this._currentNode.position.y - this._entity.position.y).normalize();
-    let movementVector = Vector2D.multiply(normalizedToTarget,MOVE_SPEED)
+    let movementVector = Vector2D.multiply(normalizedToTarget,delta * MOVE_SPEED)
 
     // If the distance from the current position to the target is less than the movement vector then we
     // might as well just put the user into the position and move onto the next node
     if (vectorToTarget.length() <= movementVector.length()){
 
-      //onsole.log("REACHED POSITION",vectorToTarget,movementVector);
       this._entity.position.x = this._currentNode.position.x;
       this._entity.position.y = this._currentNode.position.y;
 
@@ -38,18 +37,14 @@ export class ActionFollowPath extends Action {
         this._currentNode = this._path.shift();
       } else {
 
-        //this._entity.position.x = this._currentNode.position.x
-        //this._entity.position.y = this._currentNode.position.y
-
         this._isFinished = true;
         return;
       }
 
     } else { // Otherwise, move the user towards the position
 
-      //console.log("Moving",movementVector.x,movementVector.y)
-      this._entity.position.x += movementVector.x * delta;
-      this._entity.position.y += movementVector.y * delta;
+      this._entity.position.x += movementVector.x;
+      this._entity.position.y += movementVector.y;
     }
   }
 

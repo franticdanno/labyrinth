@@ -27,9 +27,13 @@ export class CompositeAction extends Action {
   }
 
   StopAllActions(){
-    this._actions = null;
+    if(this._actions != null){
+      for(let i=0; i < this._actions.length; i++){
+        this._actions[i]._isFinished = true;
+      }
+      this._actions = null;
+    }
   }
-
 }
 
 export class ParallelAction extends CompositeAction {
@@ -37,7 +41,6 @@ export class ParallelAction extends CompositeAction {
   constructor(actions){
     super();
 
-    let mainActions = this._actions
     // Add all actions to the existing action list
     if(actions!=null){
       this.AddActions(actions);
@@ -47,9 +50,9 @@ export class ParallelAction extends CompositeAction {
   Update = (delta) => {
 
     // Update all actions
-    this._actions.forEach((item, i) => {
-      item.Update(delta);
-    });
+    for(let actionIndex = 0; actionIndex < this._actions.length; actionIndex++){
+      this._actions[actionIndex].Update(delta);
+    }
 
     // Remove any actions that are finished
     this._actions = this._actions.filter((action,i,a)=>{
