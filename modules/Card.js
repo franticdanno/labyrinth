@@ -1,5 +1,3 @@
-import { SYMBOLS } from './Constants.js'
-
 export default class Card extends PIXI.Container {
 
   constructor(symbol){

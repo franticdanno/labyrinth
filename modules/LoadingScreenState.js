@@ -1,4 +1,7 @@
-import BaseState from './BaseState.js'
+// Library imports
+import BaseState from './libs/state/BaseState.js'
+
+// Custom imports
 import PlayerSelectScreenState from './PlayerSelectScreenState.js'
 
 export default class LoadingScreenState extends BaseState {

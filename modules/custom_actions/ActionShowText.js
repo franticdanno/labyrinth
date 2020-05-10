@@ -1,4 +1,4 @@
-import { Action } from './Action.js'
+import { Action } from '../libs/action/Action.js'
 
 export class ActionShowText extends Action {
 

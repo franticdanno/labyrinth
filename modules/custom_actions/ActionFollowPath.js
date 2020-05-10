@@ -1,5 +1,5 @@
-import { Action } from './Action.js'
-import Vector2D from './../Vector2D.js'
+import { Action } from '../libs/action/Action.js'
+import Vector2D from '../libs/vector/Vector2D.js'
 
 const MOVE_SPEED = 0.5;
 

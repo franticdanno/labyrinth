@@ -1,14 +1,13 @@
-import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
-import { ActionShowText } from './actions/ActionShowText.js'
-import { ActionTween } from './actions/ActionTween.js'
-import {Tween} from './libs/Tween.js'
-import { ActionSleep } from './actions/ActionSleep.js'
-import { ActionChangeState } from './actions/ActionChangeState.js'
-import BaseState from './BaseState.js'
-import BoardGame from './Boardgame.js';
+// Library imports
+import BaseState from './libs/state/BaseState.js'
+import { SequenceAction } from './libs/action/Action.js'
+import { ActionTween } from './libs/action/ActionTween.js'
+import { Tween } from './libs/tween/Tween.js'
+
+// Custom file imports
+import { ActionShowText } from './custom_actions/ActionShowText.js'
+import { ActionChangeState } from './custom_actions/ActionChangeState.js'
 import CellMoveState from './CellMoveState.js'
-import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
-import Card from './Card.js';
 
 export default class MainGameSetupState extends BaseState {
 
@@ -31,7 +30,7 @@ export default class MainGameSetupState extends BaseState {
 
     this._entity._boardgame.AddPlayersToBoard(this._entity._players)
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionTween(this._entity,"alpha",Tween.linear,0,1,20))
+    this._actionManager.AddAction(new ActionTween(this._entity,"alpha",Tween.linear,0,1,1000))
       .AddAction(new ActionShowText(this._entity,"Let's Go!",1))
       .AddAction(new ActionChangeState(this._entity,new CellMoveState(this._entity)))
 

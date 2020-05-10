@@ -1,8 +1,6 @@
 import { PLAYERS, SYMBOLS, CELL_TYPE } from './Constants.js'
-import Card from './Card.js';
-import Player from './Player.js';
 import BoardGameCell from './BoardgameCell.js';
-import KeyboardManager from './KeyboardManager.js'
+import KeyboardManager from './libs/input/KeyboardManager.js'
 
 const CELL_SPRITE_SIZE = 114;
 

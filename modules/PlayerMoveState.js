@@ -1,14 +1,12 @@
-import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
-import { ActionTween } from './actions/ActionTween.js'
-import { Tween } from './libs/Tween.js'
-import { ActionShowText } from './actions/ActionShowText.js'
-import { ActionSleep } from './actions/ActionSleep.js'
-import { ActionCustom } from './actions/ActionCustom.js'
-import { ActionFollowPath } from './actions/ActionFollowPath.js'
-import BaseState from './BaseState.js'
-import BoardGame from './Boardgame.js';
-import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
-import Card from './Card.js';
+// Library imports
+import { ParallelAction,SequenceAction } from './libs/action/Action.js'
+import { ActionTween } from './libs/action/ActionTween.js'
+import { Tween } from './libs/tween/Tween.js'
+import { ActionCustom } from './libs/action/ActionCustom.js'
+import BaseState from './libs/state/BaseState.js'
+
+import { ActionShowText } from './custom_actions/ActionShowText.js'
+import { ActionFollowPath } from './custom_actions/ActionFollowPath.js'
 import CellMoveState from './CellMoveState.js';
 import GameOverState from './GameOverState.js'
 

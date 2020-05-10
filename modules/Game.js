@@ -1,10 +1,12 @@
-import { PLAYERS, CHARACTER, SYMBOLS, CELL_TYPE } from './Constants.js'
-import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
+// Library imports
+import { SequenceAction } from './libs/action/Action.js'
+import StateManager from './libs/state/StateManager.js'
+
+// Custom file imports
+import { PLAYERS, SYMBOLS } from './Constants.js'
 import Card from './Card.js';
 import BoardGame from './Boardgame.js';
 import Player from './Player.js'
-import BaseState from './BaseState.js'
-import StateManager from './StateManager.js'
 import LoadingScreenState from './LoadingScreenState.js'
 
 export default class Game extends PIXI.Container {

@@ -1,5 +1,5 @@
 import { Action } from './Action.js'
-import {TWEEN_BEHAVIOUR} from '../libs/TweenConstants.js'
+import {TWEEN_BEHAVIOUR} from '../tween/TweenConstants.js'
 
 export class ActionTween extends Action {
   constructor(entity, property,f, start_value, end_value, duration, behaviour){

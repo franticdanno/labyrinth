@@ -1,4 +1,4 @@
-import { PLAYERS, CHARACTER, CELL_TYPE } from './Constants.js'
+import { CELL_TYPE } from './Constants.js'
 
 
 const CELL_TYPE_LINKS = {

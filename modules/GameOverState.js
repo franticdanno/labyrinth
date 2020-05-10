@@ -1,6 +1,9 @@
-import { ActionShowText } from './actions/ActionShowText.js'
-import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
-import BaseState from './BaseState.js'
+// Library imports
+import BaseState from './libs/state/BaseState.js'
+import { SequenceAction } from './libs/action/Action.js'
+
+// Custom imports
+import { ActionShowText } from './custom_actions/ActionShowText.js'
 
 export default class GameOverState extends BaseState {
 

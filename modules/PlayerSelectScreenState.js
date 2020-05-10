@@ -1,4 +1,7 @@
-import BaseState from './BaseState.js'
+// Library file imports
+import BaseState from './libs/state/BaseState.js'
+
+// Custom file imports
 import MainGameSetupState from './MainGameSetupState.js'
 
 export default class PlayerSelectScreenState extends BaseState {

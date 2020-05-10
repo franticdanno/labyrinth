@@ -1,5 +1,3 @@
-import Card from './Card.js'
-
 export default class Player {
 
   constructor(texture,playerNumber,house,currentCell){

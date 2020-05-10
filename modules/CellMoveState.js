@@ -1,18 +1,18 @@
-import { Action, ParallelAction,SequenceAction } from './actions/Action.js'
-import { ActionShowText } from './actions/ActionShowText.js'
-import { ActionSleep } from './actions/ActionSleep.js'
-import { ActionCustom } from './actions/ActionCustom.js'
-import { ActionFollowPath } from './actions/ActionFollowPath.js'
-import { Tween } from './libs/Tween.js'
-import { ActionGroupTween } from './actions/ActionGroupTween.js'
-import { ActionTween } from './actions/ActionTween.js'
-import { ActionTweenCustom } from './actions/ActionTweenCustom.js'
-import {TWEEN_BEHAVIOUR} from './libs/TweenConstants.js'
+// Library imports
+import { ParallelAction,SequenceAction } from './libs/action/Action.js'
+import { ActionCustom } from './libs/action/ActionCustom.js'
+import { ActionGroupTween } from './libs/action/ActionGroupTween.js'
+import { ActionTween } from './libs/action/ActionTween.js'
+import { ActionTweenCustom } from './libs/action/ActionTweenCustom.js'
+import { Tween } from './libs/tween/Tween.js'
+import { TWEEN_BEHAVIOUR } from './libs/tween/TweenConstants.js'
+import BaseState from './libs/state/BaseState.js'
+
+// Custom file imports
+import { ActionShowText } from './custom_actions/ActionShowText.js'
 import PlayerMoveState from './PlayerMoveState.js'
-import BaseState from './BaseState.js'
 import BoardGame from './Boardgame.js'
-import { PLAYERS, CHARACTER, CELL_TYPE,DIRECTION } from './Constants.js'
-import Card from './Card.js';
+import { DIRECTION } from './Constants.js'
 
 export default class CellMoveState extends BaseState {
 
