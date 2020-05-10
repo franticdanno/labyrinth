@@ -43,7 +43,8 @@ const myApplication = new MyApplication({
   width: CANVAS_WIDTH,
   height: CANVAS_HEIGHT,
   backgroundColor : 0x0c6e20,
-  antialias : true
+  antialias : false,
+  autoDensity : true
 })
 
 myApplication.Resize();

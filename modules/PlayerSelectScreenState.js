@@ -1,5 +1,9 @@
 // Library file imports
 import BaseState from './libs/state/BaseState.js'
+import { SequenceAction, ParallelAction } from './libs/action/Action.js'
+import { ActionCustom } from './libs/action/ActionCustom.js'
+import { ActionTween } from './libs/action/ActionTween.js'
+import { Tween } from './libs/tween/Tween.js'
 
 // Custom file imports
 import MainGameSetupState from './MainGameSetupState.js'
@@ -8,6 +12,8 @@ export default class PlayerSelectScreenState extends BaseState {
 
   constructor(entity){
     super(entity);
+
+    this._actionManager = new SequenceAction();
   }
 
   GetPlayerIcon = (index) => {
@@ -32,6 +38,10 @@ export default class PlayerSelectScreenState extends BaseState {
 
     return container
 
+  }
+
+  Update = (delta) => {
+    if(this._actionManager!=null){this._actionManager.Update(delta)};
   }
 
   Enter = () => {
@@ -65,7 +75,7 @@ export default class PlayerSelectScreenState extends BaseState {
     richText.x = 680;
     richText.y = 380;
 
-    this._entity.addChild(richText);
+    container.addChild(richText);
 
     // Create the choose player buttons
     playerChoiceSprites.map((object,index) => {
@@ -76,11 +86,22 @@ export default class PlayerSelectScreenState extends BaseState {
       object.interactive  = true;
       object.buttonMode   = true;
 
-      object.on('pointerdown',() => {
-        console.log("pointer down")
-        this._entity.removeChild(container);
+      let am = this._actionManager;
+      let state = this
+
+      object.once('pointerdown',() => {
         this._entity.SetPlayerCount(index + 2);
-        this._entity.ChangeState(new MainGameSetupState(this._entity));
+
+        am.AddActions([
+          new ParallelAction([
+            new ActionTween(container,"alpha",Tween.easeInOutQuad, 1, 0, 800),
+            new ActionTween(container,"y",Tween.easeInOutQuad, container.y, container.y - 100, 800),
+          ]),
+          new ActionCustom(()=>{
+            state._entity.removeChild(container);
+            state._entity.ChangeState(new MainGameSetupState(this._entity))
+          })
+        ])
       })
 
       container.addChild(object);
