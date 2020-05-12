@@ -24,6 +24,7 @@ export class CompositeAction extends Action {
     for(let i=0; i < actions.length; i++){
       this.AddAction(actions[i])
     }
+    return this;
   }
 
   StopAllActions(){

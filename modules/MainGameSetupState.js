@@ -29,9 +29,13 @@ export default class MainGameSetupState extends BaseState {
     this._entity.SetCurrentPlayer(1);
 
     this._entity._boardgame.AddPlayersToBoard(this._entity._players)
+
+    let game = this._entity;
+
+
+
     this._actionManager = new SequenceAction()
     this._actionManager.AddAction(new ActionTween(this._entity,"alpha",Tween.linear,0,1,1000))
-      .AddAction(new ActionShowText(this._entity,"Let's Go!",1))
       .AddAction(new ActionChangeState(this._entity,new CellMoveState(this._entity)))
 
     //console.log("Boardgame has been set up!",this)

@@ -7,6 +7,7 @@ import { ActionTweenCustom } from './libs/action/ActionTweenCustom.js'
 import { Tween } from './libs/tween/Tween.js'
 import { TWEEN_BEHAVIOUR } from './libs/tween/TweenConstants.js'
 import BaseState from './libs/state/BaseState.js'
+import { PLAYER_COLOURS } from './Constants.js'
 
 // Custom file imports
 import { ActionShowText } from './custom_actions/ActionShowText.js'
@@ -25,11 +26,12 @@ export default class CellMoveState extends BaseState {
 
   Enter = () => {
 
+    let game = this._entity;
     let boardgame = this._entity.GetBoardgame()
     let state = this
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionShowText(this._entity,"Player " + (this._entity.GetCurrentPlayerIndex() + 1),1))
+    this._actionManager.AddActions(game.GetTitleSequence("Player " + (this._entity.GetCurrentPlayerIndex() + 1),PLAYER_COLOURS[this._entity.GetCurrentPlayerIndex()],'/assets/joystick.png'))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))

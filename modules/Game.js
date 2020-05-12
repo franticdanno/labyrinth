@@ -1,5 +1,10 @@
 // Library imports
-import { SequenceAction } from './libs/action/Action.js'
+import { SequenceAction,ParallelAction } from './libs/action/Action.js'
+import { ActionCustom } from './libs/action/ActionCustom.js'
+import { ActionSleep } from './libs/action/ActionSleep.js'
+import { ActionTween } from './libs/action/ActionTween.js'
+import { Tween } from './libs/tween/Tween.js'
+
 import StateManager from './libs/state/StateManager.js'
 
 // Custom file imports
@@ -22,6 +27,75 @@ export default class Game extends PIXI.Container {
     // State manager set up
     this._stateManager = new StateManager();
     this._actionManager = new SequenceAction();
+  }
+
+  GetTitleSequence = (customText,colour,icon) => {
+
+    const container = new PIXI.Container();
+
+    const graphics = new PIXI.Graphics();
+    graphics.beginFill(colour);
+    graphics.drawRect(0, 1080 / 2 - 50,1920 , 130);
+    graphics.endFill();
+    container.addChild(graphics);
+
+    const style = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 74,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        fill: ['#DDDDDD'],
+        //fill: ['#ffffff', '#00ff99'], // gradient
+        stroke: '#4a1850',
+        strokeThickness: 8,
+        dropShadow: true,
+        dropShadowColor: '#000000',
+        dropShadowBlur: 4,
+        dropShadowAngle: Math.PI / 6,
+        dropShadowDistance: 6,
+        wordWrap: true,
+        wordWrapWidth: 1920,
+    });
+
+    let text = new PIXI.Text(customText, style);
+    text.x = 1920 / 2 - text.width/2
+    text.y = 500
+
+    container.addChild(text);
+
+    if(icon != null){
+      let joystickSprite = PIXI.Sprite.from(icon)
+      joystickSprite.anchor.set(0.5,0.5);
+      joystickSprite.y = 550;
+      joystickSprite.x = text.x - 100;
+      joystickSprite.scale.x = 0.5;
+      joystickSprite.scale.y = 0.5;
+      container.addChild(joystickSprite);
+    }
+
+    container.alpha = 0;
+
+    let gameContainer = this;
+    gameContainer.addChild(container);
+
+
+    let titleActions = [
+      new ParallelAction([
+        new ActionTween(container,"alpha",Tween.linear,0,1,500),
+        new ActionTween(container,"y",Tween.easeOutBounce,container.y - 200,container.y,500)
+      ]),
+      new ActionSleep(1500),
+      new ParallelAction([
+        new ActionTween(container,"alpha",Tween.linear,1,0,300),
+        new ActionTween(container,"y",Tween.easeInQuad,container.y,container.y + 200,300)
+      ]),
+      new ActionCustom(()=>{
+        gameContainer.removeChild(container);
+      })
+    ]
+
+    return titleActions
+
   }
 
   GetApp = () => {

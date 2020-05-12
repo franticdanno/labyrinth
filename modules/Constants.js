@@ -12,6 +12,8 @@ export const PLAYERS = {
   PLAYER_FOUR   : "Player 4",
 }
 
+export const PLAYER_COLOURS = [ "0x0c5ac7", "0xebe134", "0x2adb36", "0xDE3249" ]
+
 export const SYMBOLS = [
   {name: "Archer", path: "029-archer.png"},
   {name: "Santa", path: "052-santa claus.png"},

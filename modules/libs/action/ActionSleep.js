@@ -9,7 +9,6 @@ export class ActionSleep extends Action {
 
   Update = (delta) => {
     this._time -= delta;
-    console.log("Update timer",this._time)
     if (this._time <= 0)
     {
       this._isFinished = true;
