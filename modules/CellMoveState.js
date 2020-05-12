@@ -10,7 +10,6 @@ import BaseState from './libs/state/BaseState.js'
 import { PLAYER_COLOURS } from './Constants.js'
 
 // Custom file imports
-import { ActionShowText } from './custom_actions/ActionShowText.js'
 import PlayerMoveState from './PlayerMoveState.js'
 import BoardGame from './Boardgame.js'
 import { DIRECTION } from './Constants.js'
@@ -31,7 +30,7 @@ export default class CellMoveState extends BaseState {
     let state = this
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddActions(game.GetTitleSequence("Player " + (this._entity.GetCurrentPlayerIndex() + 1),PLAYER_COLOURS[this._entity.GetCurrentPlayerIndex()],'/assets/joystick.png'))
+    this._actionManager.AddActions(game.GetPlayerTitleSequence("Player " + (this._entity.GetCurrentPlayerIndex() + 1),PLAYER_COLOURS[this._entity.GetCurrentPlayerIndex()]))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
       },{entity:this._entity}))

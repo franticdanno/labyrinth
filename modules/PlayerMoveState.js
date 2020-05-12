@@ -5,7 +5,6 @@ import { Tween } from './libs/tween/Tween.js'
 import { ActionCustom } from './libs/action/ActionCustom.js'
 import BaseState from './libs/state/BaseState.js'
 
-import { ActionShowText } from './custom_actions/ActionShowText.js'
 import { ActionFollowPath } from './custom_actions/ActionFollowPath.js'
 import CellMoveState from './CellMoveState.js';
 import GameOverState from './GameOverState.js'
@@ -27,14 +26,14 @@ export default class PlayerMoveState extends BaseState {
 
     if(neighbours.length == 0){
 
-      this._actionManager.AddAction(new ActionShowText(this._entity,"No Moves Possible. Skipping...",1))
+      this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("No Moves Available!",0xFFFFFF))
         .AddAction(new ActionCustom(() => {
           state.PlayerMoveFinished();
         }))
 
 
     } else {
-      this._actionManager.AddAction(new ActionShowText(this._entity,"Time to Move!",1))
+      this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("Time to Move!",0xdbb22a))
         .AddAction(new ActionCustom((params)=>{
           params.entity.GetBoardgame().HighlightCurrentPlayer();
         },{entity:this._entity}))
@@ -82,7 +81,7 @@ export default class PlayerMoveState extends BaseState {
 
             this.RemoveListenersForCellInteraction(); // If we found a path, then lets remove the listeners
 
-            this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),"Bold move, not moving..."), 500)
+            this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("Bold move, not moving...",0xFF0000))
             .AddAction(new ActionCustom(()=>{
               state.PlayerMoveFinished();
             }))
@@ -94,7 +93,7 @@ export default class PlayerMoveState extends BaseState {
             if(path == null){ // No path found
               console.log("Unable to find path for player")
               this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-              this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),failMessages[Math.floor(Math.random() * failMessages.length)],500))
+              this._actionManager.AddActions(this._entity.GetGeneralTitleSequence(failMessages[Math.floor(Math.random() * failMessages.length)],0xd3a203))
 
             } else if(path != null){
 
@@ -162,7 +161,7 @@ export default class PlayerMoveState extends BaseState {
             )
             .AddAction(new ActionCustom(()=>{
               game.SetPlayerFoundCard(player,cardRequired);
-              actionManager.AddAction(new ActionShowText(state._entity.GetBoardgame(),player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",500))
+              actionManager.AddActions(state._entity.GetGeneralTitleSequence(player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",0x342321))
                 .AddAction(new ActionCustom(()=>{
                   state.PlayerMoveFinished();
                 }))

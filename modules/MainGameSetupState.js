@@ -5,7 +5,6 @@ import { ActionTween } from './libs/action/ActionTween.js'
 import { Tween } from './libs/tween/Tween.js'
 
 // Custom file imports
-import { ActionShowText } from './custom_actions/ActionShowText.js'
 import { ActionChangeState } from './custom_actions/ActionChangeState.js'
 import CellMoveState from './CellMoveState.js'
 

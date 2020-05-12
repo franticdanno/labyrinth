@@ -29,8 +29,7 @@ export default class Game extends PIXI.Container {
     this._actionManager = new SequenceAction();
   }
 
-  GetTitleSequence = (customText,colour,icon) => {
-
+  GetTitleContainer = (customText,colour,icon) => {
     const container = new PIXI.Container();
 
     const graphics = new PIXI.Graphics();
@@ -75,15 +74,44 @@ export default class Game extends PIXI.Container {
 
     container.alpha = 0;
 
+    return container;
+
+
+  }
+
+  GetPlayerTitleSequence = (customText,colour) => {
+
+    let container = this.GetTitleContainer(customText,colour,'/assets/joystick.png');
     let gameContainer = this;
     gameContainer.addChild(container);
-
 
     let titleActions = [
       new ParallelAction([
         new ActionTween(container,"alpha",Tween.linear,0,1,500),
         new ActionTween(container,"y",Tween.easeOutBounce,container.y - 200,container.y,500)
       ]),
+      new ActionSleep(1500),
+      new ParallelAction([
+        new ActionTween(container,"alpha",Tween.linear,1,0,300),
+        new ActionTween(container,"y",Tween.easeInQuad,container.y,container.y + 200,300)
+      ]),
+      new ActionCustom(()=>{
+        gameContainer.removeChild(container);
+      })
+    ]
+
+    return titleActions
+
+  }
+
+  GetGeneralTitleSequence = (customText,colour) => {
+
+    let container = this.GetTitleContainer(customText,colour);
+    let gameContainer = this;
+    gameContainer.addChild(container);
+
+    let titleActions = [
+      new ActionTween(container,"alpha",Tween.linear,0,1,500),
       new ActionSleep(1500),
       new ParallelAction([
         new ActionTween(container,"alpha",Tween.linear,1,0,300),

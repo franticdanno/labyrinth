@@ -2,9 +2,6 @@
 import BaseState from './libs/state/BaseState.js'
 import { SequenceAction } from './libs/action/Action.js'
 
-// Custom imports
-import { ActionShowText } from './custom_actions/ActionShowText.js'
-
 export default class GameOverState extends BaseState {
 
   constructor(entity,winningPlayer){
@@ -15,7 +12,9 @@ export default class GameOverState extends BaseState {
 
   Enter = () => {
     let message = "Game Over! " + this._winningPlayer.GetHouse() + " won!";
-    this._actionManager.AddAction(new ActionShowText(this._entity.GetBoardgame(),message,300))
+
+
+    this._actionManager.AddActions(this._entity.GetGeneralTitleSequence(message,0xaf2adb))
   }
 
   Update = (delta) => {
