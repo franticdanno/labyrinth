@@ -119,6 +119,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
 	"sourceSize": {"w":512,"h":512}
+},
+"joystick.png":
+{
+	"frame": {"x":1536,"y":1536,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -128,6 +136,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "boardgame_spritesheet-1.json", "boardgame_spritesheet-3.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:583209c886029ab3f82516b466c0458f:4e92d24d735a3d11aed03c7af72bcfea:f20ee964535c6611f30565802b09c4eb$"
+	"smartupdate": "$TexturePacker:SmartUpdate:aa345b540d76e03d6219c17efbd04725:f088cc62a1e0a4fd1851f006b6df019d:f20ee964535c6611f30565802b09c4eb$"
 }
 }

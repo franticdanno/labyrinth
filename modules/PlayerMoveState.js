@@ -26,14 +26,14 @@ export default class PlayerMoveState extends BaseState {
 
     if(neighbours.length == 0){
 
-      this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("No Moves Available!",0xFFFFFF))
+      this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("No Moves Available!",0xdb7414,'./assets/signs.png'))
         .AddAction(new ActionCustom(() => {
           state.PlayerMoveFinished();
         }))
 
 
     } else {
-      this._actionManager.AddActions(this._entity.GetGeneralTitleSequence("Time to Move!",0xdbb22a))
+      this._actionManager.AddActions(this._entity.GetTimeToMoveSequence("Time to Move!",0xdbb22a))
         .AddAction(new ActionCustom((params)=>{
           params.entity.GetBoardgame().HighlightCurrentPlayer();
         },{entity:this._entity}))
@@ -93,7 +93,7 @@ export default class PlayerMoveState extends BaseState {
             if(path == null){ // No path found
               console.log("Unable to find path for player")
               this._entity.GetBoardgame().GetPathFrom(player.GetCurrentCell(),targetCell);
-              this._actionManager.AddActions(this._entity.GetGeneralTitleSequence(failMessages[Math.floor(Math.random() * failMessages.length)],0xd3a203))
+              this._actionManager.AddActions(this._entity.GetGeneralTitleSequence(failMessages[Math.floor(Math.random() * failMessages.length)],0xd3a203,'./assets/signs.png'))
 
             } else if(path != null){
 

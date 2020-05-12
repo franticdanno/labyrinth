@@ -63,13 +63,13 @@ export default class Game extends PIXI.Container {
     container.addChild(text);
 
     if(icon != null){
-      let joystickSprite = PIXI.Sprite.from(icon)
-      joystickSprite.anchor.set(0.5,0.5);
-      joystickSprite.y = 550;
-      joystickSprite.x = text.x - 100;
-      joystickSprite.scale.x = 0.5;
-      joystickSprite.scale.y = 0.5;
-      container.addChild(joystickSprite);
+      let iconSprite = PIXI.Sprite.from(icon)
+      iconSprite.anchor.set(0.5,0.5);
+      iconSprite.y = 550;
+      iconSprite.x = text.x - 150;
+      iconSprite.scale.x = 0.5;
+      iconSprite.scale.y = 0.5;
+      container.addChild(iconSprite);
     }
 
     container.alpha = 0;
@@ -104,7 +104,29 @@ export default class Game extends PIXI.Container {
 
   }
 
-  GetGeneralTitleSequence = (customText,colour) => {
+  GetGeneralTitleSequence = (customText,colour,icon) => {
+
+    let container = this.GetTitleContainer(customText,colour,icon);
+    let gameContainer = this;
+    gameContainer.addChild(container);
+
+    let titleActions = [
+      new ActionTween(container,"alpha",Tween.linear,0,1,500),
+      new ActionSleep(500),
+      new ParallelAction([
+        new ActionTween(container,"alpha",Tween.linear,1,0,300),
+        new ActionTween(container,"y",Tween.easeInQuad,container.y,container.y + 200,300)
+      ]),
+      new ActionCustom(()=>{
+        gameContainer.removeChild(container);
+      })
+    ]
+
+    return titleActions
+
+  }
+
+  GetTimeToMoveSequence = (customText,colour) => {
 
     let container = this.GetTitleContainer(customText,colour);
     let gameContainer = this;
@@ -112,10 +134,10 @@ export default class Game extends PIXI.Container {
 
     let titleActions = [
       new ActionTween(container,"alpha",Tween.linear,0,1,500),
-      new ActionSleep(1500),
+      new ActionSleep(500),
       new ParallelAction([
         new ActionTween(container,"alpha",Tween.linear,1,0,300),
-        new ActionTween(container,"y",Tween.easeInQuad,container.y,container.y + 200,300)
+        new ActionTween(container,"x",Tween.easeInQuad,container.x,container.x + 200,300)
       ]),
       new ActionCustom(()=>{
         gameContainer.removeChild(container);
