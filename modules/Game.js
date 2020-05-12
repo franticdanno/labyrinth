@@ -137,7 +137,7 @@ export default class Game extends PIXI.Container {
       new ActionSleep(500),
       new ParallelAction([
         new ActionTween(container,"alpha",Tween.linear,1,0,300),
-        new ActionTween(container,"x",Tween.easeInQuad,container.x,container.x + 200,300)
+        new ActionTween(container,"y",Tween.easeInQuad,container.x,container.x - 50,300)
       ]),
       new ActionCustom(()=>{
         gameContainer.removeChild(container);
