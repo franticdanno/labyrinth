@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "version": "0.6.5"
+  },
+  "savePath": "",
+  "images": [
+    {
+      "name": "013-devil.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/013-devil.png",
+      "folder": ""
+    },
+    {
+      "name": "014-twins.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/014-twins.png",
+      "folder": ""
+    },
+    {
+      "name": "015-dragon.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/015-dragon.png",
+      "folder": ""
+    },
+    {
+      "name": "017-echidna.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/017-echidna.png",
+      "folder": ""
+    },
+    {
+      "name": "019-ufo.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/019-ufo.png",
+      "folder": ""
+    },
+    {
+      "name": "020-fairy.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/020-fairy.png",
+      "folder": ""
+    },
+    {
+      "name": "021-broom.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/021-broom.png",
+      "folder": ""
+    },
+    {
+      "name": "022-statue.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/022-statue.png",
+      "folder": ""
+    },
+    {
+      "name": "023-genie lamp.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/023-genie lamp.png",
+      "folder": ""
+    },
+    {
+      "name": "024-ghost.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/024-ghost.png",
+      "folder": ""
+    },
+    {
+      "name": "026-giant.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/026-giant.png",
+      "folder": ""
+    },
+    {
+      "name": "028-goblin.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/028-goblin.png",
+      "folder": ""
+    },
+    {
+      "name": "029-archer.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/029-archer.png",
+      "folder": ""
+    },
+    {
+      "name": "052-santa claus.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/052-santa claus.png",
+      "folder": ""
+    },
+    {
+      "name": "053-scarecrow.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/053-scarecrow.png",
+      "folder": ""
+    },
+    {
+      "name": "054-wizard.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/054-wizard.png",
+      "folder": ""
+    },
+    {
+      "name": "055-monster.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/055-monster.png",
+      "folder": ""
+    },
+    {
+      "name": "056-time machine.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/056-time machine.png",
+      "folder": ""
+    },
+    {
+      "name": "057-tooth fairy.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/057-tooth fairy.png",
+      "folder": ""
+    },
+    {
+      "name": "059-unicorn.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/059-unicorn.png",
+      "folder": ""
+    },
+    {
+      "name": "061-vampire.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/061-vampire.png",
+      "folder": ""
+    },
+    {
+      "name": "062-hunter.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/062-hunter.png",
+      "folder": ""
+    },
+    {
+      "name": "063-wizard.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/063-wizard.png",
+      "folder": ""
+    },
+    {
+      "name": "065-witch.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/icons/065-witch.png",
+      "folder": ""
+    },
+    {
+      "name": "board_background.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/board_background.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_corner.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_corner.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_corner_player_1.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_corner_player_1.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_corner_player_2.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_corner_player_2.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_corner_player_3.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_corner_player_3.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_corner_player_4.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_corner_player_4.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_junction.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_junction.png",
+      "folder": ""
+    },
+    {
+      "name": "cell_line.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/cell_line.png",
+      "folder": ""
+    },
+    {
+      "name": "joystick.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/joystick.png",
+      "folder": ""
+    },
+    {
+      "name": "player_four.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/player_four.png",
+      "folder": ""
+    },
+    {
+      "name": "player_one.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/player_one.png",
+      "folder": ""
+    },
+    {
+      "name": "player_three.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/player_three.png",
+      "folder": ""
+    },
+    {
+      "name": "player_two.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/player_two.png",
+      "folder": ""
+    },
+    {
+      "name": "refresh.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/refresh.png",
+      "folder": ""
+    },
+    {
+      "name": "signs.png",
+      "path": "/Users/danoregan/Documents/PixiJSNoob/assets/signs.png",
+      "folder": ""
+    }
+  ],
+  "folders": [],
+  "packOptions": {
+    "textureName": "texture",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "fileName": "pack-result",
+    "savePath": "",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": 0,
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}
