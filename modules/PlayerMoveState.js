@@ -3,6 +3,7 @@ import { ParallelAction,SequenceAction } from './libs/action/Action.js'
 import { ActionTween } from './libs/action/ActionTween.js'
 import { Tween } from './libs/tween/Tween.js'
 import { ActionCustom } from './libs/action/ActionCustom.js'
+import { ActionSleep } from './libs/action/ActionSleep.js'
 import BaseState from './libs/state/BaseState.js'
 
 import { ActionFollowPath } from './custom_actions/ActionFollowPath.js'
@@ -152,16 +153,23 @@ export default class PlayerMoveState extends BaseState {
             console.log("Found a match")
             playerCell.HideSymbol();
 
-            actionManager.AddAction(
+            actionManager.AddActions([
               new ParallelAction([
-                new ActionTween(cardRequired,"width",Tween.linear,cardRequired.width * 2,800,100),
-                new ActionTween(cardRequired,"height",Tween.linear,cardRequired.height * 2,600,100),
-                new ActionTween(cardRequired,"alpha",Tween.linear,1,0,100)
+                new ActionTween(cardRequired,"x",Tween.easeInQuad,cardRequired.x,1920 / 2,300),
+                new ActionTween(cardRequired,"y",Tween.easeInQuad,cardRequired.y,1080 / 2,300),
+                new ActionTween(cardRequired,"width",Tween.easeInQuad,cardRequired.width,cardRequired.width * 1.2,300),
+                new ActionTween(cardRequired,"height",Tween.easeInQuad,cardRequired.height,cardRequired.height * 1.2,300),
+              ]),
+              new ActionSleep(300),
+              new ParallelAction([
+                new ActionTween(cardRequired,"width",Tween.easeOutQuad,cardRequired.width * 2,800,300),
+                new ActionTween(cardRequired,"height",Tween.easeOutQuad,cardRequired.height * 3,600,300),
+                new ActionTween(cardRequired,"alpha",Tween.easeOutQuad,1,0,100)
               ])
-            )
+            ])
             .AddAction(new ActionCustom(()=>{
               game.SetPlayerFoundCard(player,cardRequired);
-              actionManager.AddActions(state._entity.GetGeneralTitleSequence(player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",0x342321))
+              actionManager.AddActions(state._entity.GetGeneralTitleSequence(player.GetCardTarget() != null ? "Match Found!" : "Match Found! Run home!",0xe09e2b))
                 .AddAction(new ActionCustom(()=>{
                   state.PlayerMoveFinished();
                 }))
