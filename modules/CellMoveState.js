@@ -20,7 +20,6 @@ export default class CellMoveState extends BaseState {
     super(entity);
 
     this._rotateSprite = null;
-    entity.filters = [new PIXI.filters.BlurFilter()];
 
   }
 
@@ -29,10 +28,8 @@ export default class CellMoveState extends BaseState {
     let game = this._entity;
     let boardgame = this._entity.GetBoardgame()
     let state = this
-    let filter = game.filters[0];
 
     this._actionManager = new SequenceAction()
-    this._actionManager.AddAction(new ActionTween(filter, "blur",Tween.linear, 8, 0, 1000))
     this._actionManager.AddActions(game.GetPlayerTitleSequence("Player " + (this._entity.GetCurrentPlayerIndex() + 1),PLAYER_COLOURS[this._entity.GetCurrentPlayerIndex()]))
       .AddAction(new ActionCustom((params)=>{
         params.entity.GetBoardgame().HighlightCurrentPlayer();
