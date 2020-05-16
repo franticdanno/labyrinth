@@ -155,16 +155,17 @@ export default class PlayerMoveState extends BaseState {
 
             actionManager.AddActions([
               new ParallelAction([
-                new ActionTween(cardRequired,"x",Tween.easeInQuad,cardRequired.x,1920 / 2,300),
-                new ActionTween(cardRequired,"y",Tween.easeInQuad,cardRequired.y,1080 / 2,300),
-                new ActionTween(cardRequired,"width",Tween.easeInQuad,cardRequired.width,cardRequired.width * 1.2,300),
-                new ActionTween(cardRequired,"height",Tween.easeInQuad,cardRequired.height,cardRequired.height * 1.2,300),
+                new ActionTween(cardRequired,"x",Tween.easeOutQuad,cardRequired.x,1920 / 2,700),
+                new ActionTween(cardRequired,"y",Tween.easeOutQuad,cardRequired.y,1080 / 2,700),
+                new ActionTween(cardRequired,"width",Tween.easeOutQuad,cardRequired.width,cardRequired.width * 2,700),
+                new ActionTween(cardRequired,"height",Tween.easeOutQuad,cardRequired.height,cardRequired.height * 2,700),
               ]),
               new ActionSleep(300),
               new ParallelAction([
-                new ActionTween(cardRequired,"width",Tween.easeOutQuad,cardRequired.width * 2,800,300),
-                new ActionTween(cardRequired,"height",Tween.easeOutQuad,cardRequired.height * 3,600,300),
-                new ActionTween(cardRequired,"alpha",Tween.easeOutQuad,1,0,100)
+                new ActionTween(cardRequired,"width",Tween.easeInQuad,cardRequired.width*2,cardRequired.width*3,400),
+                new ActionTween(cardRequired,"height",Tween.easeInQuad,cardRequired.height*2,cardRequired.height*3,400),
+                new ActionTween(cardRequired,"rotation",Tween.easeInQuad,cardRequired.rotation,cardRequired.rotation + Math.PI * 2,400),
+                new ActionTween(cardRequired,"alpha",Tween.easeInQuad,1,0,400)
               ])
             ])
             .AddAction(new ActionCustom(()=>{
